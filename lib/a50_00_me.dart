@@ -42,7 +42,7 @@ class LastAgreed extends StatelessWidget {
     return Column(children: const [
       SizedBox(height: 10),
       Text(
-        "Agreed on 01-Jan-2022 7:32AM",
+        "Agreed on 01-Jan-2023 7:32AM",
         style: TextStyle(color: Colors.grey),
       ),
       SizedBox(height: 10),
