@@ -7,8 +7,16 @@ class Me extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:
-            AppBar(leading: const Icon(Icons.home), title: const Text("Me")),
+        appBar: AppBar(
+          leading: null,
+          title: const Text("Me"),
+          actions: const [
+            Padding(
+              padding: EdgeInsets.only(right: 15.0),
+              child: Icon(Icons.sos),
+            )
+          ],
+        ),
         body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Container(
