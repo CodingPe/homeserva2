@@ -7,7 +7,8 @@ export 'package:homeserva_2/a30_00_accounting.dart';
 export 'package:homeserva_2/a40_00_notification.dart';
 export 'package:homeserva_2/a50_00_me.dart';
 export 'package:homeserva_2/a50_01_me_block.dart';
-export 'package:homeserva_2/a50_02_button_page.dart';
+export 'package:homeserva_2/a50_02_change_password.dart';
+export 'package:homeserva_2/a50_02_logout.dart';
 export 'package:homeserva_2/a50_03_web_content_tpd.dart';
 
 void noRotation() {
@@ -23,4 +24,3 @@ void statusBar() {
     statusBarIconBrightness: Brightness.dark,
   ));
 }
-
