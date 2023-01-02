@@ -43,7 +43,7 @@ class LastAgreed extends StatelessWidget {
       SizedBox(height: 10),
       Text(
         "Agreed on 02-Jan-2023 7:50AM",
-        style: TextStyle(color: Colors.grey),
+        style: TextStyle(color: Colors.black),
       ),
       SizedBox(height: 10),
     ]);
