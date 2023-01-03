@@ -45,11 +45,9 @@ class MeBlock2 extends StatelessWidget {
 }
 
 class MeContent extends StatelessWidget {
-  final String? title;
-  final String? field;
-
   const MeContent({Key? key, required this.title, required this.field})
       : super(key: key);
+  final String title, field;
 
   @override
   Widget build(BuildContext context) {
@@ -67,14 +65,14 @@ class MeContent extends StatelessWidget {
                       child: Container(
                           alignment: Alignment.centerRight,
                           padding: const EdgeInsets.only(right: 10),
-                          child: Text(title!,
+                          child: Text(title,
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold)))),
                   Expanded(
                       child: Container(
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(left: 10),
-                          child: Text(field!)))
+                          child: Text(field)))
                 ]),
           ),
           SizedBox(height: meGab)
