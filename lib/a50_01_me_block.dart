@@ -2,16 +2,28 @@ import 'package:flutter/material.dart';
 
 double meGab = 6.8;
 
+class MeDetails {
+  String login = "peter@vyrox.com";
+  String customerID = "100004";
+  String customerAccountEntity = "Personal";
+  String name = "Teh Hon Kee";
+  String identity = "890508-08-5605";
+}
+
 class MeBlock1 extends StatelessWidget {
-  const MeBlock1({Key? key}) : super(key: key);
+  MeBlock1({Key? key}) : super(key: key);
+
+  final _myDetails = MeDetails();
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: const [
-      MeContent(title: 'Login Username', field: 'Peter@vyrox.com'),
-      MeContent(title: 'Customer ID', field: '100004'),
-      MeContent(title: 'Customer Account Entity', field: 'Personal'),
-      MeNickname(),
+    return Column(children: [
+      MeContent(title: 'Login Username', field: _myDetails.login),
+      MeContent(title: 'Customer ID', field: _myDetails.customerAccountEntity),
+      MeContent(
+          title: 'Customer Account Entity',
+          field: _myDetails.customerAccountEntity),
+      const MeNickname(),
       MeContent(title: 'Name', field: 'Teh Hon Kee'),
       MeContent(title: 'NRIC/Passport No.', field: '890508-08-5605'),
       MeContent(title: 'Mobile Phone no.', field: '0165313713'),
@@ -20,7 +32,7 @@ class MeBlock1 extends StatelessWidget {
       MeContent(title: 'Gender', field: 'Male'),
       MeContent(title: 'Date of Birth', field: '1989-05-08'),
       MeContent(title: 'Smart Mirror Code', field: '5NKT8MHTV88VGH'),
-      SizedBox(height: 20),
+      const SizedBox(height: 20),
     ]);
   }
 }
