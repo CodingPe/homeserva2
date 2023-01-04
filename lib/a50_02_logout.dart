@@ -5,15 +5,20 @@ class LogoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String logout = '                     Logout                    ';
-    return SizedBox(
-        height: 60,
-        child: Center(
-            child: CupertinoButton.filled(
-                child: Text(logout),
-                onPressed: () {
-                  Navigator.of(context).restorablePush(dialogBuilder);
-                })));
+    String changePassword = 'Logout';
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+      child: SizedBox(
+          height: 52,
+          width: double.infinity,
+          child: Center(
+              child: CupertinoButton.filled(
+                  minSize: 400,
+                  child: Text(changePassword),
+                  onPressed: () {
+                    Navigator.of(context).restorablePush(dialogBuilder);
+                  }))),
+    );
   }
 }
 

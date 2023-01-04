@@ -26,7 +26,7 @@ class MeBlock1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       MeContent(title: 'Login Username', field: _myDetails.login),
-      MeContent(title: 'Customer ID', field: _myDetails.customerAccountEntity),
+      MeContent(title: 'Customer ID', field: _myDetails.customerID),
       MeContent(
           title: 'Customer Account Entity',
           field: _myDetails.customerAccountEntity),
