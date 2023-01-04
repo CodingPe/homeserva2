@@ -31,7 +31,7 @@ class Me extends StatelessWidget {
                                 'https://newdemo.homeserva.com/images/pic_1.png'),
                           ))),
                   const SizedBox(height: 30),
-                  const MeBlock1(),
+                  MeBlock1(),
                   const MeBlock2(),
                   const SizedBox(height: 30),
                   const ChangePasswordButton(),
