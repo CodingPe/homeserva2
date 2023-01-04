@@ -30,7 +30,7 @@ class MeBlock1 extends StatelessWidget {
       MeContent(
           title: 'Customer Account Entity',
           field: _myDetails.customerAccountEntity),
-      MeNickname(),
+      MeNickname(field: _myDetails.nickname),
       MeContent(title: 'Name', field: _myDetails.name),
       MeContent(title: 'NRIC/Passport No.', field: _myDetails.identity),
       MeContent(title: 'Mobile Phone no.', field: _myDetails.mobilePhone),
@@ -100,8 +100,8 @@ class MeContent extends StatelessWidget {
 }
 
 class MeNickname extends StatelessWidget {
-  MeNickname({Key? key}) : super(key: key);
-  final _myDetails = MeDetails();
+  const MeNickname({Key? key, required this.field}) : super(key: key);
+  final String field;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -125,7 +125,7 @@ class MeNickname extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(left: 10),
                           child: Row(children: [
-                            Text(_myDetails.nickname),
+                            Text(field),
                             Padding(
                                 padding: const EdgeInsets.only(left: 10),
                                 child: InkWell(
