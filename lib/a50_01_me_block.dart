@@ -6,8 +6,15 @@ class MeDetails {
   String login = "peter@vyrox.com";
   String customerID = "100004";
   String customerAccountEntity = "Personal";
+  String nickname = "";
   String name = "Teh Hon Kee";
   String identity = "890508-08-5605";
+  String mobilePhone = "0165313713";
+  String whatsapp = "60165313713";
+  String email = "peter@vyrox.com";
+  String gender = "Male";
+  String dateOfBirth = "1989-05-08";
+  String mirrorCode = "5NKT8MHTV88VGH";
 }
 
 class MeBlock1 extends StatelessWidget {
@@ -23,15 +30,15 @@ class MeBlock1 extends StatelessWidget {
       MeContent(
           title: 'Customer Account Entity',
           field: _myDetails.customerAccountEntity),
-      const MeNickname(),
-      MeContent(title: 'Name', field: 'Teh Hon Kee'),
-      MeContent(title: 'NRIC/Passport No.', field: '890508-08-5605'),
-      MeContent(title: 'Mobile Phone no.', field: '0165313713'),
-      MeContent(title: 'Whatsapp', field: '60165313713'),
-      MeContent(title: 'Email', field: 'peter@vyrox.com'),
-      MeContent(title: 'Gender', field: 'Male'),
-      MeContent(title: 'Date of Birth', field: '1989-05-08'),
-      MeContent(title: 'Smart Mirror Code', field: '5NKT8MHTV88VGH'),
+      MeNickname(),
+      MeContent(title: 'Name', field: _myDetails.name),
+      MeContent(title: 'NRIC/Passport No.', field: _myDetails.identity),
+      MeContent(title: 'Mobile Phone no.', field: _myDetails.mobilePhone),
+      MeContent(title: 'Whatsapp', field: _myDetails.whatsapp),
+      MeContent(title: 'Email', field: _myDetails.email),
+      MeContent(title: 'Gender', field: _myDetails.gender),
+      MeContent(title: 'Date of Birth', field: _myDetails.dateOfBirth),
+      MeContent(title: 'Smart Mirror Code', field: _myDetails.mirrorCode),
       const SizedBox(height: 20),
     ]);
   }
@@ -93,8 +100,8 @@ class MeContent extends StatelessWidget {
 }
 
 class MeNickname extends StatelessWidget {
-  const MeNickname({Key? key}) : super(key: key);
-
+  MeNickname({Key? key}) : super(key: key);
+  final _myDetails = MeDetails();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -118,7 +125,7 @@ class MeNickname extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(left: 10),
                           child: Row(children: [
-                            const Text('-'),
+                            Text(_myDetails.nickname),
                             Padding(
                                 padding: const EdgeInsets.only(left: 10),
                                 child: InkWell(
