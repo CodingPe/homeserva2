@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:homeserva_2/a60_00_login.dart';
 
 class LogoutButton extends StatelessWidget {
   const LogoutButton({Key? key}) : super(key: key);
@@ -39,6 +41,10 @@ Route<Object?> dialogBuilder(BuildContext context, Object? arguments) {
               CupertinoDialogAction(
                   onPressed: () {
                     Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Login2()));
                   },
                   isDestructiveAction: true,
                   child: const Text('Yes'))

@@ -6,7 +6,7 @@ class MeDetails {
   String login = "peter@vyrox.com";
   String customerID = "100004";
   String customerAccountEntity = "Personal";
-  String nickname = "";
+  String nickname = "asdasd";
   String name = "Teh Hon Kee";
   String identity = "890508-08-5605";
   String mobilePhone = "0165313713";
@@ -15,6 +15,15 @@ class MeDetails {
   String gender = "Male";
   String dateOfBirth = "1989-05-08";
   String mirrorCode = "5NKT8MHTV88VGH";
+  String buttonName = "Add Nickname";
+  double space = 0;
+
+  showWidget() {
+    if (nickname == "") {
+      buttonName = "Change";
+      space = 10;
+    } else {}
+  }
 }
 
 class MeBlock1 extends StatelessWidget {
@@ -100,8 +109,9 @@ class MeContent extends StatelessWidget {
 }
 
 class MeNickname extends StatelessWidget {
-  const MeNickname({Key? key, required this.field}) : super(key: key);
+  MeNickname({Key? key, required this.field}) : super(key: key);
   final String field;
+  final _myDetails = MeDetails();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -127,11 +137,13 @@ class MeNickname extends StatelessWidget {
                           child: Row(children: [
                             Text(field),
                             Padding(
-                                padding: const EdgeInsets.only(left: 10),
+                                padding:
+                                    EdgeInsets.only(left: _myDetails.space),
                                 child: InkWell(
                                     onTap: () {},
-                                    child: const Text('Change',
-                                        style: TextStyle(color: Colors.blue)))),
+                                    child: Text(_myDetails.buttonName,
+                                        style: const TextStyle(
+                                            color: Colors.blue)))),
                           ])))
                 ]),
           ),
