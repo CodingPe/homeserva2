@@ -6,7 +6,7 @@ class MeDetails {
   String login = "peter@vyrox.com";
   String customerID = "100004";
   String customerAccountEntity = "Personal";
-  String nickname = "asdasd";
+  String nickname = "a";
   String name = "Teh Hon Kee";
   String identity = "890508-08-5605";
   String mobilePhone = "0165313713";
@@ -15,14 +15,17 @@ class MeDetails {
   String gender = "Male";
   String dateOfBirth = "1989-05-08";
   String mirrorCode = "5NKT8MHTV88VGH";
-  String buttonName = "Add Nickname";
+  String buttonName = "Change";
   double space = 0;
 
   showWidget() {
-    if (nickname == "") {
+    if (nickname == "a") {
+      buttonName = "Add Nickname";
+      space = 0;
+    } else {
       buttonName = "Change";
       space = 10;
-    } else {}
+    }
   }
 }
 
@@ -108,10 +111,17 @@ class MeContent extends StatelessWidget {
   }
 }
 
-class MeNickname extends StatelessWidget {
-  MeNickname({Key? key, required this.field}) : super(key: key);
+class MeNickname extends StatefulWidget {
+  const MeNickname({Key? key, required this.field}) : super(key: key);
   final String field;
+
+  @override
+  State<MeNickname> createState() => _MeNicknameState();
+}
+
+class _MeNicknameState extends State<MeNickname> {
   final _myDetails = MeDetails();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -128,19 +138,24 @@ class MeNickname extends StatelessWidget {
                       child: Container(
                           alignment: Alignment.centerRight,
                           padding: const EdgeInsets.only(right: 10),
-                          child: const Text('Nickname',
-                              style: TextStyle(fontWeight: FontWeight.bold)))),
+                          child: Text(_myDetails.buttonName,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold)))),
                   Expanded(
                       child: Container(
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(left: 10),
                           child: Row(children: [
-                            Text(field),
+                            Text(widget.field),
                             Padding(
                                 padding:
                                     EdgeInsets.only(left: _myDetails.space),
                                 child: InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      setState(() {
+                                        _myDetails.showWidget();
+                                      });
+                                    },
                                     child: Text(_myDetails.buttonName,
                                         style: const TextStyle(
                                             color: Colors.blue)))),
