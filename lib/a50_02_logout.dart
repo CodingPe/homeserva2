@@ -41,10 +41,9 @@ Route<Object?> dialogBuilder(BuildContext context, Object? arguments) {
               CupertinoDialogAction(
                   onPressed: () {
                     Navigator.pop(context);
-                    Navigator.push(
-                        context,
+                    Navigator.of(context, rootNavigator: true).push(
                         MaterialPageRoute(
-                            builder: (context) => const MainPage()));
+                            builder: (context) => const LoginPage()));
                   },
                   isDestructiveAction: true,
                   child: const Text('Yes'))

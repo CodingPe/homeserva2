@@ -10,16 +10,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final stateManager = LoginJsonPost();
-  final _homePage = const MainPage();
   final TextEditingController _userLogin = TextEditingController();
   final TextEditingController _passLogin = TextEditingController();
   bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
-    final jsonPost = LoginJsonPost();
-    final canLogin = navigateAndFinish(context, const MainPage());
     return Scaffold(
         backgroundColor: Colors.grey[300],
         body: SafeArea(
@@ -169,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => _homePage));
+                                      builder: (context) => const MainPage()));
                             })
                       ]))
             ])))));
