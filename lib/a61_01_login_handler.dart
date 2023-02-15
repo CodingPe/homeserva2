@@ -29,7 +29,6 @@ class LoginJsonPost {
         '{"action": "test_login","username": "$userLogin", "password": "$passLogin", "Id": "118"}';
     final response = await post(url, headers: headers, body: json);
     if (response.body == '{"status":2}') {}
-
     handleResponse(response);
   }
 }

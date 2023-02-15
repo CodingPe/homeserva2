@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homeserva_2/a00_00_directory.dart';
 
 double meGab = 6.8;
 
@@ -129,39 +130,35 @@ class _MeNicknameState extends State<MeNickname> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           IntrinsicWidth(
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                      child: Container(
-                          alignment: Alignment.centerRight,
-                          padding: const EdgeInsets.only(right: 10),
-                          child: Text(_myDetails.buttonName,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold)))),
-                  Expanded(
-                      child: Container(
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Row(children: [
-                            Text(widget.field),
-                            Padding(
-                                padding:
-                                    EdgeInsets.only(left: _myDetails.space),
-                                child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        _myDetails.showWidget();
-                                      });
-                                    },
-                                    child: Text(_myDetails.buttonName,
-                                        style: const TextStyle(
-                                            color: Colors.blue)))),
-                          ])))
-                ]),
-          ),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Text(_myDetails.buttonName,
+                            style:
+                                const TextStyle(fontWeight: FontWeight.bold)))),
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Row(children: [
+                          Text(widget.field),
+                          Padding(
+                              padding: EdgeInsets.only(left: _myDetails.space),
+                              child: InkWell(
+                                  onTap: () {
+                                    _myDetails.showWidget();
+                                  },
+                                  child: Text(_myDetails.buttonName,
+                                      style: const TextStyle(
+                                          color: Colors.blue)))),
+                        ])))
+              ])),
           SizedBox(height: meGab)
         ]);
   }
