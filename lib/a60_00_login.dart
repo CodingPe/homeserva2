@@ -6,15 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:hive/hive.dart';
 
-class LoginJson {
-  String? email;
-  String? password;
-
-  LoginJson(this.email, this.password);
-
-  bool loadingVisible = false;
-  Uri url = Uri.parse('https://peterapi.vyrox.com/login_user.php');
-  late var data = {'loginCode': 'vyrox', 'email': email, 'password': password};
+canLogin(context) {
+  navigatePageRoute(context, const MainPage());
 }
 
 class LoginUser extends StatefulWidget {
@@ -25,58 +18,43 @@ class LoginUser extends StatefulWidget {
 }
 
 class LoginUserState extends State<LoginUser> {
-  late LoginJson login =
-      LoginJson(emailController.text, passwordController.text);
 //Hive Box
   final _tokenBox = Hive.box('TokenBox');
   // For CircularProgressIndicator.
-
+  bool loadingVisible = false;
   // Getting value from TextField widget.
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   Future userLogin() async {
+    String email = emailController.text;
+    String password = passwordController.text;
     // Showing CircularProgressIndicator.
     setState(() {
-      login.loadingVisible = true;
+      loadingVisible = true;
     });
-    http.Response response =
-        await http.post(login.url, body: json.encode(login.data));
+
+    Uri url = Uri.parse('https://peterapi.vyrox.com/login_user.php');
+    var data = {'loginCode': 'vyrox', 'email': email, 'password': password};
+    var response = await http.post(url, body: json.encode(data));
     var message = jsonDecode(response.body);
 
-    if (response.statusCode >= 400) {
-      debugPrint('No internet');
-      return;
+    if (message['login'] == 'Login Matched') {
+      setState(() {
+        loadingVisible = false;
+      });
+      Hive.box('TokenBox').put(1, message['token']);
+      debugPrint('Token: ${_tokenBox.get(1)}');
+      canLogin(context);
     } else {
-      if (message['login'] == 'Login Matched') {
-        setState(() {
-          login.loadingVisible = false;
-        });
-        Hive.box('TokenBox').put(1, message['token']);
-        debugPrint('Token: ${_tokenBox.get(1)}');
-        navigateAndFinish(context, const Dashboard());
-      } else {
-        // If Email or Password did not Matched.
-        // Hiding the CircularProgressIndicator.
-        setState(() {
-          login.loadingVisible = false;
-        });
-        // Showing Alert Dialog with Response JSON Message.
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                  title: Text(message['login']),
-                  actions: <Widget>[
-                    ElevatedButton(
-                        child: Text("OK"),
-                        onPressed: () {
-                          navigatorPop(context);
-                        })
-                  ]);
-            });
-        debugPrint('Login = ${message['login']}');
-      }
+      // If Email or Password did not Matched.
+      // Hiding the CircularProgressIndicator.
+      setState(() {
+        loadingVisible = false;
+      });
+      // Showing Alert Dialog with Response JSON Message.
+      Navigator.of(context).restorablePush(loginDialogBuilder);
+      debugPrint('Login = ${message['login']}');
     }
   }
 
@@ -84,88 +62,75 @@ class LoginUserState extends State<LoginUser> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
-            child: Center(
-                child: Column(children: [
-      const Padding(
-          padding: EdgeInsets.all(12.0),
-          child: Text('User Login Form', style: TextStyle(fontSize: 21))),
-      const Divider(),
-      Container(
-          width: 280,
-          padding: const EdgeInsets.all(10.0),
-          child: TextField(
-            controller: emailController,
-            decoration:
-                const InputDecoration(hintText: 'Enter Your Email Here'),
-          )),
-      Container(
-          width: 280,
-          padding: const EdgeInsets.all(10.0),
-          child: TextField(
-            controller: passwordController,
-            obscureText: true,
-            decoration:
-                const InputDecoration(hintText: 'Enter Your Password Here'),
-          )),
-      ElevatedButton(
-        onPressed: userLogin,
-        style: ElevatedButton.styleFrom(backgroundColor: Colors.amber[600]),
-        child: const Text('Login'),
-      ),
-      Visibility(
-          visible: login.loadingVisible,
-          child: Container(
-              margin: const EdgeInsets.only(bottom: 30),
-              child: const CircularProgressIndicator())),
-    ]))));
+            child: SafeArea(
+      child: Center(
+          child: Column(children: [
+        const Padding(
+            padding: EdgeInsets.all(12.0),
+            child: Text('User Login Form', style: TextStyle(fontSize: 21))),
+        const Divider(),
+        Container(
+            width: 280,
+            padding: const EdgeInsets.all(10.0),
+            child: TextField(
+              controller: emailController,
+              decoration:
+                  const InputDecoration(hintText: 'Enter Your Email Here'),
+            )),
+        Container(
+            width: 280,
+            padding: const EdgeInsets.all(10.0),
+            child: TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration:
+                  const InputDecoration(hintText: 'Enter Your Password Here'),
+            )),
+        bigButton('Login', userLogin),
+        Visibility(
+            visible: loadingVisible,
+            child: Container(
+                margin: const EdgeInsets.only(bottom: 30),
+                child: const CupertinoActivityIndicator())),
+      ])),
+    )));
   }
 }
 
-class ProfileScreen extends StatefulWidget {
-// Creating String Var to Hold sent Email.
-
-// Receiving Email using Constructor.
-  const ProfileScreen({Key? key}) : super(key: key);
-
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+Route<Object?> loginDialogBuilder(
+  BuildContext context,
+  Object? arguments,
+) {
+  return CupertinoDialogRoute<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+            title: const Text('Login Failed'),
+            content:
+                const Text('Invalid password or username, Please try again.'),
+            actions: <Widget>[
+              CupertinoDialogAction(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  isDefaultAction: true,
+                  child: const Text('Ok'))
+            ]);
+      });
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
-// User Logout Function.
-  logout(BuildContext context) {
-    Navigator.pop(context);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(
-                title: const Text('Profile Screen'),
-                automaticallyImplyLeading: false),
-            body: Center(
-                child: Column(children: [
-              Container(
-                  width: 280,
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(', Login Successful!',
-                      style: const TextStyle(fontSize: 15))),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginUser()));
-                  },
-                  child: Text('ok')),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                  onPressed: () {
-                    logout(context);
-                  },
-                  child: const Text('Click Here To Logout')),
-            ]))));
-  }
+Widget bigButton(name, action) {
+  String changePassword = 'Logout';
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+    child: SizedBox(
+        height: 52,
+        width: double.infinity,
+        child: Center(
+            child: CupertinoButton.filled(
+          minSize: 400,
+          onPressed: action,
+          child: Text(name),
+        ))),
+  );
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 export 'package:homeserva_2/main.dart';
 export 'package:homeserva_2/a10_00_dashboard.dart';
 export 'package:homeserva_2/a20_00_functions.dart';
@@ -12,7 +13,7 @@ export 'package:homeserva_2/a50_02_logout.dart';
 export 'package:homeserva_2/a50_03_web_content_tpd.dart';
 export 'package:homeserva_2/a60_01_login_2.dart';
 export 'a61_01_login_handler.dart';
-// export 'a60_00_login.dart';
+export 'a60_00_login.dart';
 
 void noRotation() {
   SystemChrome.setPreferredOrientations([
@@ -37,6 +38,13 @@ void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
       (route) => false,
     );
 
+void navigatePageRoute(context, widget) => Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => widget,
+      ),
+    );
+
 void navigatorPop(context) {
   Navigator.pop(context);
 }
@@ -49,4 +57,19 @@ extension StringCasingExtension on String {
       .split(' ')
       .map((str) => str.toCapitalized())
       .join(' ');
+}
+
+Widget bigButton(name, action) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+    child: SizedBox(
+        height: 52,
+        width: double.infinity,
+        child: Center(
+            child: CupertinoButton.filled(
+          minSize: 400,
+          onPressed: action,
+          child: Text(name),
+        ))),
+  );
 }

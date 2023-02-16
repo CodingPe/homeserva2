@@ -43,7 +43,7 @@ Route<Object?> dialogBuilder(BuildContext context, Object? arguments) {
                     Navigator.pop(context);
                     Navigator.of(context, rootNavigator: true).push(
                         MaterialPageRoute(
-                            builder: (context) => const LoginPage()));
+                            builder: (context) => const LoginUser()));
                   },
                   isDestructiveAction: true,
                   child: const Text('Yes'))
