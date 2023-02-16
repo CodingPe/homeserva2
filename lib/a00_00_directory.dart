@@ -37,6 +37,10 @@ void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
       (route) => false,
     );
 
+void navigatorPop(context) {
+  Navigator.pop(context);
+}
+
 //String letter capitalization extensions/methods.
 extension StringCasingExtension on String {
   String toCapitalized() =>
