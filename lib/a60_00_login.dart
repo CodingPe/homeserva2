@@ -106,8 +106,8 @@ Route<Object?> loginDialogBuilder(
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
             title: const Text('Login Failed'),
-            content:
-                const Text('Invalid password or username, Please try again.'),
+            content: const Text(
+                'Invalid password or username, \n Please try again.'),
             actions: <Widget>[
               CupertinoDialogAction(
                   onPressed: () {
