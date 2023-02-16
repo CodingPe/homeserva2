@@ -23,8 +23,8 @@ class LoginJsonPost {
     resultNotifier.value = RequestLoadInProgress();
 
     const urlPrefix = 'https://vyrox.com/petertest.php';
-    final url = Uri.parse('$urlPrefix/posts');
-    final headers = {"Content-type": "application/json"};
+    Uri url = Uri.parse('$urlPrefix/posts');
+    var headers = {"Content-type": "application/json"};
     final json =
         '{"action": "test_login","username": "$userLogin", "password": "$passLogin", "Id": "118"}';
     final response = await post(url, headers: headers, body: json);
