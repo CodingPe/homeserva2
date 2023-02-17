@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "53.0.0"
+  _flutterfire_internals:
+    dependency: transitive
+    description:
+      name: _flutterfire_internals
+      sha256: "6607e2a4774a97751a5739ce6e63f948c6654d059eeed918dcf10eb58554db7f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.14"
   analyzer:
     dependency: transitive
     description:
@@ -129,6 +137,54 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.4"
+  firebase_core:
+    dependency: transitive
+    description:
+      name: firebase_core
+      sha256: "8421b0d06b6a39fabd5937857250ab97b3de1e9b28aeb91fc5fc6ac6dce8b92f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.0"
+  firebase_core_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_core_platform_interface
+      sha256: "5615b30c36f55b2777d0533771deda7e5730e769e5d3cb7fda79e9bed86cfa55"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.5.3"
+  firebase_core_web:
+    dependency: transitive
+    description:
+      name: firebase_core_web
+      sha256: "0684787baee0a65848fa3a3831f525b42832ab3850257bae7245be1ad4af8ca3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
+  firebase_messaging:
+    dependency: "direct main"
+    description:
+      name: firebase_messaging
+      sha256: a40a895d87eafe8376000ec3c0d319dc4ee0719fd52909060a058b7694571e7a
+      url: "https://pub.dev"
+    source: hosted
+    version: "14.2.3"
+  firebase_messaging_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_messaging_platform_interface
+      sha256: b159a61ce709dcb0b4de9312ff55366dd7e37bcca1b71f8f7b6252eaffeb0639
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.12"
+  firebase_messaging_web:
+    dependency: transitive
+    description:
+      name: firebase_messaging_web
+      sha256: "70fda5c02f6363dfcc46a66525eea63f2ab78c0d11cc0dce7e2ba9b9061fd3fc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.13"
   flutter:
     dependency: "direct main"
     description: flutter

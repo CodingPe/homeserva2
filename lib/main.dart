@@ -3,8 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:homeserva_2/a00_00_directory.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:firebase_messaging/firebase_messaging.dart'; //push notification必定需要安裝的package
+import 'package:firebase_core/firebase_core.dart';
+import 'dart:convert';
+
+Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  print("Handling a background message: ${message.messageId}");
+}
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('TokenBox');
   runApp(const MyApp());
@@ -33,13 +41,44 @@ class MyApp extends StatelessWidget {
             foregroundColor: CupertinoColors.black,
             elevation: 0.8,
           )),
-      home: const MainPage(), // refer to (6.)
+      home: MainPage(), // refer to (6.)
     );
   }
 }
 
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
+class MainPage extends StatefulWidget {
+
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  late final FirebaseMessaging _messaging;
+
+  void requestAndRegisterNotification() async {
+    await Firebase.initializeApp();
+    _messaging = FirebaseMessaging.instance;
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+    NotificationSettings settings = await _messaging.requestPermission(
+        alert: true,
+        badge: true,
+        provisional: true,
+        sound: true
+    );
+
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print('User granted permission');
+      String? token = await _messaging.getToken();
+      print("The token is " + token!);
+    }
+  } //做到一半的push notification
+
+  @override
+  void initState() {
+    super.initState();
+    requestAndRegisterNotification();
+  }
 
   @override
   Widget build(BuildContext context) {

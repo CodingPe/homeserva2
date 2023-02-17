@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:hive/hive.dart';
 
 canLogin(context) {
-  navigatePageRoute(context, const MainPage());
+  navigatePageRoute(context, MainPage());
 }
 
 class LoginUser extends StatefulWidget {
