@@ -3,9 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:homeserva_2/a00_00_directory.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:firebase_messaging/firebase_messaging.dart'; //push notification必定需要安裝的package
+import 'package:firebase_messaging/firebase_messaging.dart'; //push notification必定需要安裝的package //push notification must be installed package
 import 'package:firebase_core/firebase_core.dart';
 import 'dart:convert';
+import 'firebase_options.dart';
 
 Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
@@ -13,6 +14,9 @@ Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await Hive.initFlutter();
   await Hive.openBox('TokenBox');
   runApp(const MyApp());
