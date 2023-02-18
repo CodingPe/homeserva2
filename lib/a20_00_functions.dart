@@ -29,7 +29,7 @@ class Functions extends StatelessWidget {
                 );
               },
               child: Image.asset(
-                'assets/images/suggestions.png',
+                'assets/icons/suggestions.png',
                 width: 100, // set the width of the image
                 height: 100, // set the height of the image
               ),
