@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.homeserva.homeserva_2">
    <application
-        android:label="homeserva_2"
+        android:label="SMARTSERVA"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

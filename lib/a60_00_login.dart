@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:hive/hive.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 canLogin(context) {
   navigatePageRoute(context, MainPage());
@@ -25,6 +26,19 @@ class LoginUserState extends State<LoginUser> {
   // Getting value from TextField widget.
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
+  String? _token;
+
+  @override
+  void initState() {
+    super.initState();
+    _firebaseMessaging.getToken().then((String? token) {
+      setState(() {
+        _token = token;
+      });
+    });
+  }
 
   Future userLogin() async {
     String email = emailController.text;
@@ -35,7 +49,7 @@ class LoginUserState extends State<LoginUser> {
     });
 
     Uri url = Uri.parse('https://peterapi.vyrox.com/login_user.php');
-    var data = {'loginCode': 'vyrox', 'email': email, 'password': password};
+    var data = {'loginCode': 'vyrox', 'email': email, 'password': password,'fcm_token': _token};
     var response = await http.post(url, body: json.encode(data));
     var message = jsonDecode(response.body);
 

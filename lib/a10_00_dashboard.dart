@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:firebase_messaging/firebase_messaging.dart'; //push notification必定需要安裝的package //push notification must be installed package
+import 'package:firebase_core/firebase_core.dart';
+import 'dart:convert';
+import 'firebase_options.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key, String? a});

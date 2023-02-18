@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
     statusBar();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'HOMESERVA',
+      title: 'SMARTSERVA',
       theme: ThemeData(
           textTheme: const TextTheme(
             bodyText1: TextStyle(fontSize: 11.8),
@@ -76,14 +76,18 @@ class _MainPageState extends State<MainPage> {
       String? token = await _messaging.getToken();
       print("The token is " + token!);
     }
-  } //做到一半的push notification
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print("Received message: ${message.notification!.body}");
+      // You can add your own code here to handle the message
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     requestAndRegisterNotification();
   }
-
   @override
   Widget build(BuildContext context) {
     List<Widget> data = const [
@@ -111,7 +115,7 @@ class _MainPageState extends State<MainPage> {
                     label: "Functions"),
                 BottomNavigationBarItem(
                     icon:
-                        Icon(Icons.insert_chart_outlined_sharp, size: iconSize),
+                    Icon(Icons.insert_chart_outlined_sharp, size: iconSize),
                     label: "Accounting"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.notifications_active_outlined,
