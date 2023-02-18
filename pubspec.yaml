@@ -54,7 +54,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    -assets/icons/
+    - assets/icons/
     # - assets/images/access%20card.png
     # - assets/images/announcements.png
     # - assets/images/committee.png
