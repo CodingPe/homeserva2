@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "811793546212",
+    "project_id": "homeserva-fcm",
+    "storage_bucket": "homeserva-fcm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:811793546212:android:729278d948aadb08e025f1",
+        "android_client_info": {
+          "package_name": "com.homeserva.homeserva_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "811793546212-8094ko6iiehav0861be45m8g1tgktp70.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn-5nV36tOR5-IkAAMFi6LVq41fcygISY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "811793546212-8094ko6iiehav0861be45m8g1tgktp70.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "811793546212-392htgjgm0b41j7ugvl3ibsrv6tfas10.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vyroxpeter.homeservametaverse.homeservaCupertinoXMetaverse"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:811793546212:android:55d03c8f5c696ad6e025f1",
+        "android_client_info": {
+          "package_name": "com.vyroxpeter.homeservametaverse.homeserva_cupertino_x_metaverse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "811793546212-8094ko6iiehav0861be45m8g1tgktp70.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn-5nV36tOR5-IkAAMFi6LVq41fcygISY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "811793546212-8094ko6iiehav0861be45m8g1tgktp70.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "811793546212-392htgjgm0b41j7ugvl3ibsrv6tfas10.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vyroxpeter.homeservametaverse.homeservaCupertinoXMetaverse"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
