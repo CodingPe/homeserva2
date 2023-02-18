@@ -6,7 +6,7 @@ class Dashboard extends StatelessWidget {
   const Dashboard({super.key, String? a});
 
   Future getannouncmentData() async {
-    var url = 'https://peterapi.vyrox.com/viewdata.php';
+    var url = 'https://peterapi.vyrox.com/viewannouncementsdata.php';
     var response = await http.get(Uri.parse(url));
     return json.decode(response.body);
   } //使用這個來接受來自phpmyadmin的announcement table裡面的data
@@ -57,7 +57,7 @@ class Dashboard extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DetailPage(list: list, index: index),
+                                builder: (context) => DetailAnnouncementPage(list: list, index: index),
                               ),
                             );
                           },
@@ -108,11 +108,11 @@ class Dashboard extends StatelessWidget {
   }
 }
 
-class DetailPage extends StatelessWidget {
+class DetailAnnouncementPage extends StatelessWidget {
   final List list;
   final int index;
 
-  const DetailPage({Key? key, required this.list, required this.index}) : super(key: key);
+  const DetailAnnouncementPage({Key? key, required this.list, required this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
