@@ -53,30 +53,32 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/images/access%20card.png
-    - assets/images/announcements.png
-    - assets/images/committee.png
-    - assets/images/complaints.png
-    - assets/images/concierge services.png
-    - assets/images/delivery lockers.png
-    - assets/images/emergency sos.png
-    - assets/images/facility bookings.png
-    - assets/images/home services applications.png
-    - assets/images/laundry.png
-    - assets/images/management account.png
-    - assets/images/marketplace.png
-    - assets/images/meeting minutes.png
-    - assets/images/qr keys.png
-    - assets/images/share.png
-    - assets/images/status.png
-    - assets/images/sub-user accounts.png
-    - assets/images/suggestions.png
-    - assets/images/tenant accounts.png
-    - assets/images/status.png
-    - assets/images/thing%20to%20do.png
-    - assets/images/tukangman.png
-    - assets/images/useful contacts.png
-    - assets/images/visitors.png
+    - assets/images/
+    -assets/icons/
+    # - assets/images/access%20card.png
+    # - assets/images/announcements.png
+    # - assets/images/committee.png
+    # - assets/images/complaints.png
+    # - assets/images/concierge services.png
+    # - assets/images/delivery lockers.png
+    # - assets/images/emergency sos.png
+    # - assets/images/facility bookings.png
+    # - assets/images/home services applications.png
+    # - assets/images/laundry.png
+    # - assets/images/management account.png
+    # - assets/images/marketplace.png
+    # - assets/images/meeting minutes.png
+    # - assets/images/qr keys.png
+    # - assets/images/share.png
+    # - assets/images/status.png
+    # - assets/images/sub-user accounts.png
+    # - assets/images/suggestions.png
+    # - assets/images/tenant accounts.png
+    # - assets/images/status.png
+    # - assets/images/thing%20to%20do.png
+    # - assets/images/tukangman.png
+    # - assets/images/useful contacts.png
+    # - assets/images/visitors.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
