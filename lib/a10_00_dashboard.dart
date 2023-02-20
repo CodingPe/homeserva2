@@ -36,7 +36,7 @@ class Dashboard extends StatelessWidget {
                         color: Colors.black,
                         fontWeight: FontWeight.w200,
                         fontSize: 20))
-              ])) //
+              ]))
               ),
           Expanded(
               flex: 2,
