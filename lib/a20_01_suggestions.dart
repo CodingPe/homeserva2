@@ -18,7 +18,7 @@ class _suggestionsState extends State<suggestions> {
   TextEditingController title = TextEditingController();
   TextEditingController display = TextEditingController();
   TextEditingController description = TextEditingController();
-  TextEditingController photo = TextEditingController();
+  String photo = '';
   final _formkey = GlobalKey<FormState>();
   List<String> list = <String>['One', 'Two', 'Three', 'Four'];
   String selectedTitle = '123';
@@ -171,7 +171,7 @@ class _suggestionsState extends State<suggestions> {
                                             'title': title.text,
                                             'display': display.text,
                                             'description': description.text,
-                                            'photo':photo.text
+                                            'photo':photo
                                           });
                                           if (response.statusCode == 200) {
                                             // Request was successful
@@ -236,33 +236,40 @@ class _suggestionsState extends State<suggestions> {
                           ),
                         );
                       },
-                      child: Row(
-                        children: [
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-
-                                Text(
-                                  list[index]['Title'],
-                                  style: const TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(height: 2),
-                                SizedBox(
-                                  height: 25, // set the height to your desired value
-                                  child: Text(
-                                    list[index]['Description'],
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const  TextStyle(color: Colors.black),
-                                  ),
-                                ),
-                              ],
-                            ),
+                      child: Row(children: [
+                        ClipRRect(
+                          borderRadius:
+                          BorderRadius.circular(12.0),
+                          child: Image.network(
+                            list[index]['Photo'],
+                            width: 60,
+                            height: 60,
+                            fit: BoxFit.cover,
                           ),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                            child: Column(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    list[index]['Title'],
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    list[index]['Description'],
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w200,
+                                        color: Color.fromARGB(
+                                            255, 66, 72, 82),
+                                        fontSize: 13),
+                                  )
+                                ]))
+                      ])
                     ),
                   );
                 }
@@ -292,11 +299,11 @@ class DetailPage extends StatelessWidget {
             children: <Widget>[
               Image.network(list[index]['Photo']),
               const SizedBox(height: 16.0),
-              Text(list[index]['Title'],style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 30),textAlign: TextAlign.center,),
+              Text(list[index]['Category'],style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 30),textAlign: TextAlign.center,),
               const SizedBox(height: 16.0),
-              Text(list[index]['Description'],textAlign: TextAlign.center,),
+              Text(list[index]['Title'],textAlign: TextAlign.center,),
               const SizedBox(height: 16.0),
-              Text(list[index]['Title'], style: const TextStyle(fontWeight: FontWeight.w300),),
+              Text(list[index]['Description'], style: const TextStyle(fontWeight: FontWeight.w300),),
               const SizedBox(height: 16.0),
             ],
           ),
