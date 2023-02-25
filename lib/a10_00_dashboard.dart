@@ -39,7 +39,7 @@ class Dashboard extends StatelessWidget {
               ]))
               ),
           Expanded(
-              flex: 2,
+              flex: 8,
               child: FutureBuilder(
                 future: getAnnouncementData(),
                 builder: (context, snapshot) {
@@ -100,9 +100,6 @@ class Dashboard extends StatelessWidget {
                 },
               ) //這個是announcement的futurebuilder 可以通過上面的flex改變大小
               ),
-          Expanded(
-            flex: 3, child: Container(), //下面還不知道要放什麼下去
-          )
         ]));
   }
 }

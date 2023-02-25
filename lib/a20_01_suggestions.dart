@@ -12,7 +12,6 @@ class suggestions extends StatefulWidget {
   State<suggestions> createState() => _suggestionsState();
 }
 
-
 class _suggestionsState extends State<suggestions> {
   TextEditingController category = TextEditingController();
   TextEditingController title = TextEditingController();
@@ -22,7 +21,6 @@ class _suggestionsState extends State<suggestions> {
   final _formkey = GlobalKey<FormState>();
   List<String> list = <String>['One', 'Two', 'Three', 'Four'];
   String selectedTitle = '123';
-
 
   Future getsuggestionsData() async {
     var url = 'https://peterapi.vyrox.com/viewsuggestionsdata.php';
@@ -211,12 +209,25 @@ class _suggestionsState extends State<suggestions> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: const Text("Complaints",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),backgroundColor: Colors.black,
+    return WillPopScope(
+      onWillPop: () => Future.value(false), // 按下返回鍵不執行任何動作
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            "Complaints",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: Colors.black,
           actions: [
-            IconButton(onPressed: showAddContentDialog, icon: Icon(Icons.add,color: Colors.white,))
-          ],),
-
+            IconButton(
+              onPressed: showAddContentDialog,
+              icon: Icon(Icons.add, color: Colors.white),
+            )
+          ],
+        ),
         body: FutureBuilder(
           future: getsuggestionsData(),
           builder: (context, snapshot){
@@ -228,54 +239,55 @@ class _suggestionsState extends State<suggestions> {
                   return Padding(
                     padding: const EdgeInsets.all(20),
                     child: GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailPage(list: list, index: index),
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailPage(list: list, index: index),
+                            ),
+                          );
+                        },
+                        child: Row(children: [
+                          ClipRRect(
+                            borderRadius:
+                            BorderRadius.circular(12.0),
+                            child: Image.network(
+                              list[index]['Photo'],
+                              width: 60,
+                              height: 60,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        );
-                      },
-                      child: Row(children: [
-                        ClipRRect(
-                          borderRadius:
-                          BorderRadius.circular(12.0),
-                          child: Image.network(
-                            list[index]['Photo'],
-                            width: 60,
-                            height: 60,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                            child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    list[index]['Title'],
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    list[index]['Description'],
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w200,
-                                        color: Color.fromARGB(
-                                            255, 66, 72, 82),
-                                        fontSize: 13),
-                                  )
-                                ]))
-                      ])
+                          const SizedBox(width: 16),
+                          Expanded(
+                              child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      list[index]['Title'],
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Text(
+                                      list[index]['Description'],
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w200,
+                                          color: Color.fromARGB(
+                                              255, 66, 72, 82),
+                                          fontSize: 13),
+                                    )
+                                  ]))
+                        ])
                     ),
                   );
                 }
             ) : const Center(child: CircularProgressIndicator(),);
           },
         )
+      ),
     );
   }
 }
