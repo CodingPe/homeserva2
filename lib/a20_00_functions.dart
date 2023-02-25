@@ -33,7 +33,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/visitors.png',height: 58,width: 58)
+                          Image.asset('assets/icons/visitors.png',height: 53,width: 53)
                         ],
                       ),
                     ),
@@ -59,7 +59,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/facility bookings.png',height: 70,width: 70)
+                          Image.asset('assets/icons/facility bookings.png',height: 65,width: 65)
                         ],
                       ),
                     ),
@@ -85,7 +85,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/complaints.png',height: 58,width: 58)
+                          Image.asset('assets/icons/complaints.png',height: 53,width: 53)
                         ],
                       ),
                     ),
@@ -115,7 +115,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/suggestions.png',height: 60,width: 60)
+                          Image.asset('assets/icons/suggestions.png',height: 65,width: 65)
                         ],
                       ),
                     ),
@@ -141,7 +141,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/management account.png',height: 65,width: 65)
+                          Image.asset('assets/icons/management account.png',height: 60,width: 60)
                         ],
                       ),
                     ),
@@ -167,7 +167,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/meeting minutes.png',height: 65,width: 65)
+                          Image.asset('assets/icons/meeting minutes.png',height: 60,width: 60)
                         ],
                       ),
                     ),
@@ -197,7 +197,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/useful contacts.png',height: 62,width: 62)
+                          Image.asset('assets/icons/useful contacts.png',height: 57,width: 57)
                         ],
                       ),
                     ),
@@ -223,7 +223,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/emergency sos.png',height: 65,width: 65)
+                          Image.asset('assets/icons/emergency sos.png',height: 60,width: 60)
                         ],
                       ),
                     ),
@@ -249,7 +249,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/access%20card.png',height: 65,width: 65)
+                          Image.asset('assets/icons/access%20card.png',height: 60,width: 60)
                         ],
                       ),
                     ),
@@ -279,7 +279,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/home services applications.png',height: 62,width: 62)
+                          Image.asset('assets/icons/home services applications.png',height: 57,width: 57)
                         ],
                       ),
                     ),
@@ -305,7 +305,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/marketplace.png',height: 60,width: 60)
+                          Image.asset('assets/icons/marketplace.png',height: 55,width: 55)
                         ],
                       ),
                     ),
@@ -331,7 +331,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/concierge services.png',height: 65,width: 65)
+                          Image.asset('assets/icons/concierge services.png',height: 60,width: 60)
                         ],
                       ),
                     ),
@@ -361,7 +361,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/tukangman.png',height: 60,width: 60)
+                          Image.asset('assets/icons/tukangman.png',height: 55,width: 55)
                         ],
                       ),
                     ),
@@ -387,13 +387,13 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/laundry.png',height: 60,width: 60)
+                          Image.asset('assets/icons/laundry.png',height: 55,width: 55)
                         ],
                       ),
                     ),
                   ),
                   const Center(
-                    child: Text("       Laundry",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w300),),
+                    child: Text("        Laundry",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w300),),
                   )
                 ],
               ),
@@ -413,7 +413,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/qr keys.png',height: 60,width: 60)
+                          Image.asset('assets/icons/qr keys.png',height: 55,width: 55)
                         ],
                       ),
                     ),
@@ -443,7 +443,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/tenant accounts.png',height: 62,width: 62)
+                          Image.asset('assets/icons/tenant accounts.png',height: 57,width: 57)
                         ],
                       ),
                     ),
@@ -469,7 +469,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/committee.png',height: 60,width: 60)
+                          Image.asset('assets/icons/committee.png',height: 55,width: 55)
                         ],
                       ),
                     ),
@@ -495,7 +495,7 @@ class Functions extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/icons/delivery lockers.png',height: 55,width: 55)
+                          Image.asset('assets/icons/delivery lockers.png',height: 50,width: 50)
                         ],
                       ),
                     ),
@@ -507,6 +507,7 @@ class Functions extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 15)
         ],
       ),
     );
