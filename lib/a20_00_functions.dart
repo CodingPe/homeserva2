@@ -20,7 +20,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -40,7 +40,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -60,7 +60,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -90,7 +90,7 @@ class Functions extends StatelessWidget {
                   );
                 },
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -110,7 +110,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -130,7 +130,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -154,7 +154,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -174,7 +174,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -194,7 +194,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -218,7 +218,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -238,7 +238,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -258,7 +258,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -282,7 +282,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -302,7 +302,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -322,7 +322,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -346,7 +346,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -366,7 +366,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
@@ -386,7 +386,7 @@ class Functions extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 15,left: 30),
+                  margin: const EdgeInsets.only(top: 15,left: 30),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     borderRadius: BorderRadius.circular(20),
