@@ -45,13 +45,12 @@ class MyApp extends StatelessWidget {
             foregroundColor: CupertinoColors.black,
             elevation: 0.8,
           )),
-      home: MainPage(), // refer to (6.)
+      home: const LoginUser(), // refer to (6.)
     );
   }
 }
 
 class MainPage extends StatefulWidget {
-
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -65,11 +64,7 @@ class _MainPageState extends State<MainPage> {
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
     NotificationSettings settings = await _messaging.requestPermission(
-        alert: true,
-        badge: true,
-        provisional: true,
-        sound: true
-    );
+        alert: true, badge: true, provisional: true, sound: true);
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       print('User granted permission');
@@ -88,6 +83,7 @@ class _MainPageState extends State<MainPage> {
     super.initState();
     requestAndRegisterNotification();
   }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> data = const [
@@ -115,7 +111,7 @@ class _MainPageState extends State<MainPage> {
                     label: "Functions"),
                 BottomNavigationBarItem(
                     icon:
-                    Icon(Icons.insert_chart_outlined_sharp, size: iconSize),
+                        Icon(Icons.insert_chart_outlined_sharp, size: iconSize),
                     label: "Accounting"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.notifications_active_outlined,

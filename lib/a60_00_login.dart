@@ -8,7 +8,7 @@ import 'package:hive/hive.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 canLogin(context) {
-  navigatePageRoute(context, MainPage());
+  navigateAndFinish(context, MainPage());
 }
 
 class LoginUser extends StatefulWidget {
@@ -49,7 +49,12 @@ class LoginUserState extends State<LoginUser> {
     });
 
     Uri url = Uri.parse('https://peterapi.vyrox.com/login_user.php');
-    var data = {'loginCode': 'vyrox', 'email': email, 'password': password,'fcm_token': _token};
+    var data = {
+      'loginCode': 'vyrox',
+      'email': email,
+      'password': password,
+      'fcm_token': _token
+    };
     var response = await http.post(url, body: json.encode(data));
     var message = jsonDecode(response.body);
 
@@ -76,38 +81,62 @@ class LoginUserState extends State<LoginUser> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
             child: SafeArea(
-      child: Center(
-          child: Column(children: [
-        const Padding(
-            padding: EdgeInsets.all(12.0),
-            child: Text('User Login Form', style: TextStyle(fontSize: 21))),
-        const Divider(),
-        Container(
-            width: 280,
-            padding: const EdgeInsets.all(10.0),
-            child: TextField(
-              controller: emailController,
-              decoration:
-                  const InputDecoration(hintText: 'Enter Your Email Here'),
-            )),
-        Container(
-            width: 280,
-            padding: const EdgeInsets.all(10.0),
-            child: TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration:
-                  const InputDecoration(hintText: 'Enter Your Password Here'),
-            )),
-        bigButton('Login', userLogin),
-        Visibility(
-            visible: loadingVisible,
-            child: Container(
-                margin: const EdgeInsets.only(bottom: 30),
-                child: const CupertinoActivityIndicator())),
-      ])),
-    )));
+              child: Center(
+                  child: Column(children: [
+                //TODO: add homeserva icon and text.
+                AspectRatio(
+                  aspectRatio: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        top: 50, left: 20, right: 20, bottom: 5),
+                    child: Image.asset('assets/icons/homeserva_logo.png'),
+                  ),
+                ),
+                const Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Text('HOMESERVA',
+                        style: TextStyle(
+                            fontSize: 38.8, fontWeight: FontWeight.bold))),
+                const SizedBox(
+                  height: 20,
+                  width: double.maxFinite,
+                ),
+                //TODO: beautify UI
+                //TODO: Email Vaildate, null validate, hint
+                Container(
+                    width: 280,
+                    padding: const EdgeInsets.all(10.0),
+                    child: TextField(
+                      controller: emailController,
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.teal,
+                            ),
+                          ),
+                          hintText: 'Enter Your Email Here'),
+                    )),
+//TODO: Email Vaildate, null validate, hint, clear button, visibility button
+                Container(
+                    width: 280,
+                    padding: const EdgeInsets.all(10.0),
+                    child: TextField(
+                      controller: passwordController,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Enter Your Password Here'),
+                    )),
+                bigButton('Login', userLogin),
+                Visibility(
+                    visible: loadingVisible,
+                    child: Container(
+                        margin: const EdgeInsets.only(bottom: 30),
+                        child: const CupertinoActivityIndicator())),
+              ])),
+            )));
   }
 }
 
@@ -133,8 +162,8 @@ Route<Object?> loginDialogBuilder(
       });
 }
 
+//TODO: Disbale button if email and password is null.
 Widget bigButton(name, action) {
-  String changePassword = 'Logout';
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
     child: SizedBox(
