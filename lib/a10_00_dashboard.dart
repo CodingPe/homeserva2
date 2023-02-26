@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:homeserva_2/a00_00_directory.dart';
 //? firebase package not using at this file, dart:covert duplicated.
 // import 'package:firebase_messaging/firebase_messaging.dart'; //push notification必定需要安裝的package //push notification must be installed package
 // import 'package:firebase_core/firebase_core.dart';
@@ -36,8 +37,7 @@ class Dashboard extends StatelessWidget {
                         color: Colors.black,
                         fontWeight: FontWeight.w200,
                         fontSize: 20))
-              ]))
-              ),
+              ]))),
           Expanded(
               flex: 8,
               child: FutureBuilder(
@@ -53,13 +53,10 @@ class Dashboard extends StatelessWidget {
                                 padding: const EdgeInsets.all(20),
                                 child: GestureDetector(
                                     onTap: () {
-                                      Navigator.push(
+                                      navigateAndFinish(
                                           context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailAnnouncementPage(
-                                                      list: list,
-                                                      index: index)));
+                                          DetailAnnouncementPage(
+                                              list: list, index: index));
                                     },
                                     child: Row(children: [
                                       ClipRRect(
@@ -100,6 +97,9 @@ class Dashboard extends StatelessWidget {
                 },
               ) //這個是announcement的futurebuilder 可以通過上面的flex改變大小
               ),
+          Expanded(
+            flex: 3, child: Container(), //下面還不知道要放什麼下去
+          )
         ]));
   }
 }
