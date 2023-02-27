@@ -106,35 +106,25 @@ class LoginUserState extends State<LoginUser> {
                 //TODO: beautify UI
                 //TODO: Email Vaildate, null validate, hint
                 Container(
-                    width: 280,
-                    padding: const EdgeInsets.all(10.0),
-                    child: TextField(
-                      controller: emailController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.teal,
-                            ),
-                          ),
-                          hintText: 'Enter Your Email Here'),
-                    )),
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 10),
+                    child: LoginInput(inputController: emailController)),
 //TODO: Email Vaildate, null validate, hint, clear button, visibility button
                 Container(
-                    width: 280,
-                    padding: const EdgeInsets.all(10.0),
-                    child: TextField(
-                      controller: passwordController,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: 'Enter Your Password Here'),
-                    )),
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 10),
+                    child: PasswordInput(inputController: passwordController)),
                 bigButton('Login', userLogin),
                 Visibility(
                     visible: loadingVisible,
                     child: Container(
                         margin: const EdgeInsets.only(bottom: 30),
                         child: const CupertinoActivityIndicator())),
+                const SizedBox(
+                  height: 10,
+                ),
               ])),
             )));
   }
@@ -176,4 +166,227 @@ Widget bigButton(name, action) {
           child: Text(name),
         ))),
   );
+}
+
+class LoginInput extends StatelessWidget {
+  final TextEditingController inputController;
+  const LoginInput({Key? key, required this.inputController}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    const primaryColor = Color(0xff4338CA);
+    const secondaryColor = Color(0xff6D28D9);
+    const accentColor = Color(0xffffffff);
+    const backgroundColor = Color(0xffffffff);
+    const errorColor = Color(0xffEF4444);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Email",
+          style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.normal,
+              color: Colors.white.withOpacity(.9)),
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        Container(
+          height: 50,
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+                offset: const Offset(12, 26),
+                blurRadius: 50,
+                spreadRadius: 0,
+                color: Colors.grey.withOpacity(.1)),
+          ]),
+          child: TextField(
+            controller: inputController,
+            onChanged: (value) {
+              //Do something wi
+            },
+            keyboardType: TextInputType.emailAddress,
+            style: const TextStyle(fontSize: 14, color: Colors.black),
+            decoration: InputDecoration(
+              label: const Text("Email"),
+              labelStyle: const TextStyle(color: primaryColor),
+              // prefixIcon: Icon(Icons.email),
+              filled: true,
+              fillColor: accentColor,
+              hintText: 'enquiry@vyrox.com',
+              hintStyle: TextStyle(color: Colors.grey.withOpacity(.75)),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+              border: const OutlineInputBorder(
+                borderSide: BorderSide(color: primaryColor, width: 1.0),
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: secondaryColor, width: 1.0),
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+              errorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: errorColor, width: 1.0),
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: primaryColor, width: 1.0),
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class PasswordInput extends StatelessWidget {
+  final TextEditingController inputController;
+  const PasswordInput({Key? key, required this.inputController})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    const primaryColor = Color(0xff4338CA);
+    const secondaryColor = Color(0xff6D28D9);
+    const accentColor = Color(0xffffffff);
+    const backgroundColor = Color(0xffffffff);
+    const errorColor = Color(0xffEF4444);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Email",
+          style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.normal,
+              color: Colors.white.withOpacity(.9)),
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        Container(
+          height: 50,
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+                offset: const Offset(12, 26),
+                blurRadius: 50,
+                spreadRadius: 0,
+                color: Colors.grey.withOpacity(.1)),
+          ]),
+          child: TextField(
+            controller: inputController,
+            onChanged: (value) {
+              //Do something wi
+            },
+            keyboardType: TextInputType.emailAddress,
+            style: const TextStyle(fontSize: 14, color: Colors.black),
+            decoration: InputDecoration(
+              label: const Text("Email"),
+              labelStyle: const TextStyle(color: primaryColor),
+              // prefixIcon: Icon(Icons.email),
+              filled: true,
+              fillColor: accentColor,
+              hintText: 'support@flutterbricks.com',
+              hintStyle: TextStyle(color: Colors.grey.withOpacity(.75)),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+              border: const OutlineInputBorder(
+                borderSide: BorderSide(color: primaryColor, width: 1.0),
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: secondaryColor, width: 1.0),
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+              errorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: errorColor, width: 1.0),
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: primaryColor, width: 1.0),
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class PasswordInputSample extends StatefulWidget {
+  final String hintText;
+  final TextEditingController textEditingController;
+
+  const PasswordInputSample(
+      {required this.textEditingController, required this.hintText, Key? key})
+      : super(key: key);
+
+  @override
+  State<PasswordInputSample> createState() => _PasswordInputSampleState();
+}
+
+class _PasswordInputSampleState extends State<PasswordInputSample> {
+  bool pwdVisibility = false;
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: widget.textEditingController,
+      obscureText: !pwdVisibility,
+      decoration: InputDecoration(
+        hintText: widget.hintText,
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.grey,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(25.0),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.red,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(25.0),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.red,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(25.0),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.grey,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(25.0),
+        ),
+        suffixIcon: InkWell(
+          onTap: () => setState(
+            () => pwdVisibility = !pwdVisibility,
+          ),
+          child: Icon(
+            pwdVisibility
+                ? Icons.visibility_outlined
+                : Icons.visibility_off_outlined,
+            color: Colors.grey.shade400,
+            size: 18,
+          ),
+        ),
+      ),
+      validator: (val) {
+        if (val!.isEmpty) {
+          return 'Required';
+        }
+        return null;
+      },
+    );
+  }
 }
