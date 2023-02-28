@@ -92,14 +92,12 @@ class Dashboard extends StatelessWidget {
                                     ])));
                           })
                       : const Center(
-                          child: CircularProgressIndicator(),
-                        );
+                    child: Text("No announcements yet",style: TextStyle(fontWeight: FontWeight.w200,color: Color.fromARGB(
+                        255, 66, 72, 82),),),
+                  );
                 },
               ) //這個是announcement的futurebuilder 可以通過上面的flex改變大小
               ),
-          Expanded(
-            flex: 3, child: Container(), //下面還不知道要放什麼下去
-          )
         ]));
   }
 }
