@@ -19,8 +19,20 @@ class _suggestionsState extends State<suggestions> {
   TextEditingController description = TextEditingController();
   String photo = '';
   final _formkey = GlobalKey<FormState>();
-  List<String> list = <String>['One', 'Two', 'Three', 'Four'];
-  String selectedTitle = '123';
+  final List<String> list = <String>[
+    'BBQ',
+    'Guard',
+    'GYM',
+    'Lobby',
+    'BBQ',
+    'Management',
+    'Sauna',
+    'Spa Pool',
+    'Swimming Pool',
+  ];
+  String? selectedTitle;
+  String? _privacy;
+
 
   Future getsuggestionsData() async {
     var url = 'https://peterapi.vyrox.com/viewsuggestionsdata.php';
@@ -50,79 +62,95 @@ class _suggestionsState extends State<suggestions> {
                               key: _formkey,
                               child: Column(
                                 children: [
-                                  const Text("Category",style: TextStyle(fontWeight: FontWeight.bold),),
-                                  const SizedBox(height: 6),
-                                  Container(
-                                    width: 250,
-                                    child: DropdownButtonFormField(
-                                      hint: const Text(" Select Category"),
-                                      isExpanded: true,
-                                      items: list.map((value) => DropdownMenuItem(
-                                        child: Text(value,style: TextStyle(fontWeight: FontWeight.bold),),
-                                        value: value,
-                                      )).toList(),
-                                      onChanged: (String? value) {
-                                        // Update the state variable when the user selects an item
-                                        setState(() {
-                                          selectedTitle != value;
-                                        });
-                                      },
-                                      validator: (value){
-                                        if(value == null || value.isEmpty){
-                                          return "Please select your Category";
-                                        }
-                                        return null;
-                                      },
-                                    ),
+                                  const Text("New Suggestion",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 22),),
+                                  const SizedBox(height: 12),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Category"),
+                                      const SizedBox(height: 2),
+                                      Container(
+                                        width: 250,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.grey),
+                                        ),
+                                        child: DropdownButtonFormField(
+                                          hint: const Text(" -- Select --"),
+                                          isExpanded: true,
+                                          value: selectedTitle,
+                                          items: list.map((value) => DropdownMenuItem(
+                                            child: Text('   $value',),
+                                            value: value,
+                                          )).toList(),
+                                          onChanged: (String? value) {
+                                            setState(() {
+                                              selectedTitle = value;
+                                            });
+                                          },
+                                          validator: (value){
+                                            if(value == null || value.isEmpty){
+                                              return "Please select your Category";
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   const SizedBox(height: 20),
-                                  TextFormField(
-                                    controller: title,
-                                    decoration: InputDecoration(
-                                      errorBorder: const OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              width: 1,color: Colors.red
-                                          )
+                                  Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Title"),
+                                    const SizedBox(height: 2),
+                                    Container(
+                                      width: 250,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey),
                                       ),
-                                      filled: true,
-                                      fillColor: const Color.fromARGB(255, 252, 246, 245),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      labelText: 'Title',labelStyle: const TextStyle(color: Colors.black),
-                                      hintText: 'Please write your title',
-                                      prefixIcon: const Icon(Icons.star,color: Colors.black),
+                                      child: TextFormField(
+                                        controller: title,
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                        ),
+                                      )
                                     ),
-                                    validator: (value){
-                                      if(value == null || value.isEmpty){
-                                        return "Please fill your title";}
-                                      return null;
-                                    },
-                                  ), //Title
+                                  ],
+                                ),
                                   const SizedBox(height: 20),
-                                  TextFormField(
-                                    controller: display,
-                                    decoration: InputDecoration(
-                                      errorBorder: const OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              width: 1,color: Colors.red
-                                          )
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Display to"),
+                                      const SizedBox(height: 2),
+                                      Row(
+                                        children: [
+                                          RadioListTile(
+                                            title: const Text('Private'),
+                                            value: 'private',
+                                            groupValue: _privacy,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _privacy = value as String?;
+                                              });
+                                            },
+                                          ),
+                                          RadioListTile(
+                                            title: const Text('Public'),
+                                            value: 'public',
+                                            groupValue: _privacy,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _privacy = value as String?;
+                                              });
+                                            },
+                                          ),
+                                        ],
                                       ),
-                                      filled: true,
-                                      fillColor: const Color.fromARGB(255, 252, 246, 245),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      labelText: 'Display',labelStyle: const TextStyle(color: Colors.black),
-                                      hintText: 'Please write your display',
-                                      prefixIcon: const Icon(Icons.lock,color: Colors.black),
-                                    ),
-                                    validator: (value){
-                                      if(value == null || value.isEmpty){
-                                        return "Please fill your display";}
-                                      return null;
-                                    },
-                                  ), //Display
+                                    ],
+                                  ),
+
                                   const SizedBox(height: 20),
                                   TextFormField(
                                     controller: description,
@@ -216,15 +244,18 @@ class _suggestionsState extends State<suggestions> {
           title: const Text(
             "Complaints",
             style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+              fontWeight: FontWeight.w200,
+              color: Colors.black,
             ),
           ),
-          backgroundColor: Colors.black,
+          leading: IconButton(onPressed: () {
+            Navigator.pop(context);
+          }, icon: Icon(Icons.arrow_back,color: Colors.black,)),
+          backgroundColor: Colors.white,
           actions: [
             IconButton(
               onPressed: showAddContentDialog,
-              icon: Icon(Icons.add, color: Colors.white),
+              icon: Icon(Icons.add, color: Colors.black),
             )
           ],
         ),

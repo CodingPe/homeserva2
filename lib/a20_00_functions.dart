@@ -102,7 +102,12 @@ class Functions extends StatelessWidget {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const suggestions()),
+                      );
+                    },
                     child: Container(
                       height: 80,
                       width: 80,
