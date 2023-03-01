@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
@@ -16,7 +15,6 @@ class suggestions extends StatefulWidget {
 class _suggestionsState extends State<suggestions> {
   TextEditingController category = TextEditingController();
   TextEditingController title = TextEditingController();
-  TextEditingController display = TextEditingController();
   TextEditingController description = TextEditingController();
   String photo = '';
   final _formkey = GlobalKey<FormState>();
@@ -114,7 +112,8 @@ class _suggestionsState extends State<suggestions> {
                                           ),
                                           validator: (value){
                                             if(value == null || value.isEmpty){
-                                              return "Please fill your title";}
+                                              return "Please fill your title";
+                                            }
                                             return null;
                                           },
                                         )
@@ -187,18 +186,50 @@ class _suggestionsState extends State<suggestions> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Attachment (PDF, JPG or PNG format)"),
+                                    const Text("Attachment (PDF, JPG or PNG format)"),
                                     const SizedBox(height: 2),
                                     Container(
                                       width: 250,
                                       color: Colors.blue,
-                                      child: TextButton(onPressed: (){}, child: Text("Upload",style: TextStyle(color: Colors.white),)),
+                                      child: TextButton(onPressed: (){}, child: const Text("Upload",style: TextStyle(color: Colors.white),)),
                                     ),
                                     const SizedBox(height: 7),
                                     Container(
                                       width: 250,
                                       color: Colors.blue,
-                                      child: TextButton(onPressed: (){}, child: Text("Add",style: TextStyle(color: Colors.white),)),
+                                      child: TextButton(
+                                        onPressed: () {
+                                          if(_formkey.currentState!.validate()) {
+                                            final url = 'https://peterapi.vyrox.com/addsuggestions.php';
+                                            try {
+                                              final response = http.post(Uri.parse(url),body: {
+                                                'category': selectedTitle,
+                                                'title': title.text,
+                                                'display': _privacy,
+                                                'description': description.text,
+                                                'photo':photo
+                                              });
+                                              response.then((value) {
+                                                if (value.statusCode == 200) {
+                                                  category.clear();
+                                                  title.clear();
+                                                  description.clear();
+                                                  Navigator.pop(context);
+                                                } else {
+                                                  throw Exception('Failed to add suggestion');
+                                                }
+                                              });
+                                            } catch (e) {
+                                              print('Error adding suggestion: $e');
+                                            }
+                                          }
+                                        },
+
+                                        child: const Text(
+                                          "Add",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -249,19 +280,19 @@ class _suggestionsState extends State<suggestions> {
             future: getsuggestionsData(),
             builder: (context, snapshot){
               if(snapshot.hasError) print(snapshot.error);
-              return snapshot.hasData ? ListView.builder(
+              return snapshot.connectionState == ConnectionState.done && snapshot.data != null && snapshot.data.length > 0
+                  ? ListView.builder(
                   itemCount: snapshot.data.length,
                   itemBuilder: (context,index){
                     List list = snapshot.data;
                     return Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: GestureDetector(
+                        padding: const EdgeInsets.all(20),
+                        child: GestureDetector(
                           onTap: (){
                             Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailPage(list: list, index: index),
-                              ),
+                                context,
+                                MaterialPageRoute(builder: (context) => DetailPage(list: list, index: index)
+                                )
                             );
                           },
                           child: Row(children: [
@@ -278,32 +309,44 @@ class _suggestionsState extends State<suggestions> {
                             const SizedBox(width: 16),
                             Expanded(
                                 child: Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        list[index]['Title'],
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      list[index]['Title'],
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20
                                       ),
-                                      const SizedBox(height: 10),
-                                      Text(
-                                        list[index]['Description'],
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.w200,
-                                            color: Color.fromARGB(
-                                                255, 66, 72, 82),
-                                            fontSize: 13),
-                                      )
-                                    ]))
-                          ])
-                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Text(
+                                      list[index]['Description'],
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w200,
+                                        color: Color.fromARGB(255, 66, 72, 82),
+                                        fontSize: 13
+                                      ),
+                                    )
+                                  ],
+                                )
+                            )
+                          ],
+                          ),
+                        ),
                     );
                   }
-              ) : const Center(child: CircularProgressIndicator(),);
+              )
+                  : const Center(
+                    child: Text(
+                    "No suggestions yet",
+                     style: TextStyle(
+                      fontWeight: FontWeight.w200,
+                      color: Color.fromARGB(255, 66, 72, 82),
+                  ),
+                ),
+              );
             },
-          ),
+          )
         )
       ),
     );
