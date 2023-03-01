@@ -18,7 +18,7 @@ class Notifications extends StatelessWidget {
           leading: const Icon(Icons.home),
           title: const Text("Notification"),
         ),
-        body: Column(
+        body: Scrollbar(child: Column(
           children: <Widget>[
             Expanded(
                 flex: 8,
@@ -28,38 +28,38 @@ class Notifications extends StatelessWidget {
                     if (snapshot.hasError) print(snapshot.error);
                     return snapshot.hasData
                         ? ListView.builder(
-                            itemCount: snapshot.data.length,
-                            itemBuilder: (context, index) {
-                              List list = snapshot.data;
-                              return Padding(
-                                  padding: const EdgeInsets.all(20),
-                                  child: GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    DetailNotificationsPage(
-                                                        list: list,
-                                                        index: index)));
-                                      },
-                                      child: Row(children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                          child: Image.network(
-                                            list[index]['Photo'],
-                                            width: 60,
-                                            height: 60,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        const SizedBox(width: 16),
-                                        Expanded(
-                                            child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          List list = snapshot.data;
+                          return Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                DetailNotificationsPage(
+                                                    list: list,
+                                                    index: index)));
+                                  },
+                                  child: Row(children: [
+                                    ClipRRect(
+                                      borderRadius:
+                                      BorderRadius.circular(12.0),
+                                      child: Image.network(
+                                        list[index]['Photo'],
+                                        width: 60,
+                                        height: 60,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    Expanded(
+                                        child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
                                               Text(
                                                 list[index]['Title'],
                                                 style: const TextStyle(
@@ -76,17 +76,17 @@ class Notifications extends StatelessWidget {
                                                     fontSize: 13),
                                               )
                                             ]))
-                                      ])));
-                            })
+                                  ])));
+                        })
                         : const Center(
-                            child: Text("No notification yet",style: TextStyle(fontWeight: FontWeight.w200,color: Color.fromARGB(
-                                255, 66, 72, 82),),),
-                          );
+                      child: Text("No notification yet",style: TextStyle(fontWeight: FontWeight.w200,color: Color.fromARGB(
+                          255, 66, 72, 82),),),
+                    );
                   },
                 ) //這個是announcement的futurebuilder 可以通過上面的flex改變大小
-                ),
+            ),
           ],
-        ));
+        )));
   }
 }
 
