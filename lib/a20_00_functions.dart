@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homeserva_2/a20_01_suggestions.dart';
+import 'package:homeserva_2/a20_02_complaints.dart';
 
 class Functions extends StatelessWidget {
   const Functions({
@@ -73,7 +74,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const complaints()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
