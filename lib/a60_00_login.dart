@@ -81,7 +81,7 @@ class LoginUserState extends State<LoginUser> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             child: SafeArea(
               child: Center(
                   child: Column(children: [
@@ -107,15 +107,17 @@ class LoginUserState extends State<LoginUser> {
                 //TODO: Email Vaildate, null validate, hint
                 Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 10),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 30, vertical: 2),
                     child: LoginInput(inputController: emailController)),
 //TODO: Email Vaildate, null validate, hint, clear button, visibility button
                 Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 10),
-                    child: PasswordInput(inputController: passwordController)),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 30, vertical: 2),
+                    child: PasswordInput(
+                      inputController: passwordController,
+                    )),
                 bigButton('Login', userLogin),
                 Visibility(
                     visible: loadingVisible,
@@ -168,14 +170,33 @@ Widget bigButton(name, action) {
   );
 }
 
-class LoginInput extends StatelessWidget {
+class LoginInput extends StatefulWidget {
   final TextEditingController inputController;
   const LoginInput({Key? key, required this.inputController}) : super(key: key);
 
   @override
+  State<LoginInput> createState() => _LoginInputState();
+}
+
+class _LoginInputState extends State<LoginInput> {
+  bool _isTextFieldEmpty = true;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.inputController.addListener(_onTextChanged);
+  }
+
+  void _onTextChanged() {
+    setState(() {
+      _isTextFieldEmpty = widget.inputController.text.isEmpty;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    const primaryColor = Color(0xff4338CA);
-    const secondaryColor = Color(0xff6D28D9);
+    const primaryColor = Colors.grey;
+    const secondaryColor = CupertinoColors.activeBlue;
     const accentColor = Color(0xffffffff);
     const backgroundColor = Color(0xffffffff);
     const errorColor = Color(0xffEF4444);
@@ -183,49 +204,51 @@ class LoginInput extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Email",
-          style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.normal,
-              color: Colors.white.withOpacity(.9)),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
         Container(
           height: 50,
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
                 offset: const Offset(12, 26),
                 blurRadius: 50,
-                spreadRadius: 0,
-                color: Colors.grey.withOpacity(.1)),
+                spreadRadius: 5,
+                color: Colors.blue.shade50),
           ]),
-          child: TextField(
-            controller: inputController,
+          child: TextFormField(
+            //TODO: Text input not working.
+            textInputAction: TextInputAction.next,
+            controller: widget.inputController,
             onChanged: (value) {
               //Do something wi
             },
             keyboardType: TextInputType.emailAddress,
             style: const TextStyle(fontSize: 14, color: Colors.black),
             decoration: InputDecoration(
-              label: const Text("Email"),
+              // label: const Text("Email"),
               labelStyle: const TextStyle(color: primaryColor),
-              // prefixIcon: Icon(Icons.email),
+              prefixIcon: const Icon(Icons.email),
+              suffixIcon: InkWell(
+                onTap: () {
+                  widget.inputController.clear();
+                },
+                child: Icon(
+                  Icons.clear,
+                  size: _isTextFieldEmpty ? 0 : 18,
+                  color: primaryColor,
+                ),
+              ),
               filled: true,
               fillColor: accentColor,
               hintText: 'enquiry@vyrox.com',
               hintStyle: TextStyle(color: Colors.grey.withOpacity(.75)),
               contentPadding:
-                  const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+                  const EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
               border: const OutlineInputBorder(
                 borderSide: BorderSide(color: primaryColor, width: 1.0),
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
               ),
               focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: secondaryColor, width: 1.0),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
               ),
               errorBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: errorColor, width: 1.0),
@@ -243,15 +266,37 @@ class LoginInput extends StatelessWidget {
   }
 }
 
-class PasswordInput extends StatelessWidget {
+class PasswordInput extends StatefulWidget {
   final TextEditingController inputController;
-  const PasswordInput({Key? key, required this.inputController})
-      : super(key: key);
+  const PasswordInput({
+    Key? key,
+    required this.inputController,
+  }) : super(key: key);
+
+  @override
+  State<PasswordInput> createState() => _PasswordInputState();
+}
+
+class _PasswordInputState extends State<PasswordInput> {
+  bool pwdVisibility = false;
+  bool _isTextFieldEmpty = true;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.inputController.addListener(_onTextChanged);
+  }
+
+  void _onTextChanged() {
+    setState(() {
+      _isTextFieldEmpty = widget.inputController.text.isEmpty;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    const primaryColor = Color(0xff4338CA);
-    const secondaryColor = Color(0xff6D28D9);
+    const primaryColor = Colors.grey;
+    const secondaryColor = CupertinoColors.activeBlue;
     const accentColor = Color(0xffffffff);
     const backgroundColor = Color(0xffffffff);
     const errorColor = Color(0xffEF4444);
@@ -259,16 +304,6 @@ class PasswordInput extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Email",
-          style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.normal,
-              color: Colors.white.withOpacity(.9)),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
         Container(
           height: 50,
           decoration: BoxDecoration(boxShadow: [
@@ -278,20 +313,21 @@ class PasswordInput extends StatelessWidget {
                 spreadRadius: 0,
                 color: Colors.grey.withOpacity(.1)),
           ]),
-          child: TextField(
-            controller: inputController,
+          child: TextFormField(
+            //TODO: cant become next, check textformfield.
+            textInputAction: TextInputAction.none,
+            obscureText: !pwdVisibility,
+            controller: widget.inputController,
             onChanged: (value) {
               //Do something wi
             },
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.visiblePassword,
             style: const TextStyle(fontSize: 14, color: Colors.black),
             decoration: InputDecoration(
-              label: const Text("Email"),
-              labelStyle: const TextStyle(color: primaryColor),
-              // prefixIcon: Icon(Icons.email),
+              prefixIcon: const Icon(Icons.lock),
               filled: true,
               fillColor: accentColor,
-              hintText: 'support@flutterbricks.com',
+              hintText: 'Enter your password here',
               hintStyle: TextStyle(color: Colors.grey.withOpacity(.75)),
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
@@ -301,7 +337,7 @@ class PasswordInput extends StatelessWidget {
               ),
               focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: secondaryColor, width: 1.0),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
               ),
               errorBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: errorColor, width: 1.0),
@@ -310,6 +346,38 @@ class PasswordInput extends StatelessWidget {
               enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: primaryColor, width: 1.0),
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              ),
+              suffixIcon: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween, // added line
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      widget.inputController.clear();
+                    },
+                    child: Icon(
+                      Icons.clear,
+                      size: _isTextFieldEmpty ? 0 : 18,
+                      color: primaryColor,
+                    ),
+                  ),
+                  const SizedBox(width: 3),
+                  InkWell(
+                    onTap: () => setState(
+                      () => pwdVisibility = !pwdVisibility,
+                    ),
+                    child: Icon(
+                      pwdVisibility
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined,
+                      color: pwdVisibility ? secondaryColor : primaryColor,
+                      size: 18,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  )
+                ],
               ),
             ),
           ),
@@ -337,6 +405,7 @@ class _PasswordInputSampleState extends State<PasswordInputSample> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.textEditingController,
+      textInputAction: TextInputAction.next,
       obscureText: !pwdVisibility,
       decoration: InputDecoration(
         hintText: widget.hintText,
