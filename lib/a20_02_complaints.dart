@@ -24,7 +24,6 @@ class _complaintsState extends State<complaints> {
     'Guard',
     'GYM',
     'Lobby',
-    'BBQ',
     'Management',
     'Sauna',
     'Spa Pool',

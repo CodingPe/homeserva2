@@ -24,7 +24,6 @@ class _suggestionsState extends State<suggestions> {
     'Guard',
     'GYM',
     'Lobby',
-    'BBQ',
     'Management',
     'Sauna',
     'Spa Pool',
@@ -34,18 +33,12 @@ class _suggestionsState extends State<suggestions> {
   String? _privacy;
   File? image;
 
-  Future pickImage() async {
-    try{
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-
-      if(image == null) return;
-
-      final imageTemp = File(image.path);
-
-      setState(() => this.image = imageTemp);
-    } on PlatformException catch(e) {
-      print("Failed to pick image: $e");
-    }
+  Future<void> pickImage() async {
+    final pickedFile =
+    await ImagePicker().getImage(source: ImageSource.gallery);
+    setState(() {
+      image = pickedFile != null ? File(pickedFile.path) : null;
+    });
   }
 
   Future getsuggestionsData() async {
@@ -55,7 +48,7 @@ class _suggestionsState extends State<suggestions> {
   }
 
   Future<void> _addSuggestion() async {
-    final url = 'https://peterapi.vyrox.com/addsuggestions.php';
+    const url = 'https://peterapi.vyrox.com/addsuggestions.php';
     try {
       final response = await http.post(Uri.parse(url), body: {
         'category': selectedTitle!,
@@ -225,6 +218,33 @@ class _suggestionsState extends State<suggestions> {
                                   children: [
                                     const Text("Attachment (PDF, JPG or PNG format)"),
                                     const SizedBox(height: 2),
+                                    if (image != null)
+                                      Container(
+                                        width: 250,
+                                        height: 250,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: FileImage(image!),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    if (image != null)
+                                      Positioned(
+                                        top: 0,
+                                        right: 0,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              image = null;
+                                            });
+                                          },
+                                          child: Icon(
+                                            Icons.clear,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
                                     Container(
                                       width: 250,
                                       color: Colors.blue,
