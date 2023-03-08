@@ -1,12 +1,13 @@
 {
-    "editor.formatOnSave": true,
-    "cSpell.words": [
-        "Cupertino",
-        "homeserva",
-        "NRIC",
-        "RGBO",
-        "Schyler",
-        "tukangman",
-        "uid"
-    ]
+  "editor.formatOnSave": true,
+  "cSpell.words": [
+    "Cupertino",
+    "homeserva",
+    "NRIC",
+    "RGBO",
+    "Schyler",
+    "tukangman",
+    "uid"
+  ],
+  "cmake.sourceDirectory": "${workspaceFolder}/linux"
 }
