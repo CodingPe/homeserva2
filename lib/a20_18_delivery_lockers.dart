@@ -18,8 +18,25 @@ class _deliverylockersState extends State<deliverylockers> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Delivery Lockers',style: TextStyle(fontWeight: FontWeight.w300),),
+        title: const Text('Palazzo @ Ipoh Garden East',style: TextStyle(fontWeight: FontWeight.w300),),
       ),
+      body: Center(
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 20),
+              child: const Text(
+                "No delivery found",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w200,
+                  color: Color.fromARGB(255, 66, 72, 82),
+                ),
+              ),
+            )
+          ],
+        ),
+      )
     );
   }
 }

@@ -15,11 +15,35 @@ class _qrkeysState extends State<qrkeys> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('QR-Keys',style: TextStyle(fontWeight: FontWeight.w300),),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => DefaultTabController(
+      length: 3,
+      child: Scaffold(
+          appBar: AppBar(
+              title: const Text('QR-Keys',style: TextStyle(fontWeight: FontWeight.w300),),
+              bottom: const TabBar(
+                indicatorColor: Colors.black,
+                indicatorWeight: 5,
+                labelColor: Colors.black,
+                unselectedLabelColor: Colors.grey,
+                tabs: [
+                  Tab(
+                    text: 'Pending',
+                  ),
+                  Tab(
+                    text: 'Active',
+                  ),
+                  Tab(
+                    text: 'Inactive',
+                  ),
+                ],
+              )
+
+          ),
+          body: Column(
+            children: [
+
+            ],
+          )
+      )
+  );
 }
