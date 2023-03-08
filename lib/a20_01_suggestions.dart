@@ -297,7 +297,7 @@ class _suggestionsState extends State<suggestions> {
           title: const Text(
             "Suggestions",
             style: TextStyle(
-              fontWeight: FontWeight.w200,
+              fontWeight: FontWeight.w300,
               color: Colors.black,
             ),
           ),

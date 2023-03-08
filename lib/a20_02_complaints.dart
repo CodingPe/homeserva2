@@ -276,7 +276,7 @@ class _complaintsState extends State<complaints> {
             title: const Text(
               "Complaints",
               style: TextStyle(
-                fontWeight: FontWeight.w200,
+                fontWeight: FontWeight.w300,
                 color: Colors.black,
               ),
             ),

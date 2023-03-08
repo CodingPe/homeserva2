@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:homeserva_2/a20_01_suggestions.dart';
 import 'package:homeserva_2/a20_02_complaints.dart';
+import 'package:homeserva_2/a20_03_visitor.dart';
+import 'package:homeserva_2/a20_04_facility_bookings.dart';
+import 'package:homeserva_2/a20_05_management_account.dart';
+import 'package:homeserva_2/a20_06_meeting_minutes.dart';
+import 'package:homeserva_2/a20_07_emergency_numbers.dart';
+import 'package:homeserva_2/a20_08_emergency_sos.dart';
+import 'package:homeserva_2/a20_09_access_cards.dart';
+import 'package:homeserva_2/a20_10_home_services_applications.dart';
+import 'package:homeserva_2/a20_11_marketplace.dart';
+import 'package:homeserva_2/a20_12_concierge_services.dart';
+import 'package:homeserva_2/a20_13_tukangman.dart';
+import 'package:homeserva_2/a20_14_laundry.dart';
+import 'package:homeserva_2/a20_15_qrkeys.dart';
+import 'package:homeserva_2/a20_16_tenant_accounts.dart';
+import 'package:homeserva_2/a20_17_committee.dart';
+import 'package:homeserva_2/a20_18_delivery_lockers.dart';
 
 class Functions extends StatelessWidget {
   const Functions({
@@ -22,7 +38,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const visitor()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
@@ -48,7 +69,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const facilitybookings()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
@@ -140,7 +166,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const managementaccount()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
@@ -166,7 +197,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const meetingminutes()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
@@ -196,7 +232,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const emergencynumbers()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
@@ -222,7 +263,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const emergencysos()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
@@ -248,7 +294,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const accesscards()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
@@ -278,7 +329,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const homeservicesapplications()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
@@ -305,7 +361,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const marketplace()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
@@ -330,7 +391,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const conciergeservices()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
@@ -360,7 +426,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const tukangman()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
@@ -386,7 +457,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const laundry()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
@@ -412,7 +488,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const qrkeys()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
@@ -442,7 +523,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const tenantaccounts()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
@@ -469,7 +555,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const committee()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
@@ -494,7 +585,12 @@ class Functions extends StatelessWidget {
                 Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const deliverylockers()),
+                        );
+                      },
                       child: Container(
                         height: 80,
                         width: 80,
@@ -522,7 +618,7 @@ class Functions extends StatelessWidget {
             const SizedBox(height: 15)
           ],
         ),
-      ),
+      )
     );
   }
 }
