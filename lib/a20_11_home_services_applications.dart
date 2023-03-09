@@ -19,6 +19,17 @@ class _homeservicesapplicationsState extends State<homeservicesapplications> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home Services Applications',style: TextStyle(fontWeight: FontWeight.w300),),
+        actions: [
+          CircleAvatar(
+            backgroundColor: Colors.red,
+            child: FloatingActionButton(
+                backgroundColor: Colors.red,
+                onPressed: () {},
+                child: const Text('SOS',style: TextStyle(color: Colors.white,fontSize: 13),)
+            ),
+          ),
+          const SizedBox(width: 10)
+        ],
       ),
     );
   }

@@ -289,108 +289,125 @@ class _suggestionsState extends State<suggestions> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => Future.value(false), // 按下返回鍵不執行任何動作
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "Suggestions",
-            style: TextStyle(
-              fontWeight: FontWeight.w300,
-              color: Colors.black,
+  Widget build(BuildContext context) => DefaultTabController(
+    length: 3,
+    child: Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Suggestions',
+          style: TextStyle(fontWeight: FontWeight.w300),
+        ),
+        bottom: const TabBar(
+          indicatorColor: Colors.black,
+          indicatorWeight: 5,
+          labelColor: Colors.black,
+          unselectedLabelColor: Colors.grey,
+          tabs: [
+            Tab(
+              text: 'New',
             ),
-          ),
-          leading: IconButton(onPressed: () {
-            Navigator.pop(context);
-          }, icon: const Icon(Icons.arrow_back,color: Colors.black,)),
-          backgroundColor: Colors.white,
-          actions: [
-            IconButton(
-              onPressed: showAddContentDialog,
-              icon: const Icon(Icons.add, color: Colors.black),
-            )
+            Tab(
+              text: 'Processing',
+            ),
+            Tab(
+              text: 'Completed',
+            ),
           ],
         ),
-        body: Scrollbar(
-          child: FutureBuilder(
-            future: getsuggestionsData(),
-            builder: (context, snapshot){
-              if(snapshot.hasError) print(snapshot.error);
-              return snapshot.connectionState == ConnectionState.done && snapshot.data != null && snapshot.data.length > 0
-                  ? ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (context, index) {
-                  List list = snapshot.data;
-                  if (list[index]['Display'] == 'public') {
-                    return Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailPage(list: list, index: index),
-                            ),
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(12.0),
-                              child: Image.network(
-                                list[index]['Photo'],
-                                width: 60,
-                                height: 60,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    list[index]['Title'],
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold, fontSize: 20),
+        actions: [
+          IconButton(onPressed: () {
+            showAddContentDialog();
+          }, icon: Icon(Icons.add, color: Colors.black))
+        ],
+      ),
+      body: TabBarView(
+        children: [
+          Scrollbar(
+              child: FutureBuilder(
+                future: getsuggestionsData(),
+                builder: (context, snapshot){
+                  if(snapshot.hasError) print(snapshot.error);
+                  return snapshot.connectionState == ConnectionState.done && snapshot.data != null && snapshot.data.length > 0
+                      ? ListView.builder(
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index) {
+                      List list = snapshot.data;
+                      if (list[index]['Display'] == 'public') {
+                        return Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailPage(list: list, index: index),
+                                ),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  child: Image.network(
+                                    list[index]['Photo'],
+                                    width: 60,
+                                    height: 60,
+                                    fit: BoxFit.cover,
                                   ),
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    list[index]['Description'],
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w200,
-                                        color: Color.fromARGB(255, 66, 72, 82),
-                                        fontSize: 13),
+                                ),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        list[index]['Title'],
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold, fontSize: 20),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        list[index]['Description'],
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w200,
+                                            color: Color.fromARGB(255, 66, 72, 82),
+                                            fontSize: 13),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  } else {
-                    // If display is private, return an empty Container
-                    return Container();
-                  }
-                },
-              )
-                  : const Center(
-                      child: Text(
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      } else {
+                        // If display is private, return an empty Container
+                        return Container();
+                      }
+                    },
+                  )
+                      : const Center(
+                    child: Text(
                       "No suggestions yet",
                       style: TextStyle(
-                       fontWeight: FontWeight.w200,
-                       color: Color.fromARGB(255, 66, 72, 82),
+                        fontWeight: FontWeight.w200,
+                        color: Color.fromARGB(255, 66, 72, 82),
+                      ),
                     ),
-                  ),
-              );
-            },
-          )
-        )
+                  );
+                },
+              )
+          ),
+          const Center(
+            child: Text('Processing'),
+          ),
+          const Center(
+            child: Text('Completed'),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
 }
 
 class DetailPage extends StatelessWidget {

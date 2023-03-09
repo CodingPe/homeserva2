@@ -34,8 +34,10 @@ class _visitorState extends State<visitor> {
                   text: 'Checked-In',
                 ),
               ],
-            )
-
+            ),
+            actions: [
+              IconButton(onPressed: () {}, icon: const Icon(Icons.search, color: Colors.black))
+            ],
           ),
           body: Column(
             children: [

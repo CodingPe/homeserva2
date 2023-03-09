@@ -19,7 +19,19 @@ class _emergencynumbersState extends State<emergencynumbers> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Emergency Numbers',style: TextStyle(fontWeight: FontWeight.w300),),
+        actions: [
+          CircleAvatar(
+            backgroundColor: Colors.red,
+            child: FloatingActionButton(
+                backgroundColor: Colors.red,
+                onPressed: () {},
+                child: const Text('SOS',style: TextStyle(color: Colors.white,fontSize: 13),)
+            ),
+          ),
+          const SizedBox(width: 10)
+        ],
       ),
+
     );
   }
 }
