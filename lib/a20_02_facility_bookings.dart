@@ -1,14 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-class facilitybookings extends StatefulWidget {
-  const facilitybookings({Key? key}) : super(key: key);
+class FacilityBookings extends StatefulWidget {
+  const FacilityBookings({Key? key}) : super(key: key);
 
   @override
-  State<facilitybookings> createState() => _facilitybookingsState();
+  State<FacilityBookings> createState() => _FacilityBookingsState();
 }
 
-class _facilitybookingsState extends State<facilitybookings> {
+class _FacilityBookingsState extends State<FacilityBookings> {
   @override
   void initState() {
     super.initState();
@@ -18,7 +18,10 @@ class _facilitybookingsState extends State<facilitybookings> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Facility Bookings',style: TextStyle(fontWeight: FontWeight.w300),),
+        title: const Text(
+          'Facility Bookings',
+          style: TextStyle(fontWeight: FontWeight.w300),
+        ),
       ),
     );
   }
