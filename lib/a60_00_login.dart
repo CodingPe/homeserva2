@@ -48,12 +48,13 @@ class LoginUserState extends State<LoginUser> {
       loadingVisible = true;
     });
 
-    Uri url = Uri.parse('https://peterapi.vyrox.com/login_user.php');
+    Uri url = Uri.parse(
+        'https://newdemo.homeserva.com/flutter_api/a01_00_user_login.php');
     var data = {
       'loginCode': 'vyrox',
       'email': email,
       'password': password,
-      'fcm_token': _token
+      'fcm_token': _token ?? 'failed to get fcm token',
     };
     var response = await http.post(url, body: json.encode(data));
     var message = jsonDecode(response.body);
