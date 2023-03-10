@@ -1,14 +1,13 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 
-class meetingminutes extends StatefulWidget {
-  const meetingminutes({Key? key}) : super(key: key);
+class MeetingMinutes extends StatefulWidget {
+  const MeetingMinutes({Key? key}) : super(key: key);
 
   @override
-  State<meetingminutes> createState() => _meetingminutesState();
+  State<MeetingMinutes> createState() => _MeetingMinutesState();
 }
 
-class _meetingminutesState extends State<meetingminutes> {
+class _MeetingMinutesState extends State<MeetingMinutes> {
   @override
   void initState() {
     super.initState();

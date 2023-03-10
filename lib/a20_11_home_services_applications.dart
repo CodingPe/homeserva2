@@ -1,14 +1,13 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 
-class homeservicesapplications extends StatefulWidget {
-  const homeservicesapplications({Key? key}) : super(key: key);
+class HomeServicesApplications extends StatefulWidget {
+  const HomeServicesApplications({Key? key}) : super(key: key);
 
   @override
-  State<homeservicesapplications> createState() => _homeservicesapplicationsState();
+  State<HomeServicesApplications> createState() => _HomeServicesApplicationsState();
 }
 
-class _homeservicesapplicationsState extends State<homeservicesapplications> {
+class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
   @override
   void initState() {
     super.initState();
@@ -18,7 +17,7 @@ class _homeservicesapplicationsState extends State<homeservicesapplications> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Services Applications',style: TextStyle(fontWeight: FontWeight.w300),),
+        title: const Text('Home Services Applications',style: TextStyle(fontWeight: FontWeight.w300,fontSize: 18),),
         actions: [
           CircleAvatar(
             backgroundColor: Colors.red,
@@ -30,6 +29,23 @@ class _homeservicesapplicationsState extends State<homeservicesapplications> {
           ),
           const SizedBox(width: 10)
         ],
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 20),
+              child: const Text(
+                "No application found",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w200,
+                  color: Color.fromARGB(255, 66, 72, 82),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

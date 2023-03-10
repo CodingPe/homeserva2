@@ -1,14 +1,13 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 
-class qrkeys extends StatefulWidget {
-  const qrkeys({Key? key}) : super(key: key);
+class QRKeys extends StatefulWidget {
+  const QRKeys({Key? key}) : super(key: key);
 
   @override
-  State<qrkeys> createState() => _qrkeysState();
+  State<QRKeys> createState() => _QRKeysState();
 }
 
-class _qrkeysState extends State<qrkeys> {
+class _QRKeysState extends State<QRKeys> {
   @override
   void initState() {
     super.initState();

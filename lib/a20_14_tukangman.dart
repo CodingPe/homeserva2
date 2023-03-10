@@ -1,14 +1,13 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 
-class tukangman extends StatefulWidget {
-  const tukangman({Key? key}) : super(key: key);
+class TukangMan extends StatefulWidget {
+  const TukangMan({Key? key}) : super(key: key);
 
   @override
-  State<tukangman> createState() => _tukangmanState();
+  State<TukangMan> createState() => _TukangManState();
 }
 
-class _tukangmanState extends State<tukangman> {
+class _TukangManState extends State<TukangMan> {
   @override
   void initState() {
     super.initState();

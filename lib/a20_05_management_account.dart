@@ -1,14 +1,13 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 
-class managementaccount extends StatefulWidget {
-  const managementaccount({Key? key}) : super(key: key);
+class ManagementAccount extends StatefulWidget {
+  const ManagementAccount({Key? key}) : super(key: key);
 
   @override
-  State<managementaccount> createState() => _managementaccountState();
+  State<ManagementAccount> createState() => _ManagementAccountState();
 }
 
-class _managementaccountState extends State<managementaccount> {
+class _ManagementAccountState extends State<ManagementAccount> {
   @override
   void initState() {
     super.initState();

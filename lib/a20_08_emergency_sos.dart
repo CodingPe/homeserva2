@@ -1,14 +1,13 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 
-class emergencysos extends StatefulWidget {
-  const emergencysos({Key? key}) : super(key: key);
+class EmergencySOS extends StatefulWidget {
+  const EmergencySOS({Key? key}) : super(key: key);
 
   @override
-  State<emergencysos> createState() => _emergencysosState();
+  State<EmergencySOS> createState() => _EmergencySOSState();
 }
 
-class _emergencysosState extends State<emergencysos> {
+class _EmergencySOSState extends State<EmergencySOS> {
   @override
   void initState() {
     super.initState();

@@ -1,14 +1,13 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 
-class tenantaccounts extends StatefulWidget {
-  const tenantaccounts({Key? key}) : super(key: key);
+class TenantAccounts extends StatefulWidget {
+  const TenantAccounts({Key? key}) : super(key: key);
 
   @override
-  State<tenantaccounts> createState() => _tenantaccountsState();
+  State<TenantAccounts> createState() => _TenantAccountsState();
 }
 
-class _tenantaccountsState extends State<tenantaccounts> {
+class _TenantAccountsState extends State<TenantAccounts> {
   @override
   void initState() {
     super.initState();

@@ -1,14 +1,13 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 
-class committee extends StatefulWidget {
-  const committee({Key? key}) : super(key: key);
+class Committee extends StatefulWidget {
+  const Committee({Key? key}) : super(key: key);
 
   @override
-  State<committee> createState() => _committeeState();
+  State<Committee> createState() => _CommitteeState();
 }
 
-class _committeeState extends State<committee> {
+class _CommitteeState extends State<Committee> {
   @override
   void initState() {
     super.initState();

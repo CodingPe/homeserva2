@@ -1,14 +1,13 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 
-class laundry extends StatefulWidget {
-  const laundry({Key? key}) : super(key: key);
+class Laundry extends StatefulWidget {
+  const Laundry({Key? key}) : super(key: key);
 
   @override
-  State<laundry> createState() => _laundryState();
+  State<Laundry> createState() => _LaundryState();
 }
 
-class _laundryState extends State<laundry> {
+class _LaundryState extends State<Laundry> {
   @override
   void initState() {
     super.initState();
@@ -41,7 +40,7 @@ class _laundryState extends State<laundry> {
           ],
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.add, color: Colors.black))
+          IconButton(onPressed: () {}, icon: const Icon(Icons.add, color: Colors.black))
         ],
       ),
       body: TabBarView(

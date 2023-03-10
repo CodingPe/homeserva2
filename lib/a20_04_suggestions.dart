@@ -1,19 +1,18 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
 
-class suggestions extends StatefulWidget {
-  const suggestions({Key? key}) : super(key: key);
+class Suggestions extends StatefulWidget {
+  const Suggestions({Key? key}) : super(key: key);
 
   @override
-  State<suggestions> createState() => _suggestionsState();
+  State<Suggestions> createState() => _SuggestionsState();
 }
 
-class _suggestionsState extends State<suggestions> {
+class _SuggestionsState extends State<Suggestions> {
   TextEditingController category = TextEditingController();
   TextEditingController title = TextEditingController();
   TextEditingController description = TextEditingController();
@@ -239,7 +238,7 @@ class _suggestionsState extends State<suggestions> {
                                               image = null;
                                             });
                                           },
-                                          child: Icon(
+                                          child: const Icon(
                                             Icons.clear,
                                             color: Colors.white,
                                           ),
@@ -317,7 +316,7 @@ class _suggestionsState extends State<suggestions> {
         actions: [
           IconButton(onPressed: () {
             showAddContentDialog();
-          }, icon: Icon(Icons.add, color: Colors.black))
+          }, icon: const Icon(Icons.add, color: Colors.black))
         ],
       ),
       body: TabBarView(
@@ -334,50 +333,74 @@ class _suggestionsState extends State<suggestions> {
                       List list = snapshot.data;
                       if (list[index]['Display'] == 'public') {
                         return Padding(
-                          padding: const EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(5),
                           child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DetailPage(list: list, index: index),
-                                ),
-                              );
-                            },
-                            child: Row(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  child: Image.network(
-                                    list[index]['Photo'],
-                                    width: 60,
-                                    height: 60,
-                                    fit: BoxFit.cover,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailPage(list: list, index: index),
                                   ),
-                                ),
-                                const SizedBox(width: 16),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                );
+                              },
+                              child: Container(
+                                width: 250,
+                                height: 60,
+                                child: Card(
+                                  child: Row(
                                     children: [
-                                      Text(
-                                        list[index]['Title'],
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold, fontSize: 20),
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(12.0),
+                                        child: Image.network(
+                                          list[index]['Photo'],
+                                          width: 35,
+                                          height: 35,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
-                                      const SizedBox(height: 10),
-                                      Text(
-                                        list[index]['Description'],
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.w200,
-                                            color: Color.fromARGB(255, 66, 72, 82),
-                                            fontSize: 13),
+                                      const SizedBox(width: 10),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              list[index]['Category'],
+                                              style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 16),
+                                            ),
+                                            Text(
+                                              list[index]['Title'],
+                                              style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
+                                            ),
+                                            Text(
+                                              list[index]['Time'],
+                                              style: const TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                          children: const [
+                                            Text(
+                                              'New',
+                                              style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16),
+                                            ),
+                                            Text(
+                                              '1 day outstanding',
+                                              style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
+                                            ),
+                                            Text(
+                                              'Submitted by Li Kin Mun',
+                                              style: TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
-                                )
-                              ],
-                            ),
+                                ),
+                              )
                           ),
                         );
                       } else {
@@ -388,7 +411,7 @@ class _suggestionsState extends State<suggestions> {
                   )
                       : const Center(
                     child: Text(
-                      "No suggestions yet",
+                      "No suggestion yet",
                       style: TextStyle(
                         fontWeight: FontWeight.w200,
                         color: Color.fromARGB(255, 66, 72, 82),

@@ -1,14 +1,13 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 
-class accesscards extends StatefulWidget {
-  const accesscards({Key? key}) : super(key: key);
+class AccessCards extends StatefulWidget {
+  const AccessCards({Key? key}) : super(key: key);
 
   @override
-  State<accesscards> createState() => _accesscardsState();
+  State<AccessCards> createState() => _AccessCardsState();
 }
 
-class _accesscardsState extends State<accesscards> {
+class _AccessCardsState extends State<AccessCards> {
   @override
   void initState() {
     super.initState();

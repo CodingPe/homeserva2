@@ -1,14 +1,13 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 
-class visitor extends StatefulWidget {
-  const visitor({Key? key}) : super(key: key);
+class Visitor extends StatefulWidget {
+  const Visitor({Key? key}) : super(key: key);
 
   @override
-  State<visitor> createState() => _visitorState();
+  State<Visitor> createState() => _VisitorState();
 }
 
-class _visitorState extends State<visitor> {
+class _VisitorState extends State<Visitor> {
 
   @override
   void initState() {
@@ -41,7 +40,7 @@ class _visitorState extends State<visitor> {
           ),
           body: Column(
             children: [
-
+              const Text('Visitors')
             ],
           )
       )

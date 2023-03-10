@@ -1,14 +1,13 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 
-class deliverylockers extends StatefulWidget {
-  const deliverylockers({Key? key}) : super(key: key);
+class DeliveryLockers extends StatefulWidget {
+  const DeliveryLockers({Key? key}) : super(key: key);
 
   @override
-  State<deliverylockers> createState() => _deliverylockersState();
+  State<DeliveryLockers> createState() => _DeliveryLockersState();
 }
 
-class _deliverylockersState extends State<deliverylockers> {
+class _DeliveryLockersState extends State<DeliveryLockers> {
   @override
   void initState() {
     super.initState();
