@@ -75,3 +75,18 @@ Widget bigButton(name, action) {
         ))),
   );
 }
+
+//no over scroll glow effect.
+class NoGlowScrollBehavior extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
+  }
+}
+//example of how to use the no over scroll glow effect:
+
+// ScrollConfiguration(
+//   behavior: NoGlowScrollBehavior(),
+//   child: // your widget tree here
+// );

@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:hive/hive.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'dart:ui';
 
 canLogin(context) {
   navigateAndFinish(context, MainPage());
@@ -81,22 +82,24 @@ class LoginUserState extends State<LoginUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            child: SafeArea(
-              child: Center(
-                  child: Column(children: [
+        body: ScrollConfiguration(
+      behavior: NoGlowScrollBehavior(),
+      child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 50),
+              child: Column(children: [
                 //TODO: add homeserva icon and text.
                 AspectRatio(
-                  aspectRatio: 1,
+                  aspectRatio: 1.38,
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        top: 50, left: 20, right: 20, bottom: 5),
+                        top: 50, left: 20, right: 20, bottom: 10),
                     child: Image.asset('assets/icons/homeserva_logo.png'),
                   ),
                 ),
                 const Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: EdgeInsets.all(5.0),
                     child: Text('HOMESERVA',
                         style: TextStyle(
                             fontSize: 38.8, fontWeight: FontWeight.bold))),
@@ -111,7 +114,7 @@ class LoginUserState extends State<LoginUser> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 30, vertical: 2),
                     child: LoginInput(inputController: emailController)),
-//TODO: Email Vaildate, null validate, hint, clear button, visibility button
+                //TODO: Email Vaildate, null validate, hint, clear button, visibility button
                 Container(
                     width: double.infinity,
                     padding:
@@ -128,8 +131,8 @@ class LoginUserState extends State<LoginUser> {
                 const SizedBox(
                   height: 10,
                 ),
-              ])),
-            )));
+              ]))),
+    ));
   }
 }
 
@@ -228,15 +231,21 @@ class _LoginInputState extends State<LoginInput> {
               labelStyle: const TextStyle(color: primaryColor),
               prefixIcon: const Icon(Icons.email),
               suffixIcon: InkWell(
-                onTap: () {
-                  widget.inputController.clear();
-                },
-                child: Icon(
-                  Icons.clear,
-                  size: _isTextFieldEmpty ? 0 : 18,
-                  color: primaryColor,
-                ),
-              ),
+                  onTap: () {
+                    widget.inputController.clear();
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.clear,
+                          size: _isTextFieldEmpty ? 0 : 18,
+                          color: primaryColor),
+                      const SizedBox(
+                        width: 8,
+                      )
+                    ],
+                  )),
               filled: true,
               fillColor: accentColor,
               hintText: 'enquiry@vyrox.com',
@@ -302,10 +311,8 @@ class _PasswordInputState extends State<PasswordInput> {
     const backgroundColor = Color(0xffffffff);
     const errorColor = Color(0xffEF4444);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Container(
           height: 50,
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
@@ -315,76 +322,69 @@ class _PasswordInputState extends State<PasswordInput> {
                 color: Colors.grey.withOpacity(.1)),
           ]),
           child: TextFormField(
-            //TODO: cant become next, check textformfield.
-            textInputAction: TextInputAction.none,
-            obscureText: !pwdVisibility,
-            controller: widget.inputController,
-            onChanged: (value) {
-              //Do something wi
-            },
-            keyboardType: TextInputType.visiblePassword,
-            style: const TextStyle(fontSize: 14, color: Colors.black),
-            decoration: InputDecoration(
-              prefixIcon: const Icon(Icons.lock),
-              filled: true,
-              fillColor: accentColor,
-              hintText: 'Enter your password here',
-              hintStyle: TextStyle(color: Colors.grey.withOpacity(.75)),
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
-              border: const OutlineInputBorder(
-                borderSide: BorderSide(color: primaryColor, width: 1.0),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-              focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: secondaryColor, width: 1.0),
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              ),
-              errorBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: errorColor, width: 1.0),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: primaryColor, width: 1.0),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-              suffixIcon: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween, // added line
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      widget.inputController.clear();
-                    },
-                    child: Icon(
-                      Icons.clear,
-                      size: _isTextFieldEmpty ? 0 : 18,
-                      color: primaryColor,
-                    ),
+              //TODO: cant become next, check textformfield.
+              textInputAction: TextInputAction.none,
+              obscureText: !pwdVisibility,
+              controller: widget.inputController,
+              onChanged: (value) {
+                //Do something wi
+              },
+              keyboardType: TextInputType.visiblePassword,
+              style: const TextStyle(fontSize: 14, color: Colors.black),
+              decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.lock),
+                  filled: true,
+                  fillColor: accentColor,
+                  hintText: 'Enter your password here',
+                  hintStyle: TextStyle(color: Colors.grey.withOpacity(.75)),
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 0.0, horizontal: 20.0),
+                  border: const OutlineInputBorder(
+                    borderSide: BorderSide(color: primaryColor, width: 1.0),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
-                  const SizedBox(width: 3),
-                  InkWell(
-                    onTap: () => setState(
-                      () => pwdVisibility = !pwdVisibility,
-                    ),
-                    child: Icon(
-                      pwdVisibility
-                          ? Icons.visibility_outlined
-                          : Icons.visibility_off_outlined,
-                      color: pwdVisibility ? secondaryColor : primaryColor,
-                      size: 18,
-                    ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: secondaryColor, width: 1.0),
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
-                  SizedBox(
-                    width: 5,
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
+                  errorBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: errorColor, width: 1.0),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  ),
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: primaryColor, width: 1.0),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  ),
+                  suffixIcon: Row(
+                      mainAxisAlignment: MainAxisAlignment.end, // added line
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            widget.inputController.clear();
+                          },
+                          child: Icon(
+                            Icons.clear,
+                            size: !_isTextFieldEmpty ? 18 : 0,
+                            color: primaryColor,
+                          ),
+                        ),
+                        const SizedBox(width: 3),
+                        InkWell(
+                            onTap: () => setState(
+                                  () => pwdVisibility = !pwdVisibility,
+                                ),
+                            child: Icon(
+                                pwdVisibility
+                                    ? Icons.visibility_rounded
+                                    : Icons.visibility_off_outlined,
+                                color: pwdVisibility
+                                    ? secondaryColor
+                                    : primaryColor,
+                                size: 18)),
+                        const SizedBox(width: 8),
+                      ]))))
+    ]);
   }
 }
 
