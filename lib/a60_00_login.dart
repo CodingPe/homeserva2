@@ -2,11 +2,9 @@ import 'dart:convert';
 import 'package:homeserva_2/a00_00_directory.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:hive/hive.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'dart:ui';
 
 canLogin(context) {
   navigateAndFinish(context, MainPage());
@@ -82,57 +80,57 @@ class LoginUserState extends State<LoginUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ScrollConfiguration(
-      behavior: NoGlowScrollBehavior(),
-      child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 50),
-              child: Column(children: [
-                //TODO: add homeserva icon and text.
-                AspectRatio(
-                  aspectRatio: 1.38,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        top: 50, left: 20, right: 20, bottom: 10),
-                    child: Image.asset('assets/icons/homeserva_logo.png'),
+        body: Stack(children: [
+      ScrollConfiguration(
+        behavior: NoGlowScrollBehavior(),
+        child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 50),
+                child: Column(children: [
+                  //TODO: add homeserva icon and text.
+                  AspectRatio(
+                    aspectRatio: 1.38,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          top: 50, left: 20, right: 20, bottom: 10),
+                      child: Image.asset('assets/icons/homeserva_logo.png'),
+                    ),
                   ),
-                ),
-                const Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: Text('HOMESERVA',
-                        style: TextStyle(
-                            fontSize: 38.8, fontWeight: FontWeight.bold))),
-                const SizedBox(
-                  height: 20,
-                  width: double.maxFinite,
-                ),
-                //TODO: beautify UI
-                //TODO: Email Vaildate, null validate, hint
-                Container(
-                    width: double.infinity,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 30, vertical: 2),
-                    child: LoginInput(inputController: emailController)),
-                //TODO: Email Vaildate, null validate, hint, clear button, visibility button
-                Container(
-                    width: double.infinity,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 30, vertical: 2),
-                    child: PasswordInput(
-                      inputController: passwordController,
-                    )),
-                bigButton('Login', userLogin),
-                Visibility(
-                    visible: loadingVisible,
-                    child: Container(
-                        margin: const EdgeInsets.only(bottom: 30),
-                        child: const CupertinoActivityIndicator())),
-                const SizedBox(
-                  height: 10,
-                ),
-              ]))),
-    ));
+                  const Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: Text('HOMESERVA',
+                          style: TextStyle(
+                              fontSize: 38.8, fontWeight: FontWeight.bold))),
+                  const SizedBox(
+                    height: 20,
+                    width: double.maxFinite,
+                  ),
+                  //TODO: beautify UI
+                  //TODO: Email Vaildate, null validate, hint
+                  Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 2),
+                      child: LoginInput(inputController: emailController)),
+                  //TODO: Email Vaildate, null validate, hint, clear button, visibility button
+                  Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 2),
+                      child: PasswordInput(
+                        inputController: passwordController,
+                      )),
+                  bigButton('Login', userLogin),
+                  Visibility(
+                      visible: loadingVisible,
+                      child: Container(
+                          margin: const EdgeInsets.only(bottom: 30),
+                          child: const CupertinoActivityIndicator())),
+                  const SizedBox(height: 10)
+                ]))),
+      ),
+    ]));
   }
 }
 

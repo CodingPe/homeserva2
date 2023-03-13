@@ -11,8 +11,6 @@ export 'package:homeserva_2/a50_01_me_block.dart';
 export 'package:homeserva_2/a50_02_change_password.dart';
 export 'package:homeserva_2/a50_02_logout.dart';
 export 'package:homeserva_2/a50_03_web_content_tpd.dart';
-export 'package:homeserva_2/a60_01_login_2.dart';
-export 'a61_01_login_handler.dart';
 export 'a60_00_login.dart';
 
 //testing
