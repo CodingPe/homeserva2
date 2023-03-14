@@ -23,7 +23,10 @@ class Functions extends StatelessWidget {
                       onPressed: () {},
                       child: const Text('SOS',
                           style:
-                              TextStyle(color: Colors.white, fontSize: 13)))),
+                              TextStyle(color: Colors.white, fontSize: 13)
+                      )
+                  )
+              ),
               const SizedBox(width: 10)
             ]),
         body: Scrollbar(
@@ -167,5 +170,7 @@ Widget _buildGridViewItem(String iconAssetPath, String label,
         Text(label,
             style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
             textAlign: TextAlign.center)
-      ]));
+      ]
+      )
+  );
 }

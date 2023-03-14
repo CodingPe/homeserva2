@@ -168,29 +168,29 @@ class _ComplaintsState extends State<Complaints> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Text("Display to"),
-                                const SizedBox(height: 2),
-                                Container(
-                                  width: 250,
-                                  child: RadioListTile(
-                                    title: const Text('Public'),
-                                    value: 'public',
-                                    groupValue: _privacy,
-                                    onChanged: (value) {
-                                      setState(() {});
-                                    },
-                                  ),
+                                const SizedBox(height: 2,width: 250),
+                                RadioListTile(
+                                  title: const Text('Public'),
+                                  value: 'public',
+                                  groupValue: _privacy,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _privacy = value as String?;
+                                    }
+                                    );
+                                  },
                                 ),
-                                Container(
-                                  width: 250,
-                                  child: RadioListTile(
-                                    title: const Text('Private'),
-                                    value: 'private',
-                                    groupValue: _privacy,
-                                    onChanged: (value) {
-                                      setState(() {});
-                                    },
-                                  ),
-                                )
+                                const SizedBox(width: 250),
+                                RadioListTile(
+                                  title: const Text('Private'),
+                                  value: 'private',
+                                  groupValue: _privacy,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _privacy = value as String?;
+                                    });
+                                  },
+                                ),
                               ],
                             ),
                             const SizedBox(height: 10),
@@ -323,11 +323,67 @@ class _ComplaintsState extends State<Complaints> {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
                           child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ComplaintDetailPage(list: list, index: index),
+                              onTap: () async {
+                                await showDialog(
+                                  context: context,
+                                  builder: (ctx) => StatefulBuilder(
+                                    builder: (context, setState) {
+                                      return Center(
+                                        child: Container(
+                                          constraints: const BoxConstraints(minWidth: 500),
+                                          margin: const EdgeInsets.all(20),
+                                          child: Card(
+                                            elevation: 10,
+                                            shadowColor: Colors.blueGrey,
+                                            child: Container(
+                                              padding: const EdgeInsets.all(20),
+                                              color: Colors.grey[200],
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  const Text(
+                                                    'Complaint Detail',
+                                                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                                                  ),
+                                                  ClipRRect(
+                                                    borderRadius: BorderRadius.circular(12.0),
+                                                    child: Image.network(
+                                                      list[index]['Photo'],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 15),
+                                                  const Text(
+                                                    'Unit\nD-5-19',
+                                                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
+                                                  ),
+                                                  const SizedBox(height: 15),
+                                                  Text(
+                                                    'Category\n${list[index]['Category']}',
+                                                    style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
+                                                  ),
+                                                  const SizedBox(height: 15),
+                                                  Text(
+                                                    'Title\n${list[index]['Title']}',
+                                                    style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
+                                                  ),
+                                                  const SizedBox(height: 15),
+                                                  Text(
+                                                    'Show to\n${list[index]['Display']}',
+                                                    style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
+                                                  ),
+                                                  const SizedBox(height: 15),
+                                                  Text(
+                                                    'Description\n${list[index]['Description']}',
+                                                    style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 );
                               },
@@ -416,50 +472,4 @@ class _ComplaintsState extends State<Complaints> {
       ),
     ),
   );
-}
-
-class ComplaintDetailPage extends StatelessWidget {
-  final List list;
-  final int index;
-
-  const ComplaintDetailPage({Key? key, required this.list, required this.index})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(list[index]['Title'],
-            style: const TextStyle(fontWeight: FontWeight.bold)),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Image.network(list[index]['Photo']),
-              const SizedBox(height: 16.0),
-              Text(
-                list[index]['Category'],
-                style:
-                const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16.0),
-              Text(
-                list[index]['Title'],
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16.0),
-              Text(
-                list[index]['Description'],
-                style: const TextStyle(fontWeight: FontWeight.w300),
-              ),
-              const SizedBox(height: 16.0),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 }
