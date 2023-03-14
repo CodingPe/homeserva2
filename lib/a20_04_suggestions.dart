@@ -40,7 +40,7 @@ class _SuggestionsState extends State<Suggestions> {
     });
   }
 
-  Future getsuggestionsData() async {
+  Future getSuggestionsData() async {
     var url = 'https://peterapi.vyrox.com/viewsuggestionsdata.php';
     var response = await http.get(Uri.parse(url));
     return json.decode(response.body);
@@ -323,7 +323,7 @@ class _SuggestionsState extends State<Suggestions> {
         children: [
           Scrollbar(
               child: FutureBuilder(
-                future: getsuggestionsData(),
+                future: getSuggestionsData(),
                 builder: (context, snapshot){
                   if(snapshot.hasError) print(snapshot.error);
                   return snapshot.connectionState == ConnectionState.done && snapshot.data != null && snapshot.data.length > 0
@@ -339,7 +339,7 @@ class _SuggestionsState extends State<Suggestions> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => DetailPage(list: list, index: index),
+                                    builder: (context) => SuggestionDetailPage(list: list, index: index),
                                   ),
                                 );
                               },
@@ -430,11 +430,11 @@ class _SuggestionsState extends State<Suggestions> {
   );
 }
 
-class DetailPage extends StatelessWidget {
+class SuggestionDetailPage extends StatelessWidget {
   final List list;
   final int index;
 
-  const DetailPage({Key? key, required this.list, required this.index}) : super(key: key);
+  const SuggestionDetailPage({Key? key, required this.list, required this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
