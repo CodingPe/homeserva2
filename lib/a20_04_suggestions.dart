@@ -17,7 +17,7 @@ class _SuggestionsState extends State<Suggestions> {
   TextEditingController title = TextEditingController();
   TextEditingController description = TextEditingController();
   String photo = '';
-  final _formkey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   final List<String> list = <String>[
     'BBQ',
     'Guard',
@@ -83,7 +83,7 @@ class _SuggestionsState extends State<Suggestions> {
                       child: Container(
                         padding: const EdgeInsets.all(20),
                         child:  Form(
-                          key: _formkey,
+                          key: _formKey,
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
@@ -154,33 +154,26 @@ class _SuggestionsState extends State<Suggestions> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text("Display to"),
-                                    const SizedBox(height: 2),
-                                    Container(
-                                      width: 250,
-                                      child: RadioListTile(
-                                        title: const Text('Public'),
-                                        value: 'public',
-                                        groupValue: _privacy,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _privacy = value as String?;
-                                          });
-                                        },
-                                      ),
+                                    const SizedBox(height: 2,width: 250),
+                                    RadioListTile(
+                                      title: const Text('Public'),
+                                      value: 'public',
+                                      groupValue: _privacy,
+                                      onChanged: (value) {
+                                        setState(() {}
+                                        );
+                                      },
                                     ),
-                                    Container(
-                                      width: 250,
-                                      child: RadioListTile(
-                                        title: const Text('Private'),
-                                        value: 'private',
-                                        groupValue: _privacy,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _privacy = value as String?;
-                                          });
-                                        },
-                                      ),
-                                    )
+                                    const SizedBox(width: 250,),
+                                    RadioListTile(
+                                      title: const Text('Private'),
+                                      value: 'private',
+                                      groupValue: _privacy,
+                                      onChanged: (value) {
+                                        setState(() {}
+                                        );
+                                      },
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(height: 10),

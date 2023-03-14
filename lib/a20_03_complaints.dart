@@ -18,7 +18,7 @@ class _ComplaintsState extends State<Complaints> {
   TextEditingController title = TextEditingController();
   TextEditingController description = TextEditingController();
   String photo = '';
-  final _formkey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   final List<String> list = <String>[
     'BBQ',
     'Guard',
@@ -47,13 +47,13 @@ class _ComplaintsState extends State<Complaints> {
     }
   }
 
-  Future getcomplaintData() async {
+  Future getComplaintData() async {
     var url = 'https://peterapi.vyrox.com/viewcomplaintsdata.php';
     var response = await http.get(Uri.parse(url));
     return json.decode(response.body);
   }
 
-  Future<void> _addcomplaint() async {
+  Future<void> _addComplaint() async {
     final url = 'https://peterapi.vyrox.com/addcomplaints.php';
     try {
       final response = await http.post(Uri.parse(url), body: {
@@ -87,7 +87,7 @@ class _ComplaintsState extends State<Complaints> {
                   child: Container(
                     padding: const EdgeInsets.all(20),
                     child: Form(
-                      key: _formkey,
+                      key: _formKey,
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
@@ -176,9 +176,7 @@ class _ComplaintsState extends State<Complaints> {
                                     value: 'public',
                                     groupValue: _privacy,
                                     onChanged: (value) {
-                                      setState(() {
-                                        _privacy = value as String?;
-                                      });
+                                      setState(() {});
                                     },
                                   ),
                                 ),
@@ -189,9 +187,7 @@ class _ComplaintsState extends State<Complaints> {
                                     value: 'private',
                                     groupValue: _privacy,
                                     onChanged: (value) {
-                                      setState(() {
-                                        _privacy = value as String?;
-                                      });
+                                      setState(() {});
                                     },
                                   ),
                                 )
@@ -253,8 +249,7 @@ class _ComplaintsState extends State<Complaints> {
                                   color: Colors.blue,
                                   child: TextButton(
                                     onPressed: () {
-                                      _addcomplaint();
-                                      print(image);
+                                      _addComplaint();
                                       Navigator.pop(context);
                                     },
                                     child: const Text(
@@ -309,14 +304,14 @@ class _ComplaintsState extends State<Complaints> {
         actions: [
           IconButton(onPressed: () {
             showAddContentDialog();
-          }, icon: Icon(Icons.add, color: Colors.black))
+          }, icon: const Icon(Icons.add, color: Colors.black))
         ],
       ),
       body: TabBarView(
         children: [
           Scrollbar(
               child: FutureBuilder(
-                future: getcomplaintData(),
+                future: getComplaintData(),
                 builder: (context, snapshot){
                   if(snapshot.hasError) print(snapshot.error);
                   return snapshot.connectionState == ConnectionState.done && snapshot.data != null && snapshot.data.length > 0
