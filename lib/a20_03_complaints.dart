@@ -326,75 +326,72 @@ class _ComplaintsState extends State<Complaints> {
                       List list = snapshot.data;
                       if (list[index]['Display'] == 'public') {
                         return Padding(
-                          padding: const EdgeInsets.all(5),
+                          padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
                           child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ComplaintDetailPage(list: list, index: index),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ComplaintDetailPage(list: list, index: index),
+                                  ),
+                                );
+                              },
+                              child: SizedBox(
+                                width: 300,
+                                height: 40,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: Colors.blueGrey.shade200,
+                                        width: 1,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(12.0),
+                                        child: Image.network(
+                                          list[index]['Photo'],
+                                          width: 35,
+                                          height: 35,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              list[index]['Category'],
+                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                                            ),
+                                            Text(
+                                              list[index]['Title'],
+                                              style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 13,color: Colors.grey),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                          children: const [
+                                            Text(
+                                              '1 day outstanding\n',
+                                              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13,color: Colors.grey),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              );
-                            },
-                            child: Container(
-                              width: 250,
-                              height: 60,
-                              child: Card(
-                                child: Row(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      child: Image.network(
-                                        list[index]['Photo'],
-                                        width: 35,
-                                        height: 35,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            list[index]['Category'],
-                                            style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 16),
-                                          ),
-                                          Text(
-                                            list[index]['Title'],
-                                            style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
-                                          ),
-                                          Text(
-                                            list[index]['Time'],
-                                            style: const TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.end,
-                                        children: const [
-                                          Text(
-                                            'New',
-                                            style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16),
-                                          ),
-                                          Text(
-                                            '1 day outstanding',
-                                            style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
-                                          ),
-                                          Text(
-                                            'Submitted by Li Kin Mun',
-                                            style: TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
+                              )
                           ),
+
                         );
                       } else {
                         // If display is private, return an empty Container

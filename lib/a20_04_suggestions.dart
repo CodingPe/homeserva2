@@ -333,7 +333,7 @@ class _SuggestionsState extends State<Suggestions> {
                       List list = snapshot.data;
                       if (list[index]['Display'] == 'public') {
                         return Padding(
-                          padding: const EdgeInsets.all(5),
+                          padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
                           child: GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -343,10 +343,18 @@ class _SuggestionsState extends State<Suggestions> {
                                   ),
                                 );
                               },
-                              child: Container(
-                                width: 250,
-                                height: 60,
-                                child: Card(
+                              child: SizedBox(
+                                width: 300,
+                                height: 40,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: Colors.blueGrey.shade200,
+                                        width: 1,
+                                      ),
+                                    ),
+                                  ),
                                   child: Row(
                                     children: [
                                       ClipRRect(
@@ -365,15 +373,11 @@ class _SuggestionsState extends State<Suggestions> {
                                           children: [
                                             Text(
                                               list[index]['Category'],
-                                              style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 16),
+                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                                             ),
                                             Text(
                                               list[index]['Title'],
-                                              style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
-                                            ),
-                                            Text(
-                                              list[index]['Time'],
-                                              style: const TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
+                                              style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 13,color: Colors.grey),
                                             ),
                                           ],
                                         ),
@@ -383,16 +387,8 @@ class _SuggestionsState extends State<Suggestions> {
                                           crossAxisAlignment: CrossAxisAlignment.end,
                                           children: const [
                                             Text(
-                                              'New',
-                                              style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16),
-                                            ),
-                                            Text(
-                                              '1 day outstanding',
-                                              style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13),
-                                            ),
-                                            Text(
-                                              'Submitted by Li Kin Mun',
-                                              style: TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
+                                              '1 day outstanding\n',
+                                              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13,color: Colors.grey),
                                             ),
                                           ],
                                         ),
@@ -402,6 +398,7 @@ class _SuggestionsState extends State<Suggestions> {
                                 ),
                               )
                           ),
+
                         );
                       } else {
                         // If display is private, return an empty Container
@@ -411,7 +408,7 @@ class _SuggestionsState extends State<Suggestions> {
                   )
                       : const Center(
                     child: Text(
-                      "No suggestion yet",
+                      "No complaint yet",
                       style: TextStyle(
                         fontWeight: FontWeight.w200,
                         color: Color.fromARGB(255, 66, 72, 82),
