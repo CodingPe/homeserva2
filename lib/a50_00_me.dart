@@ -10,12 +10,24 @@ class Me extends StatelessWidget {
         appBar: AppBar(
           leading: null,
           title: const Text("Me"),
-          actions: const [
-            Padding(
-              padding: EdgeInsets.only(right: 15.0),
-              child: Icon(Icons.sos),
-            )
-          ],
+            actions: [
+              SizedBox(
+                width: 35,
+                height: 35,
+                child: CircleAvatar(
+                    backgroundColor: Colors.red,
+                    child: FloatingActionButton(
+                        backgroundColor: Colors.red,
+                        onPressed: () {},
+                        child: const Text('SOS',
+                            style:
+                            TextStyle(color: Colors.white, fontSize: 11)
+                        )
+                    )
+                ),
+              ),
+              const SizedBox(width: 10)
+            ]
         ),
         body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),

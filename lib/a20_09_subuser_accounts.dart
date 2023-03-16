@@ -18,17 +18,24 @@ class _SubUserState extends State<SubUser> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sub-User Accounts',style: TextStyle(fontWeight: FontWeight.w300),),
-        actions: [
-          CircleAvatar(
-            backgroundColor: Colors.red,
-            child: FloatingActionButton(
-              backgroundColor: Colors.red,
-              onPressed: () {},
-              child: const Text('SOS',style: TextStyle(color: Colors.white,fontSize: 13),)
+          actions: [
+            SizedBox(
+              width: 35,
+              height: 35,
+              child: CircleAvatar(
+                  backgroundColor: Colors.red,
+                  child: FloatingActionButton(
+                      backgroundColor: Colors.red,
+                      onPressed: () {},
+                      child: const Text('SOS',
+                          style:
+                          TextStyle(color: Colors.white, fontSize: 11)
+                      )
+                  )
+              ),
             ),
-          ),
-          const SizedBox(width: 10)
-        ],
+            const SizedBox(width: 10)
+          ]
       ),
       body: Center(
         child: Column(

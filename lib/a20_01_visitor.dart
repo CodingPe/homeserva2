@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 
 class Visitor extends StatefulWidget {
   const Visitor({Key? key}) : super(key: key);
@@ -8,6 +12,536 @@ class Visitor extends StatefulWidget {
 }
 
 class _VisitorState extends State<Visitor> {
+  final _formKey = GlobalKey<FormState>();
+  DateTime selectedDate = DateTime.now();
+  TextEditingController name = TextEditingController();
+  TextEditingController nric = TextEditingController();
+  TextEditingController passport = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController whatsapp = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController vehicleplate = TextEditingController();
+  final List<String> parkinglot = <String>[
+    'None',
+    'Visitor Parking',
+    'A-Level G-100',
+  ];
+  final List<String> type = <String>[
+    '--Select--',
+    'Family',
+    'Contractor',
+    'Food Delivery',
+    'Parcel Delivery',
+    'Teacher',
+    'School Bus',
+    'Public Transport',
+    'Mover',
+    'Property Agent',
+    'Long Term',
+    'Delivery Lorry'
+  ];
+
+String? selectedparkinglot;
+String? selectedtype;
+
+Future getVisitorsData() async {
+  var url = 'https://peterapi.vyrox.com/viewvisitorsdata.php';
+  var response = await http.get(Uri.parse(url));
+  return json.decode(response.body);
+}
+
+Future<void> _addVisitor() async {
+  const url = 'https://peterapi.vyrox.com/addvisitors.php';
+  try {
+    final response = await http.post(Uri.parse(url), body: {
+      'parkinglot': selectedparkinglot!,
+      'title': name.text,
+      'description': nric.text,
+    });
+    if (response.statusCode == 200) {
+      name.clear();
+      nric.clear();
+    } else {
+      throw Exception('Failed to add visitor');
+    }
+  } catch (e) {
+    print('Error adding visitor: $e');
+  }
+}
+
+void showAddContentDialog() {
+  showDialog(
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+          builder: (context,setState){
+            return Center(
+              child: Container(
+                  constraints: const BoxConstraints(
+                      minWidth: 500
+                  ),
+                  margin: const EdgeInsets.all(10),
+                  child: Card(
+                    shadowColor: Colors.blueGrey,
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      child:  Form(
+                        key: _formKey,
+                        child: ListView(
+                          children: [
+                            const Center(
+                              child: Text("New Visitor",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 22),),
+                            ),
+                            const SizedBox(height: 7),
+                            const Text('Property No.',style: TextStyle(fontSize: 14)),
+                            const SizedBox(height: 5),
+                            const Text('D-5-19',style: TextStyle(fontSize: 14)),
+                            const SizedBox(height: 7),
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              height: 600,
+                              width: 320,
+                              color: const Color.fromARGB(255, 248, 248, 248),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(height: 10),
+                                  const Text("Appointment Date",style: TextStyle(fontSize: 14)),
+                                  const SizedBox(height: 2),
+                                  GestureDetector(
+                                      onTap: () async {
+                                        DateTime? pickedDate = await showDatePicker(
+                                          context: context,
+                                          initialDate: selectedDate,
+                                          firstDate: DateTime.now(),
+                                          lastDate: DateTime(2028),
+                                        );
+                                        if (pickedDate != null && pickedDate != selectedDate)
+                                          setState(() {
+                                            selectedDate = pickedDate;
+                                          });
+                                      },
+                                      child: Container(
+                                          width: 300,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: Colors.grey),
+                                            borderRadius: BorderRadius.circular(5),
+                                            color: Colors.white, // set background color to white
+                                          ),
+                                          child: Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              '  ${DateFormat('d MMMM yyyy').format(selectedDate)}',
+                                              style: TextStyle(fontSize: 16,color: Colors.black), // format date as "day month year"
+                                            ),
+                                          )
+                                      ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  const Text("Visitor Name",style: TextStyle(fontSize: 14)),
+                                  const SizedBox(height: 2),
+                                  Container(
+                                      width: 300,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(5),
+                                        border: Border.all(color: Colors.grey),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 5),
+                                        child: TextFormField(
+                                          controller: name,
+                                          decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            suffixIcon: name.text.isNotEmpty
+                                                ? IconButton(
+                                              icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                              onPressed: () {
+                                                setState(() {
+                                                  name.clear();
+                                                });
+                                              },
+                                            )
+                                                : null,
+                                          ),
+                                          onChanged: (value) {
+                                            setState(() {});
+                                          },
+                                        ),
+                                      ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                          flex: 4,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children:  [
+                                              const Text("NRIC",style: TextStyle(fontSize: 14)),
+                                              const SizedBox(height: 2),
+                                              Container(
+                                                width: 300,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(5),
+                                                  border: Border.all(color: Colors.grey),
+                                                ),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(left: 5),
+                                                  child: TextFormField(
+                                                  controller: nric,
+                                                  decoration: InputDecoration(
+                                                    border: InputBorder.none,
+                                                    suffixIcon: nric.text.isNotEmpty
+                                                        ? IconButton(
+                                                      icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          nric.clear();
+                                                        });
+                                                      },
+                                                    )
+                                                        : null,
+                                                  ),
+                                                  onChanged: (value) {
+                                                    setState(() {});
+                                                  },
+                                                ),),
+                                              ),
+                                            ],
+                                          )),
+                                      Expanded(
+                                          flex: 1,
+                                          child: Container()),
+                                      Expanded(
+                                          flex: 4,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children:  [
+                                              const Text("Passport No.",style: TextStyle(fontSize: 14)),
+                                              const SizedBox(height: 2),
+                                              Container(
+                                                width: 300,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(5),
+                                                  border: Border.all(color: Colors.grey),
+                                                ),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(left: 5),
+                                                  child: TextFormField(
+                                                    controller: passport,
+                                                    decoration: InputDecoration(
+                                                      border: InputBorder.none,
+                                                      suffixIcon: passport.text.isNotEmpty
+                                                          ? IconButton(
+                                                        icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            passport.clear();
+                                                          });
+                                                        },
+                                                      )
+                                                          : null,
+                                                    ),
+                                                    onChanged: (value) {
+                                                      setState(() {});
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ))
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                          flex: 4,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children:  [
+                                              const Text("Mobile Phone No.",style: TextStyle(fontSize: 14)),
+                                              const SizedBox(height: 2),
+                                              Container(
+                                                width: 300,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(5),
+                                                  border: Border.all(color: Colors.grey),
+                                                ),
+                                                child: Padding(
+                                                    padding: const EdgeInsets.only(left: 5),
+                                                    child: TextFormField(
+                                                      controller: phone,
+                                                      decoration: InputDecoration(
+                                                        border: InputBorder.none,
+                                                        suffixIcon: phone.text.isNotEmpty
+                                                            ? IconButton(
+                                                          icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              phone.clear();
+                                                            });
+                                                          },
+                                                        )
+                                                            : null,
+                                                      ),
+                                                      onChanged: (value) {
+                                                        setState(() {});
+                                                      },
+                                                    ),
+                                                )
+                                              ),
+                                            ],
+                                          )),
+                                      Expanded(
+                                          flex: 1,
+                                          child: Container()),
+                                      Expanded(
+                                          flex: 4,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children:  [
+                                              const Text("WhatsApp",style: TextStyle(fontSize: 14)),
+                                              const SizedBox(height: 2),
+                                              Container(
+                                                width: 300,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(5),
+                                                  border: Border.all(color: Colors.grey),
+                                                ),
+                                                child: Padding(
+                                                    padding: const EdgeInsets.only(left: 5),
+                                                    child: TextFormField(
+                                                      controller: whatsapp,
+                                                      decoration: InputDecoration(
+                                                        border: InputBorder.none,
+                                                        suffixIcon: whatsapp.text.isNotEmpty
+                                                            ? IconButton(
+                                                          icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              whatsapp.clear();
+                                                            });
+                                                          },
+                                                        )
+                                                            : null,
+                                                      ),
+                                                      onChanged: (value) {
+                                                        setState(() {});
+                                                      },
+                                                    ),),
+                                              ),
+                                            ],
+                                          ))
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  const Text("Email Address",style: TextStyle(fontSize: 14)),
+                                  const SizedBox(height: 2),
+                                  Container(
+                                    width: 300,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(color: Colors.grey),
+                                    ),
+                                    child: Padding(
+                                        padding: const EdgeInsets.only(left: 5),
+                                        child: TextFormField(
+                                          controller: email,
+                                          decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            suffixIcon: email.text.isNotEmpty
+                                                ? IconButton(
+                                              icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                              onPressed: () {
+                                                setState(() {
+                                                  email.clear();
+                                                });
+                                              },
+                                            )
+                                                : null,
+                                          ),
+                                          onChanged: (value) {
+                                            setState(() {});
+                                          },
+                                        ),
+                                    )
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                          flex: 4,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children:  [
+                                              const Text("Vehicle Plate No.",style: TextStyle(fontSize: 14)),
+                                              const SizedBox(height: 2),
+                                              Container(
+                                                width: 300,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(5),
+                                                  border: Border.all(color: Colors.grey),
+                                                ),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(left: 5),
+                                                  child: TextFormField(
+                                                    controller: vehicleplate,
+                                                    decoration: InputDecoration(
+                                                      border: InputBorder.none,
+                                                      suffixIcon: vehicleplate.text.isNotEmpty
+                                                          ? IconButton(
+                                                        icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            vehicleplate.clear();
+                                                          });
+                                                        },
+                                                      )
+                                                          : null,
+                                                    ),
+                                                    onChanged: (value) {
+                                                      setState(() {});
+                                                    },
+                                                  ),
+                                                )
+                                              ),
+                                            ],
+                                          )),
+                                      Expanded(
+                                          flex: 1,
+                                          child: Container()),
+                                      Expanded(
+                                          flex: 4,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children:  [
+                                              const Text("Parking Lot",style: TextStyle(fontSize: 14)),
+                                              const SizedBox(height: 2),
+                                              Container(
+                                                width: 250,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(5),
+                                                  border: Border.all(color: Colors.grey),
+                                                ),
+                                                child: DropdownButtonFormField(
+                                                  decoration: const InputDecoration(
+                                                      border: InputBorder.none,
+                                                  ),
+                                                  isExpanded: true,
+                                                  value: parkinglot.first,
+                                                  items: parkinglot.map((value) => DropdownMenuItem(
+                                                    child: Text('   $value',),
+                                                    value: value,
+                                                  )).toList(),
+                                                  onChanged: (String? value) {
+                                                    setState(() {
+                                                      selectedparkinglot = value;
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ))
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                          flex: 4,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children:  [
+                                              const Text("Visitor Type",style: TextStyle(fontSize: 14)),
+                                              const SizedBox(height: 2),
+                                              Container(
+                                                  width: 250,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius: BorderRadius.circular(5),
+                                                    border: Border.all(color: Colors.grey),
+                                                  ),
+                                                  child: DropdownButtonFormField(
+                                                    decoration: const InputDecoration(
+                                                        border: InputBorder.none,
+                                                    ),
+                                                    isExpanded: true,
+                                                    value: type.first,
+                                                    items: type.map((value) => DropdownMenuItem(
+                                                      child: Text('   $value',),
+                                                      value: value,
+                                                    )).toList(),
+                                                    onChanged: (String? value) {
+                                                      setState(() {
+                                                        selectedtype = value;
+                                                      });
+                                                    },
+                                                  ),
+                                              ),
+                                            ],
+                                          )),
+                                      Expanded(
+                                          flex: 1,
+                                          child: Container()),
+                                      Expanded(
+                                          flex: 4,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children:  [
+                                              const Text("Visitor Pass Validity",style: TextStyle(fontSize: 14)),
+                                              const SizedBox(height: 2),
+                                              Container(
+                                                width: 250,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(5),
+                                                  border: Border.all(color: Colors.grey),
+                                                ),
+                                                child: DropdownButtonFormField(
+                                                  decoration: const InputDecoration(
+                                                    border: InputBorder.none,
+                                                  ),
+                                                  isExpanded: true,
+                                                  value: type.first,
+                                                  items: type.map((value) => DropdownMenuItem(
+                                                    child: Text('   $value',),
+                                                    value: value,
+                                                  )).toList(),
+                                                  onChanged: (String? value) {
+                                                    setState(() {
+                                                      selectedtype = value;
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ))
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                          ],
+                        )
+                      ),
+                    ),
+                  )
+              ),
+            );
+          }
+      )
+  );
+}
 
   @override
   void initState() {
@@ -35,14 +569,20 @@ class _VisitorState extends State<Visitor> {
               ],
             ),
             actions: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.search, color: Colors.black))
+              IconButton(onPressed: () {}, icon: const Icon(Icons.search, color: Colors.black),),
+              IconButton(onPressed: showAddContentDialog, icon: const Icon(Icons.add,color: Colors.black,))
             ],
           ),
-          body: Column(
+          body: const TabBarView(
             children: [
-              const Text('Visitors')
+              Center(
+                child: Text('Testing'),
+              ),
+              Center(
+                child: Text('Testing'),
+              )
             ],
-          )
+          ),
       )
   );
 }
