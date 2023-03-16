@@ -78,4 +78,7 @@ dependencies {
 
     // 添加其他依賴
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+//Peter added for in app notification
+    implementation platform('com.google.firebase:firebase-bom:28.4.2')
 }

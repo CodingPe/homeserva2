@@ -5,18 +5,35 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:firebase_messaging/firebase_messaging.dart'; //push notification必定需要安裝的package //push notification must be installed package
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_in_app_messaging/firebase_in_app_messaging.dart';
 import 'dart:convert';
 import 'firebase_options.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
 }
 
-void main() async {
+//? flutter_local_notifications
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+  'high_importance_channel', // id
+  'High Importance Notifications', // title
+  //'This channel is used for important notifications.', // description
+  importance: Importance.high,
+  playSound: true,
+);
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+//? flutter_local_notifications
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   await Hive.initFlutter();
   await Hive.openBox('TokenBox');
   runApp(const MyApp());
@@ -58,10 +75,29 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   late final FirebaseMessaging _messaging;
 
-  void requestAndRegisterNotification() async {
+  Future<void> requestAndRegisterNotification() async {
     await Firebase.initializeApp();
     _messaging = FirebaseMessaging.instance;
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+    await _messaging.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+
+    //? flutter_local_notifications by Peter.
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
+
+    //? foreground notification by Peter.
+    await _messaging.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
 
     NotificationSettings settings = await _messaging.requestPermission(
         alert: true, badge: true, provisional: true, sound: true);
@@ -82,6 +118,23 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     requestAndRegisterNotification();
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+                android: AndroidNotificationDetails(
+              channel.id,
+              channel.name,
+              //channel.description,
+              icon: 'launch_background',
+            )));
+      }
+    });
   }
 
   @override
