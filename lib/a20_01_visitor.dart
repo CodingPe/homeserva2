@@ -40,9 +40,32 @@ class _VisitorState extends State<Visitor> {
     'Long Term',
     'Delivery Lorry'
   ];
+  final List<String> validity = <String>[
+    '--Select--',
+    '15 mins',
+    '30 mins',
+    '1 hour',
+    '2 hour',
+    '3 hour',
+    'Until end-time of today',
+    'Until end-time of tomorrow',
+    'Until end of the day',
+    'Until end of tomorrow',
+    'Long Term (custom start and end date-time'
+  ];
+  final List<String> times = List.generate(288, (index) {
+    final hour = index ~/ 12;
+    final minute = (index % 12) * 5;
+    final time = TimeOfDay(hour: hour, minute: minute);
+    final formattedTime = DateFormat.jm().format(DateTime(2000, 1, 1, time.hour, time.minute));
+    return formattedTime;
+  });
+  TextEditingController remark = TextEditingController();
 
-String? selectedparkinglot;
+  String? selectedparkinglot;
 String? selectedtype;
+String? selectedvalidity;
+String? selectedtimes;
 
 Future getVisitorsData() async {
   var url = 'https://peterapi.vyrox.com/viewvisitorsdata.php';
@@ -98,7 +121,7 @@ void showAddContentDialog() {
                             const SizedBox(height: 7),
                             Container(
                               padding: EdgeInsets.all(10),
-                              height: 600,
+                              height: 650,
                               width: 320,
                               color: const Color.fromARGB(255, 248, 248, 248),
                               child: Column(
@@ -511,14 +534,14 @@ void showAddContentDialog() {
                                                     border: InputBorder.none,
                                                   ),
                                                   isExpanded: true,
-                                                  value: type.first,
-                                                  items: type.map((value) => DropdownMenuItem(
+                                                  value: validity.first,
+                                                  items: validity.map((value) => DropdownMenuItem(
                                                     child: Text('   $value',),
                                                     value: value,
                                                   )).toList(),
                                                   onChanged: (String? value) {
                                                     setState(() {
-                                                      selectedtype = value;
+                                                      selectedvalidity = value;
                                                     });
                                                   },
                                                 ),
@@ -527,10 +550,125 @@ void showAddContentDialog() {
                                           ))
                                     ],
                                   ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                          flex: 4,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children:  [
+                                              const Text("Valid From",style: TextStyle(fontSize: 14)),
+                                              const SizedBox(height: 2),
+                                              Container(
+                                                width: 250,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(5),
+                                                  border: Border.all(color: Colors.grey),
+                                                ),
+                                                child: DropdownButtonFormField<String>(
+                                                  decoration: const InputDecoration(
+                                                    border: InputBorder.none,
+                                                  ),
+                                                  isExpanded: true,
+                                                  value: selectedtimes,
+                                                  items: times.map((time) => DropdownMenuItem(value: time, child: Text('  $time'))).toList(),
+                                                  onChanged: (value) => setState(() => selectedtimes = value),
+                                                )
+                                              ),
+                                            ],
+                                          )),
+                                      Expanded(
+                                          flex: 1,
+                                          child: Container()),
+                                      Expanded(
+                                          flex: 4,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [],
+                                          ))
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 17),
+                            const Text('QR Key',style: TextStyle(fontSize: 14)),
+                            const SizedBox(height: 7),
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              height: 150,
+                              width: 320,
+                              color: const Color.fromARGB(255, 248, 248, 248),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 17),
+                            const Text('Remark',style: TextStyle(fontSize: 14)),
+                            const SizedBox(height: 7),
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              height: 70,
+                              width: 320,
+                              color: const Color.fromARGB(255, 248, 248, 248),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 300,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(color: Colors.grey),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 5),
+                                      child: TextFormField(
+                                        controller: remark,
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          suffixIcon: remark.text.isNotEmpty
+                                              ? IconButton(
+                                            icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                            onPressed: () {
+                                              setState(() {
+                                                remark.clear();
+                                              });
+                                            },
+                                          )
+                                              : null,
+                                        ),
+                                        onChanged: (value) {
+                                          setState(() {});
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                          TextButton(
+                        onPressed: (){},
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          primary: Colors.white,
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            side: const BorderSide(color: Colors.grey),
+                          ),
+                        ),
+                           child: const Text(
+                            'Add',
+                            style: TextStyle(fontSize: 16),
+                         ),
+                       )
                           ],
                         )
                       ),
