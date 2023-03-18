@@ -159,17 +159,16 @@ Route<Object?> loginDialogBuilder(
 //TODO: Disbale button if email and password is null.
 Widget bigButton(name, action) {
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-    child: SizedBox(
-        height: 52,
-        width: double.infinity,
-        child: Center(
-            child: CupertinoButton.filled(
-          minSize: 400,
-          onPressed: action,
-          child: Text(name),
-        ))),
-  );
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+      child: SizedBox(
+          height: 52,
+          width: double.infinity,
+          child: Center(
+              child: CupertinoButton.filled(
+            minSize: 400,
+            onPressed: action,
+            child: Text(name),
+          ))));
 }
 
 class LoginInput extends StatefulWidget {
@@ -233,17 +232,14 @@ class _LoginInputState extends State<LoginInput> {
                     widget.inputController.clear();
                   },
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.clear,
-                          size: _isTextFieldEmpty ? 0 : 18,
-                          color: primaryColor),
-                      const SizedBox(
-                        width: 8,
-                      )
-                    ],
-                  )),
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.clear,
+                            size: _isTextFieldEmpty ? 0 : 18,
+                            color: primaryColor),
+                        const SizedBox(width: 8),
+                      ])),
               filled: true,
               fillColor: accentColor,
               hintText: 'enquiry@vyrox.com',
