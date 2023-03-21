@@ -8,6 +8,58 @@ class Laundry extends StatefulWidget {
 }
 
 class _LaundryState extends State<Laundry> {
+
+  void showScanQRDialog() {
+    showDialog(
+        context: context,
+        builder: (ctx) => StatefulBuilder(
+            builder: (context,setState){
+              return Center(
+                child: Container(
+                  constraints: const BoxConstraints(
+                      minWidth: 500
+                  ),
+                  margin: const EdgeInsets.all(20),
+                  child: Card(
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      color: Colors.grey[200],
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text('Scan QR Code',style: TextStyle(fontSize: 20)),
+                          const SizedBox(height: 20),
+                          const Text('Please scan the QR Code of the amenity and make payment to start using.'),
+                          const SizedBox(height: 15),
+                          TextButton(
+                            onPressed: (){
+                              Navigator.pop(context);
+                            },
+                            style: TextButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                              primary: Colors.white,
+                              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            child: const Text(
+                              'Ok',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+
+                ),
+              );
+            }
+        )
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -40,7 +92,7 @@ class _LaundryState extends State<Laundry> {
           ],
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.add, color: Colors.black))
+          IconButton(onPressed: showScanQRDialog, icon: const Icon(Icons.add, color: Colors.black))
         ],
       ),
       body: TabBarView(

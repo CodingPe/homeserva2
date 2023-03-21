@@ -66,6 +66,7 @@ class _VisitorState extends State<Visitor> {
 String? selectedtype;
 String? selectedvalidity;
 String? selectedtimes;
+String property = 'D-5-19';
 
 Future getVisitorsData() async {
   var url = 'https://peterapi.vyrox.com/viewvisitorsdata.php';
@@ -77,9 +78,19 @@ Future<void> _addVisitor() async {
   const url = 'https://peterapi.vyrox.com/addvisitors.php';
   try {
     final response = await http.post(Uri.parse(url), body: {
+      'propery': property,
+      'date': selectedDate!,
+      'name': name.text,
+      'nric': nric.text,
+      'passport': passport.text,
+      'mobilephone': phone.text,
+      'email': email.text,
+      'vehicleplate': vehicleplate.text,
       'parkinglot': selectedparkinglot!,
-      'title': name.text,
-      'description': nric.text,
+      'type': selectedtype!,
+      'validity': selectedvalidity!,
+      'validfrom': selectedtimes!,
+      'remark': remark.text,
     });
     if (response.statusCode == 200) {
       name.clear();
@@ -654,11 +665,14 @@ void showAddContentDialog() {
                             ),
                             const SizedBox(height: 20),
                           TextButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          _addVisitor;
+                          Navigator.pop(context);
+                        },
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.blue,
                           primary: Colors.white,
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
                             side: const BorderSide(color: Colors.grey),
@@ -711,10 +725,74 @@ void showAddContentDialog() {
               IconButton(onPressed: showAddContentDialog, icon: const Icon(Icons.add,color: Colors.black,))
             ],
           ),
-          body: const TabBarView(
+          body: TabBarView(
             children: [
-              Center(
-                child: Text('Testing'),
+              Scrollbar(
+                child: FutureBuilder(
+                  future: getVisitorsData(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) print(snapshot.error);
+                    return snapshot.hasData
+                        ? ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          List list = snapshot.data;
+                          return Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: GestureDetector(
+                                  onTap: () {},
+                                  child: Row(children: [
+                                    ClipRRect(
+                                        borderRadius:
+                                        BorderRadius.circular(12.0),
+                                        child: Image.network(
+                                            list[index]['Photo'],
+                                            width: 70,
+                                            height: 70,
+                                            fit: BoxFit.cover)),
+                                    const SizedBox(width: 16),
+                                    Expanded(
+                                        child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                list[index]['Name'],
+                                                style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20),
+                                              ),
+                                              const SizedBox(height: 10),
+                                              Text(
+                                                list[index]['Phone'],
+                                                style: const TextStyle(
+                                                    fontWeight: FontWeight.w200,
+                                                    color: Color.fromARGB(
+                                                        255, 66, 72, 82),
+                                                    fontSize: 13),
+                                              ),
+                                              Text(
+                                                list[index]['ValidFrom'],
+                                                style: const TextStyle(
+                                                    fontWeight: FontWeight.w200,
+                                                    color: Color.fromARGB(
+                                                        255, 66, 72, 82),
+                                                    fontSize: 13),
+                                              )
+                                            ]))
+                                  ])));
+                        })
+                        : const Center(
+                      child: Text(
+                        "No announcements yet",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w200,
+                          color: Color.fromARGB(255, 66, 72, 82),
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
               Center(
                 child: Text('Testing'),
