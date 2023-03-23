@@ -103,7 +103,7 @@ Future<void> _addVisitor() async {
   }
 }
 
-void showAddContentDialog() {
+void showAddVisitorDialog() {
   showDialog(
       context: context,
       builder: (ctx) => StatefulBuilder(
@@ -722,7 +722,7 @@ void showAddContentDialog() {
             ),
             actions: [
               IconButton(onPressed: () {}, icon: const Icon(Icons.search, color: Colors.black),),
-              IconButton(onPressed: showAddContentDialog, icon: const Icon(Icons.add,color: Colors.black,))
+              IconButton(onPressed: showAddVisitorDialog, icon: const Icon(Icons.add,color: Colors.black,))
             ],
           ),
           body: TabBarView(
@@ -784,7 +784,7 @@ void showAddContentDialog() {
                         })
                         : const Center(
                       child: Text(
-                        "No announcements yet",
+                        "No visitor yet",
                         style: TextStyle(
                           fontWeight: FontWeight.w200,
                           color: Color.fromARGB(255, 66, 72, 82),
@@ -794,7 +794,7 @@ void showAddContentDialog() {
                   },
                 ),
               ),
-              Center(
+              const Center(
                 child: Text('Testing'),
               )
             ],

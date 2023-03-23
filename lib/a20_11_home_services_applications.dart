@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:grouped_buttons/grouped_buttons.dart';
 
 class HomeServicesApplications extends StatefulWidget {
   const HomeServicesApplications({Key? key}) : super(key: key);
@@ -28,20 +29,6 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
     'Disassembly/Dismantling',
     'Other',
   ];
-
-  List<String> items = [
-    "Item 1",
-    "Item 2",
-    "Item 3",
-    "Item 4",
-    "Item 5",
-    "Item 6",
-    "Item 7",
-    "Item 8",
-    "Item 9",
-    "Item 10"
-  ];
-  List<bool> _selections = List.generate(10, (_) => false);
 
   String? selectedSpace;
   String? selectedService;
@@ -80,6 +67,36 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
                                     const SizedBox(height: 10),
                                     const Text("Space Involved",style: TextStyle(fontSize: 14)),
                                     const SizedBox(height: 2),
+                                    Row(
+                                      children: [
+                                        CheckboxGroup(
+                                          labels: const <String>[
+                                            "Sunday",
+                                            "Monday",
+                                            "Tuesday",
+                                            "Wednesday",
+                                            "Thursday",
+                                            "Friday",
+                                            "Saturday",
+                                          ],
+                                          onChange: (bool isChecked, String label, int index) => print("isChecked: $isChecked   label: $label  index: $index"),
+                                          onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
+                                        ),
+                                        CheckboxGroup(
+                                          labels: const <String>[
+                                            "Sunday",
+                                            "Monday",
+                                            "Tuesday",
+                                            "Wednesday",
+                                            "Thursday",
+                                            "Friday",
+                                            "Saturday",
+                                          ],
+                                          onChange: (bool isChecked, String label, int index) => print("isChecked: $isChecked   label: $label  index: $index"),
+                                          onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
+                                        ),
+                                      ],
+                                    ),
                                     const SizedBox(height: 10),
                                     const Text("Service",style: TextStyle(fontSize: 14)),
                                     const SizedBox(height: 2),
@@ -346,6 +363,8 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
                                       ],
                                     ),
                                     const SizedBox(height: 10),
+                                    const Text("Service Company Name",style: TextStyle(fontSize: 14)),
+                                    const SizedBox(height: 2),
                                     Container(
                                       width: 300,
                                       decoration: BoxDecoration(
