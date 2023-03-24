@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class Visitor extends StatefulWidget {
@@ -15,13 +14,13 @@ class _VisitorState extends State<Visitor> {
   final _formKey = GlobalKey<FormState>();
   DateTime selectedDate = DateTime.now();
   TextEditingController name = TextEditingController();
-  TextEditingController nric = TextEditingController();
+  TextEditingController nRIC = TextEditingController();
   TextEditingController passport = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController whatsapp = TextEditingController();
   TextEditingController email = TextEditingController();
-  TextEditingController vehicleplate = TextEditingController();
-  final List<String> parkinglot = <String>[
+  TextEditingController vehiclePlate = TextEditingController();
+  final List<String> parkingLot = <String>[
     'None',
     'Visitor Parking',
     'A-Level G-100',
@@ -43,7 +42,7 @@ class _VisitorState extends State<Visitor> {
   final List<String> validity = <String>[
     '--Select--',
     '15 mins',
-    '30 mins',
+    '30 Mins',
     '1 hour',
     '2 hour',
     '3 hour',
@@ -62,11 +61,11 @@ class _VisitorState extends State<Visitor> {
   });
   TextEditingController remark = TextEditingController();
 
-  String? selectedparkinglot;
-String? selectedtype;
-String? selectedvalidity;
-String? selectedtimes;
-String property = 'D-5-19';
+  String? selectedParkingLot;
+  String? selectedType;
+  String? selectedValidity;
+  String? selectedTimes;
+  String property = 'D-5-19';
 
 Future getVisitorsData() async {
   var url = 'https://peterapi.vyrox.com/viewvisitorsdata.php';
@@ -78,23 +77,23 @@ Future<void> _addVisitor() async {
   const url = 'https://peterapi.vyrox.com/addvisitors.php';
   try {
     final response = await http.post(Uri.parse(url), body: {
-      'propery': property,
+      'property': property,
       'date': selectedDate!,
       'name': name.text,
-      'nric': nric.text,
+      'nRIC': nRIC.text,
       'passport': passport.text,
-      'mobilephone': phone.text,
+      'mobilePhone': phone.text,
       'email': email.text,
-      'vehicleplate': vehicleplate.text,
-      'parkinglot': selectedparkinglot!,
-      'type': selectedtype!,
-      'validity': selectedvalidity!,
-      'validfrom': selectedtimes!,
+      'vehiclePlate': vehiclePlate.text,
+      'parkingLot': selectedParkingLot!,
+      'type': selectedType!,
+      'validity': selectedValidity!,
+      'validFrom': selectedTimes!,
       'remark': remark.text,
     });
     if (response.statusCode == 200) {
       name.clear();
-      nric.clear();
+      nRIC.clear();
     } else {
       throw Exception('Failed to add visitor');
     }
@@ -131,7 +130,7 @@ void showAddVisitorDialog() {
                             const Text('D-5-19',style: TextStyle(fontSize: 14)),
                             const SizedBox(height: 7),
                             Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               height: 650,
                               width: 320,
                               color: const Color.fromARGB(255, 248, 248, 248),
@@ -166,7 +165,7 @@ void showAddVisitorDialog() {
                                             alignment: Alignment.centerLeft,
                                             child: Text(
                                               '  ${DateFormat('d MMMM yyyy').format(selectedDate)}',
-                                              style: TextStyle(fontSize: 16,color: Colors.black), // format date as "day month year"
+                                              style: const TextStyle(fontSize: 16,color: Colors.black), // format date as "day month year"
                                             ),
                                           )
                                       ),
@@ -224,15 +223,15 @@ void showAddVisitorDialog() {
                                                 child: Padding(
                                                   padding: const EdgeInsets.only(left: 5),
                                                   child: TextFormField(
-                                                  controller: nric,
+                                                  controller: nRIC,
                                                   decoration: InputDecoration(
                                                     border: InputBorder.none,
-                                                    suffixIcon: nric.text.isNotEmpty
+                                                    suffixIcon: nRIC.text.isNotEmpty
                                                         ? IconButton(
                                                       icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
                                                       onPressed: () {
                                                         setState(() {
-                                                          nric.clear();
+                                                          nRIC.clear();
                                                         });
                                                       },
                                                     )
@@ -427,15 +426,15 @@ void showAddVisitorDialog() {
                                                 child: Padding(
                                                   padding: const EdgeInsets.only(left: 5),
                                                   child: TextFormField(
-                                                    controller: vehicleplate,
+                                                    controller: vehiclePlate,
                                                     decoration: InputDecoration(
                                                       border: InputBorder.none,
-                                                      suffixIcon: vehicleplate.text.isNotEmpty
+                                                      suffixIcon: vehiclePlate.text.isNotEmpty
                                                           ? IconButton(
                                                         icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
                                                         onPressed: () {
                                                           setState(() {
-                                                            vehicleplate.clear();
+                                                            vehiclePlate.clear();
                                                           });
                                                         },
                                                       )
@@ -471,14 +470,14 @@ void showAddVisitorDialog() {
                                                       border: InputBorder.none,
                                                   ),
                                                   isExpanded: true,
-                                                  value: parkinglot.first,
-                                                  items: parkinglot.map((value) => DropdownMenuItem(
-                                                    child: Text('   $value',),
+                                                  value: parkingLot.first,
+                                                  items: parkingLot.map((value) => DropdownMenuItem(
                                                     value: value,
+                                                    child: Text('   $value',),
                                                   )).toList(),
                                                   onChanged: (String? value) {
                                                     setState(() {
-                                                      selectedparkinglot = value;
+                                                      selectedParkingLot = value;
                                                     });
                                                   },
                                                 ),
@@ -511,12 +510,12 @@ void showAddVisitorDialog() {
                                                     isExpanded: true,
                                                     value: type.first,
                                                     items: type.map((value) => DropdownMenuItem(
-                                                      child: Text('   $value',),
                                                       value: value,
+                                                      child: Text('   $value',),
                                                     )).toList(),
                                                     onChanged: (String? value) {
                                                       setState(() {
-                                                        selectedtype = value;
+                                                        selectedType = value;
                                                       });
                                                     },
                                                   ),
@@ -547,12 +546,12 @@ void showAddVisitorDialog() {
                                                   isExpanded: true,
                                                   value: validity.first,
                                                   items: validity.map((value) => DropdownMenuItem(
-                                                    child: Text('   $value',),
                                                     value: value,
+                                                    child: Text('   $value',),
                                                   )).toList(),
                                                   onChanged: (String? value) {
                                                     setState(() {
-                                                      selectedvalidity = value;
+                                                      selectedValidity = value;
                                                     });
                                                   },
                                                 ),
@@ -583,9 +582,9 @@ void showAddVisitorDialog() {
                                                     border: InputBorder.none,
                                                   ),
                                                   isExpanded: true,
-                                                  value: selectedtimes,
+                                                  value: selectedTimes,
                                                   items: times.map((time) => DropdownMenuItem(value: time, child: Text('  $time'))).toList(),
-                                                  onChanged: (value) => setState(() => selectedtimes = value),
+                                                  onChanged: (value) => setState(() => selectedTimes = value),
                                                 )
                                               ),
                                             ],
@@ -597,7 +596,9 @@ void showAddVisitorDialog() {
                                           flex: 4,
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [],
+                                            children: const [
+
+                                            ],
                                           ))
                                     ],
                                   ),
@@ -608,13 +609,13 @@ void showAddVisitorDialog() {
                             const Text('QR Key',style: TextStyle(fontSize: 14)),
                             const SizedBox(height: 7),
                             Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               height: 150,
                               width: 320,
                               color: const Color.fromARGB(255, 248, 248, 248),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
+                                children: const [
 
                                 ],
                               ),

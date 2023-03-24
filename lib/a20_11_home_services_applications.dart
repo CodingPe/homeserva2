@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:grouped_buttons/grouped_buttons.dart';
+import 'package:group_button/group_button.dart';
 
 class HomeServicesApplications extends StatefulWidget {
   const HomeServicesApplications({Key? key}) : super(key: key);
@@ -19,7 +19,6 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
   TextEditingController vehicleNumber = TextEditingController();
   TextEditingController remark = TextEditingController();
   final List<String> service = <String>[
-
     'Move-In',
     'Move-Out',
     'Repair/Maintenance',
@@ -29,6 +28,9 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
     'Disassembly/Dismantling',
     'Other',
   ];
+
+  List<String> space = ['Item 1', 'Item 2', 'Item 3'];
+  List<bool> selected = [false, false, false];
 
   String? selectedSpace;
   String? selectedService;
@@ -67,36 +69,6 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
                                     const SizedBox(height: 10),
                                     const Text("Space Involved",style: TextStyle(fontSize: 14)),
                                     const SizedBox(height: 2),
-                                    Row(
-                                      children: [
-                                        CheckboxGroup(
-                                          labels: const <String>[
-                                            "Sunday",
-                                            "Monday",
-                                            "Tuesday",
-                                            "Wednesday",
-                                            "Thursday",
-                                            "Friday",
-                                            "Saturday",
-                                          ],
-                                          onChange: (bool isChecked, String label, int index) => print("isChecked: $isChecked   label: $label  index: $index"),
-                                          onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                        ),
-                                        CheckboxGroup(
-                                          labels: const <String>[
-                                            "Sunday",
-                                            "Monday",
-                                            "Tuesday",
-                                            "Wednesday",
-                                            "Thursday",
-                                            "Friday",
-                                            "Saturday",
-                                          ],
-                                          onChange: (bool isChecked, String label, int index) => print("isChecked: $isChecked   label: $label  index: $index"),
-                                          onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                        ),
-                                      ],
-                                    ),
                                     const SizedBox(height: 10),
                                     const Text("Service",style: TextStyle(fontSize: 14)),
                                     const SizedBox(height: 2),
@@ -114,8 +86,8 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
                                         isExpanded: true,
                                         value: service.first,
                                         items: service.map((value) => DropdownMenuItem(
-                                          child: Text('   $value',),
                                           value: value,
+                                          child: Text('   $value',),
                                         )).toList(),
                                         onChanged: (String? value) {
                                           setState(() {
@@ -159,7 +131,7 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
                                                         alignment: Alignment.centerLeft,
                                                         child: Text(
                                                           '  ${DateFormat('d MMMM yyyy').format(selectedStartDate)}',
-                                                          style: TextStyle(fontSize: 16,color: Colors.black), // format date as "day month year"
+                                                          style: const TextStyle(fontSize: 16,color: Colors.black), // format date as "day month year"
                                                         ),
                                                       )
                                                   ),
@@ -201,7 +173,7 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
                                                         alignment: Alignment.centerLeft,
                                                         child: Text(
                                                           '  ${DateFormat('d MMMM yyyy').format(selectedEndDate)}',
-                                                          style: TextStyle(fontSize: 16,color: Colors.black), // format date as "day month year"
+                                                          style: const TextStyle(fontSize: 16,color: Colors.black), // format date as "day month year"
                                                         ),
                                                       )
                                                   ),
@@ -460,7 +432,7 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
       ),
       body: Center(
         child: Column(
-          children: [
+          children: const [
 
           ],
         ),

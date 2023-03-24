@@ -95,8 +95,8 @@ class _SubUserState extends State<SubUser> {
                                     isExpanded: true,
                                     value: accountType.first,
                                     items: accountType.map((value) => DropdownMenuItem(
-                                      child: Text('   $value',),
                                       value: value,
+                                      child: Text('   $value',),
                                     )).toList(),
                                     onChanged: (String? value) {
                                       setState(() {
@@ -1010,7 +1010,6 @@ class _SubUserState extends State<SubUser> {
         )
     );
   }
-
 
   @override
   void initState() {
