@@ -102,10 +102,7 @@ class LoginUserState extends State<LoginUser> {
                       child: Text('HOMESERVA',
                           style: TextStyle(
                               fontSize: 38.8, fontWeight: FontWeight.bold))),
-                  const SizedBox(
-                    height: 20,
-                    width: double.maxFinite,
-                  ),
+                  const SizedBox(height: 20, width: double.maxFinite),
                   //TODO: beautify UI
                   //TODO: Email Vaildate, null validate, hint
                   Container(
