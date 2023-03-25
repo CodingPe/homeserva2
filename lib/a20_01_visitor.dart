@@ -63,7 +63,7 @@ class _VisitorState extends State<Visitor> {
 
   String? selectedParkingLot;
   String? selectedType;
-  String? selectedValidity;
+  String? selectedValidity = '--Select--';
   String? selectedTimes;
   String property = 'D-5-19';
 
@@ -596,10 +596,70 @@ void showAddVisitorDialog() {
                                           flex: 4,
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: const [
-
+                                            children: [
+                                              if (selectedValidity != '--Select--' && selectedTimes != null)
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    const Text("Valid Until", style: TextStyle(fontSize: 14)),
+                                                    const SizedBox(height: 2),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 6,
+                                                          child: Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Container(
+                                                                width: 250,
+                                                                height: 45,
+                                                                decoration: BoxDecoration(
+                                                                  color: const Color.fromARGB(255, 221, 221, 221),
+                                                                  border: Border.all(color: Colors.grey),
+                                                                ),
+                                                                child: SingleChildScrollView(
+                                                                  scrollDirection: Axis.horizontal,
+                                                                  child: Center(
+                                                                      child:
+                                                                      Text(
+                                                                        '  ${DateFormat('d MMMM yyyy').format(selectedDate)}',
+                                                                        style: const TextStyle(fontSize: 14,color: Color.fromARGB(255, 140, 140, 140)), // format date as "day month year"
+                                                                      ),),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Expanded(flex: 1, child: Container()),
+                                                        Expanded(
+                                                          flex: 6,
+                                                          child: Container(
+                                                            width: 250,
+                                                            height: 45,
+                                                            decoration: BoxDecoration(
+                                                              color: const Color.fromARGB(255, 221, 221, 221),
+                                                              border: Border.all(color: Colors.grey),
+                                                            ),
+                                                            child: const SingleChildScrollView(
+                                                              scrollDirection: Axis.horizontal,
+                                                              child: Center(
+                                                                child: Text(
+                                                                  'data',
+                                                                  style: TextStyle(fontSize: 14,color: Color.fromARGB(255, 140, 140, 140)),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                )
+                                              else
+                                                Container(),
                                             ],
-                                          ))
+                                          )// Add this closing bracket
+                                      )
                                     ],
                                   ),
                                 ],

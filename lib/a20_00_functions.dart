@@ -33,126 +33,123 @@ class Functions extends StatelessWidget {
               ),
               const SizedBox(width: 10)
             ]),
-        body: Container(
-          margin: const EdgeInsets.only(top: 20),
-          child: Scrollbar(
-              child: GridView.count(
-                  childAspectRatio: 0.8,
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 8,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  physics: const BouncingScrollPhysics(),
-                  crossAxisSpacing: 8,
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  children: [
-                    _buildGridViewItem('assets/icons/visitors.png', 'Visitor',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Visitor()))),
-                    _buildGridViewItem(
-                        'assets/icons/facility bookings.png', 'Facility\nBookings',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const FacilityBookings()))),
-                    _buildGridViewItem('assets/icons/complaints.png', 'Complaints',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Complaints()))),
-                    _buildGridViewItem('assets/icons/suggestions.png', 'Suggestions',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Suggestions()))),
-                    _buildGridViewItem(
-                        'assets/icons/management account.png', 'Management\nAccount',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ManagementAccount()))),
-                    _buildGridViewItem(
-                        'assets/icons/meeting minutes.png', 'Meeting\nMinutes',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MeetingMinutes()))),
-                    _buildGridViewItem(
-                        'assets/icons/useful contacts.png', 'Emergency\nNumbers',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const EmergencyNumbers()))),
-                    _buildGridViewItem(
-                        'assets/icons/emergency sos.png', 'Emergency\nSOS',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const EmergencySOS()))),
-                    _buildGridViewItem(
-                        'assets/icons/sub-user accounts.png', 'Sub-User\nAccounts',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SubUser()))),
-                    _buildGridViewItem(
-                        'assets/icons/access%20card.png', 'Access\nCards',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const AccessCards()))),
-                    _buildGridViewItem('assets/icons/home services applications.png',
-                        'Home Services\nApplications',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                const HomeServicesApplications()))),
-                    _buildGridViewItem('assets/icons/marketplace.png', 'Marketplace',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Marketplace()))),
-                    _buildGridViewItem(
-                        'assets/icons/concierge services.png', 'Concierge\nServices',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ConciergeServices()))),
-                    _buildGridViewItem('assets/icons/tukangman.png', 'TukangMan',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const TukangMan()))),
-                    _buildGridViewItem('assets/icons/laundry.png', 'Laundry',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Laundry()))),
-                    _buildGridViewItem('assets/icons/qr keys.png', 'QR-Keys',
-                        onTap: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const QRKeys()))),
-                    _buildGridViewItem(
-                        'assets/icons/tenant accounts.png', 'Tenant\nAccounts',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const TenantAccounts()))),
-                    _buildGridViewItem('assets/icons/committee.png', 'Committee',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Committee()))),
-                    _buildGridViewItem(
-                        'assets/icons/delivery lockers.png', 'Delivery\nLockers',
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const DeliveryLockers())))
-                  ])
-          ),
+        body: Scrollbar(
+            child: GridView.count(
+                childAspectRatio: 0.8,
+                crossAxisCount: 3,
+                mainAxisSpacing: 8,
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                physics: const BouncingScrollPhysics(),
+                crossAxisSpacing: 8,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                children: [
+                  _buildGridViewItem('assets/icons/visitors.png', 'Visitor',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Visitor()))),
+                  _buildGridViewItem(
+                      'assets/icons/facility bookings.png', 'Facility\nBookings',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const FacilityBookings()))),
+                  _buildGridViewItem('assets/icons/complaints.png', 'Complaints',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Complaints()))),
+                  _buildGridViewItem('assets/icons/suggestions.png', 'Suggestions',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Suggestions()))),
+                  _buildGridViewItem(
+                      'assets/icons/management account.png', 'Management\nAccount',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ManagementAccount()))),
+                  _buildGridViewItem(
+                      'assets/icons/meeting minutes.png', 'Meeting\nMinutes',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MeetingMinutes()))),
+                  _buildGridViewItem(
+                      'assets/icons/useful contacts.png', 'Emergency\nNumbers',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const EmergencyNumbers()))),
+                  _buildGridViewItem(
+                      'assets/icons/emergency sos.png', 'Emergency\nSOS',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const EmergencySOS()))),
+                  _buildGridViewItem(
+                      'assets/icons/sub-user accounts.png', 'Sub-User\nAccounts',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SubUser()))),
+                  _buildGridViewItem(
+                      'assets/icons/access%20card.png', 'Access\nCards',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AccessCards()))),
+                  _buildGridViewItem('assets/icons/home services applications.png',
+                      'Home Services\nApplications',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                              const HomeServicesApplications()))),
+                  _buildGridViewItem('assets/icons/marketplace.png', 'Marketplace',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Marketplace()))),
+                  _buildGridViewItem(
+                      'assets/icons/concierge services.png', 'Concierge\nServices',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ConciergeServices()))),
+                  _buildGridViewItem('assets/icons/tukangman.png', 'TukangMan',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const TukangMan()))),
+                  _buildGridViewItem('assets/icons/laundry.png', 'Laundry',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Laundry()))),
+                  _buildGridViewItem('assets/icons/qr keys.png', 'QR-Keys',
+                      onTap: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const QRKeys()))),
+                  _buildGridViewItem(
+                      'assets/icons/tenant accounts.png', 'Tenant\nAccounts',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const TenantAccounts()))),
+                  _buildGridViewItem('assets/icons/committee.png', 'Committee',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Committee()))),
+                  _buildGridViewItem(
+                      'assets/icons/delivery lockers.png', 'Delivery\nLockers',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const DeliveryLockers())))
+                ])
         )
     );
   }

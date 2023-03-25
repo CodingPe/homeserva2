@@ -45,7 +45,7 @@ class _AccessCardsState extends State<AccessCards> {
 
   String? selectedOwner;
   String? selectedApply;
-  String? selectedCard;
+  String? selectedCard = '-- Select --';
   String? selectedParkingBay;
 
   void showAddNewAccessDialog() {
@@ -546,6 +546,442 @@ class _AccessCardsState extends State<AccessCards> {
                                           ),
                                         ],
                                       )
+                                    else if (selectedCard == 'LIFT-ONLY ACCESS CARD')
+                                      Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            const Text('Parking Bay to be Reserved'),
+                                            const SizedBox(height: 2),
+                                            Container(
+                                              width: 300,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(5),
+                                                border: Border.all(color: Colors.grey),
+                                              ),
+                                              child: DropdownButtonFormField(
+                                                decoration: const InputDecoration(
+                                                  border: InputBorder.none,
+                                                ),
+                                                isExpanded: true,
+                                                value: parkingBay.first,
+                                                items: parkingBay.map((value) => DropdownMenuItem(
+                                                  value: value,
+                                                  child: Text('   $value',),
+                                                )).toList(),
+                                                onChanged: (String? value) {
+                                                  setState(() {
+                                                    selectedParkingBay = value;
+                                                  });
+                                                },
+                                              ),
+                                            ),
+                                            const SizedBox(height: 5),
+                                            const Text('RM0.00 / Month, due immediately on the 1st day of every quarter, deposit RM80.00'),
+                                            const SizedBox(height: 10),
+                                            const Text('Car Plate No.'),
+                                            const SizedBox(height: 2),
+                                            Container(
+                                              width: 300,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(5),
+                                                border: Border.all(color: Colors.grey),
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(left: 5),
+                                                child: TextFormField(
+                                                  controller: carPlate,
+                                                  decoration: InputDecoration(
+                                                    border: InputBorder.none,
+                                                    suffixIcon: carPlate.text.isNotEmpty
+                                                        ? IconButton(
+                                                      icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          carPlate.clear();
+                                                        });
+                                                      },
+                                                    )
+                                                        : null,
+                                                  ),
+                                                  onChanged: (value) {
+                                                    setState(() {});
+                                                  },
+                                                ),),
+                                            ),
+                                            const SizedBox(height: 10),
+                                            CheckboxListTile(
+                                              title: const Text('Enable car plate recognition for access controls'),
+                                              value: _isEnable,
+                                              onChanged: (bool? value) {
+                                                setState(() {
+                                                  _isEnable = value!;
+                                                });
+                                              },
+                                              controlAffinity: ListTileControlAffinity.leading,
+                                            ),
+                                            const SizedBox(height: 15),
+                                            const Text('Remark'),
+                                            const SizedBox(height: 2),
+                                            Container(
+                                              width: 300,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(5),
+                                                border: Border.all(color: Colors.grey),
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(left: 5),
+                                                child: TextFormField(
+                                                  controller: remark,
+                                                  decoration: InputDecoration(
+                                                    border: InputBorder.none,
+                                                    suffixIcon: remark.text.isNotEmpty
+                                                        ? IconButton(
+                                                      icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          remark.clear();
+                                                        });
+                                                      },
+                                                    )
+                                                        : null,
+                                                  ),
+                                                  onChanged: (value) {
+                                                    setState(() {});
+                                                  },
+                                                ),),
+                                            ),
+                                          ],
+                                        )
+                                      else if (selectedCard == 'PARKING AND LIFT ACCESS CARD')
+                                        Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              const Text('Parking Bay to be Reserved'),
+                                              const SizedBox(height: 2),
+                                              Container(
+                                                width: 300,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(5),
+                                                  border: Border.all(color: Colors.grey),
+                                                ),
+                                                child: DropdownButtonFormField(
+                                                  decoration: const InputDecoration(
+                                                    border: InputBorder.none,
+                                                  ),
+                                                  isExpanded: true,
+                                                  value: parkingBay.first,
+                                                  items: parkingBay.map((value) => DropdownMenuItem(
+                                                    value: value,
+                                                    child: Text('   $value',),
+                                                  )).toList(),
+                                                  onChanged: (String? value) {
+                                                    setState(() {
+                                                      selectedParkingBay = value;
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(height: 5),
+                                              const Text('RM0.00 / Month, due immediately on the 1st day of every quarter, deposit RM80.00'),
+                                              const SizedBox(height: 10),
+                                              const Text('Car Plate No.'),
+                                              const SizedBox(height: 2),
+                                              Container(
+                                                width: 300,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(5),
+                                                  border: Border.all(color: Colors.grey),
+                                                ),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(left: 5),
+                                                  child: TextFormField(
+                                                    controller: carPlate,
+                                                    decoration: InputDecoration(
+                                                      border: InputBorder.none,
+                                                      suffixIcon: carPlate.text.isNotEmpty
+                                                          ? IconButton(
+                                                        icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            carPlate.clear();
+                                                          });
+                                                        },
+                                                      )
+                                                          : null,
+                                                    ),
+                                                    onChanged: (value) {
+                                                      setState(() {});
+                                                    },
+                                                  ),),
+                                              ),
+                                              const SizedBox(height: 10),
+                                              CheckboxListTile(
+                                                title: const Text('Enable car plate recognition for access controls'),
+                                                value: _isEnable,
+                                                onChanged: (bool? value) {
+                                                  setState(() {
+                                                    _isEnable = value!;
+                                                  });
+                                                },
+                                                controlAffinity: ListTileControlAffinity.leading,
+                                              ),
+                                              const SizedBox(height: 15),
+                                              const Text('Remark'),
+                                              const SizedBox(height: 2),
+                                              Container(
+                                                width: 300,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(5),
+                                                  border: Border.all(color: Colors.grey),
+                                                ),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(left: 5),
+                                                  child: TextFormField(
+                                                    controller: remark,
+                                                    decoration: InputDecoration(
+                                                      border: InputBorder.none,
+                                                      suffixIcon: remark.text.isNotEmpty
+                                                          ? IconButton(
+                                                        icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            remark.clear();
+                                                          });
+                                                        },
+                                                      )
+                                                          : null,
+                                                    ),
+                                                    onChanged: (value) {
+                                                      setState(() {});
+                                                    },
+                                                  ),),
+                                              ),
+                                            ],
+                                          )
+                                        else if (selectedCard == 'LIFT AND FACILITY ACCESS CARD')
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                const Text('Parking Bay to be Reserved'),
+                                                const SizedBox(height: 2),
+                                                Container(
+                                                  width: 300,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius: BorderRadius.circular(5),
+                                                    border: Border.all(color: Colors.grey),
+                                                  ),
+                                                  child: DropdownButtonFormField(
+                                                    decoration: const InputDecoration(
+                                                      border: InputBorder.none,
+                                                    ),
+                                                    isExpanded: true,
+                                                    value: parkingBay.first,
+                                                    items: parkingBay.map((value) => DropdownMenuItem(
+                                                      value: value,
+                                                      child: Text('   $value',),
+                                                    )).toList(),
+                                                    onChanged: (String? value) {
+                                                      setState(() {
+                                                        selectedParkingBay = value;
+                                                      });
+                                                    },
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 5),
+                                                const Text('RM100.00 / Month, due immediately on the 1st day of every quarter, deposit RM80.00'),
+                                                const SizedBox(height: 10),
+                                                const Text('Car Plate No.'),
+                                                const SizedBox(height: 2),
+                                                Container(
+                                                  width: 300,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius: BorderRadius.circular(5),
+                                                    border: Border.all(color: Colors.grey),
+                                                  ),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(left: 5),
+                                                    child: TextFormField(
+                                                      controller: carPlate,
+                                                      decoration: InputDecoration(
+                                                        border: InputBorder.none,
+                                                        suffixIcon: carPlate.text.isNotEmpty
+                                                            ? IconButton(
+                                                          icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              carPlate.clear();
+                                                            });
+                                                          },
+                                                        )
+                                                            : null,
+                                                      ),
+                                                      onChanged: (value) {
+                                                        setState(() {});
+                                                      },
+                                                    ),),
+                                                ),
+                                                const SizedBox(height: 10),
+                                                CheckboxListTile(
+                                                  title: const Text('Enable car plate recognition for access controls'),
+                                                  value: _isEnable,
+                                                  onChanged: (bool? value) {
+                                                    setState(() {
+                                                      _isEnable = value!;
+                                                    });
+                                                  },
+                                                  controlAffinity: ListTileControlAffinity.leading,
+                                                ),
+                                                const SizedBox(height: 15),
+                                                const Text('Remark'),
+                                                const SizedBox(height: 2),
+                                                Container(
+                                                  width: 300,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius: BorderRadius.circular(5),
+                                                    border: Border.all(color: Colors.grey),
+                                                  ),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(left: 5),
+                                                    child: TextFormField(
+                                                      controller: remark,
+                                                      decoration: InputDecoration(
+                                                        border: InputBorder.none,
+                                                        suffixIcon: remark.text.isNotEmpty
+                                                            ? IconButton(
+                                                          icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              remark.clear();
+                                                            });
+                                                          },
+                                                        )
+                                                            : null,
+                                                      ),
+                                                      onChanged: (value) {
+                                                        setState(() {});
+                                                      },
+                                                    ),),
+                                                ),
+                                              ],
+                                            )
+                                          else if (selectedCard == 'PARKING,LIFT,AND FACILITY ACCESS CARD')
+                                              Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  const Text('Parking Bay to be Reserved'),
+                                                  const SizedBox(height: 2),
+                                                  Container(
+                                                    width: 300,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius: BorderRadius.circular(5),
+                                                      border: Border.all(color: Colors.grey),
+                                                    ),
+                                                    child: DropdownButtonFormField(
+                                                      decoration: const InputDecoration(
+                                                        border: InputBorder.none,
+                                                      ),
+                                                      isExpanded: true,
+                                                      value: parkingBay.first,
+                                                      items: parkingBay.map((value) => DropdownMenuItem(
+                                                        value: value,
+                                                        child: Text('   $value',),
+                                                      )).toList(),
+                                                      onChanged: (String? value) {
+                                                        setState(() {
+                                                          selectedParkingBay = value;
+                                                        });
+                                                      },
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 5),
+                                                  const Text('RM100.00 / Month, due immediately on the 1st day of every quarter, deposit RM80.00'),
+                                                  const SizedBox(height: 10),
+                                                  const Text('Car Plate No.'),
+                                                  const SizedBox(height: 2),
+                                                  Container(
+                                                    width: 300,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius: BorderRadius.circular(5),
+                                                      border: Border.all(color: Colors.grey),
+                                                    ),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.only(left: 5),
+                                                      child: TextFormField(
+                                                        controller: carPlate,
+                                                        decoration: InputDecoration(
+                                                          border: InputBorder.none,
+                                                          suffixIcon: carPlate.text.isNotEmpty
+                                                              ? IconButton(
+                                                            icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                            onPressed: () {
+                                                              setState(() {
+                                                                carPlate.clear();
+                                                              });
+                                                            },
+                                                          )
+                                                              : null,
+                                                        ),
+                                                        onChanged: (value) {
+                                                          setState(() {});
+                                                        },
+                                                      ),),
+                                                  ),
+                                                  const SizedBox(height: 10),
+                                                  CheckboxListTile(
+                                                    title: const Text('Enable car plate recognition for access controls'),
+                                                    value: _isEnable,
+                                                    onChanged: (bool? value) {
+                                                      setState(() {
+                                                        _isEnable = value!;
+                                                      });
+                                                    },
+                                                    controlAffinity: ListTileControlAffinity.leading,
+                                                  ),
+                                                  const SizedBox(height: 15),
+                                                  const Text('Remark'),
+                                                  const SizedBox(height: 2),
+                                                  Container(
+                                                    width: 300,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius: BorderRadius.circular(5),
+                                                      border: Border.all(color: Colors.grey),
+                                                    ),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.only(left: 5),
+                                                      child: TextFormField(
+                                                        controller: remark,
+                                                        decoration: InputDecoration(
+                                                          border: InputBorder.none,
+                                                          suffixIcon: remark.text.isNotEmpty
+                                                              ? IconButton(
+                                                            icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                            onPressed: () {
+                                                              setState(() {
+                                                                remark.clear();
+                                                              });
+                                                            },
+                                                          )
+                                                              : null,
+                                                        ),
+                                                        onChanged: (value) {
+                                                          setState(() {});
+                                                        },
+                                                      ),),
+                                                  ),
+                                                ],
+                                              )
                                   ],
                                 ),
                                 const SizedBox(height: 25),
