@@ -13,7 +13,7 @@ abstract class AboutNotification {
   }
 }
 
-//to create a notification page, which can pull to show cupertinoactivitycircle with bouncing effect, and fetch latest notification, pull_to_refresh_flutter3
+//to create a notification page, which can pull to show cupertinoctivitycircle with bouncing effect, and fetch latest notification, pull_to_refresh_flutter3
 
 class Notifications extends StatefulWidget {
   const Notifications({super.key});
@@ -33,9 +33,20 @@ class NotificationsState extends State<Notifications> with AboutNotification {
           0,
           ListTile(
             leading: const Icon(Icons.notifications),
-            title: Text('Testing ${items.length + 1}'),
+            title: items.isEmpty
+                ? Text('Testing ${items.length + 1}')
+                : Text('Testing ${items.length}'),
             subtitle: const Text('Testing'),
           ));
+      if (items.length == 1) {
+        items.add(const SizedBox(
+          height: 100,
+          child: Center(
+              child: Text('- No more notifications -',
+                  style: TextStyle(
+                      color: Colors.grey, fontWeight: FontWeight.w300))),
+        ));
+      }
     });
   }
 
