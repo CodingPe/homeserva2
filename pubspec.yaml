@@ -41,6 +41,7 @@ dependencies:
   http: ^0.13.5
   image_picker: ^0.8.6+4
   intl: ^0.18.0
+  pull_to_refresh_flutter3: ^2.0.1
   url_launcher: ^6.1.7
 
 dev_dependencies:
