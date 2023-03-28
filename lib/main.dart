@@ -39,7 +39,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -175,27 +175,29 @@ class MainPageState extends State<MainPage> with AboutNotification {
 
     const double iconSize = 22.8;
 
+    List<BottomNavigationBarItem> tabItem = const [
+      BottomNavigationBarItem(
+        icon: Icon(CupertinoIcons.home, size: iconSize),
+        label: "Dashboard",
+      ),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.grid_view_outlined, size: iconSize),
+          label: "Functions"),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.insert_chart_outlined_sharp, size: iconSize),
+          label: "Accounting"),
+      BottomNavigationBarItem(icon: BadgeIcon(), label: "Notification"),
+      BottomNavigationBarItem(
+          icon: Icon(CupertinoIcons.person, size: iconSize), label: "Me"),
+    ];
+
     return Scaffold(
       body: CupertinoTabScaffold(
           tabBar: CupertinoTabBar(
             backgroundColor: CupertinoColors.systemGrey6,
             activeColor: CupertinoColors.activeBlue,
             inactiveColor: Colors.grey,
-            items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.home, size: iconSize),
-                  label: "Dashboard"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.grid_view_outlined, size: iconSize),
-                  label: "Functions"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.insert_chart_outlined_sharp, size: iconSize),
-                  label: "Accounting"),
-              BottomNavigationBarItem(icon: BadgeIcon(), label: "Notification"),
-              BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.person, size: iconSize),
-                  label: "Me"),
-            ],
+            items: tabItem,
           ),
           tabBuilder: (context, index) {
             return CupertinoTabView(builder: (context) {
