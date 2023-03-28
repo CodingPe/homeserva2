@@ -7,6 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart'; //push notification
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:badges/badges.dart' as badges;
 
 Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   debugPrint("Handling a background message: ${message.messageId}");
@@ -104,9 +105,8 @@ class MainPage extends StatefulWidget {
   MainPageState createState() => MainPageState();
 }
 
-class MainPageState extends State<MainPage> {
+class MainPageState extends State<MainPage> with AboutNotification {
   late final FirebaseMessaging _messaging;
-
   Future<void> requestAndRegisterNotification() async {
     await Firebase.initializeApp();
     _messaging = FirebaseMessaging.instance;
@@ -176,35 +176,65 @@ class MainPageState extends State<MainPage> {
     const double iconSize = 22.8;
 
     return Scaffold(
-        body: CupertinoTabScaffold(
-            tabBar: CupertinoTabBar(
-              backgroundColor: CupertinoColors.systemGrey6,
-              activeColor: CupertinoColors.activeBlue,
-              inactiveColor: Colors.grey,
-              items: const [
-                BottomNavigationBarItem(
-                    icon: Icon(CupertinoIcons.home, size: iconSize),
-                    label: "Dashboard"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.grid_view_outlined, size: iconSize),
-                    label: "Functions"),
-                BottomNavigationBarItem(
-                    icon:
-                        Icon(Icons.insert_chart_outlined_sharp, size: iconSize),
-                    label: "Accounting"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.notifications_active_outlined,
-                        size: iconSize),
-                    label: "Notification"),
-                BottomNavigationBarItem(
-                    icon: Icon(CupertinoIcons.person, size: iconSize),
-                    label: "Me"),
-              ],
+      body: CupertinoTabScaffold(
+          tabBar: CupertinoTabBar(
+            backgroundColor: CupertinoColors.systemGrey6,
+            activeColor: CupertinoColors.activeBlue,
+            inactiveColor: Colors.grey,
+            items: const [
+              BottomNavigationBarItem(
+                  icon: Icon(CupertinoIcons.home, size: iconSize),
+                  label: "Dashboard"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.grid_view_outlined, size: iconSize),
+                  label: "Functions"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.insert_chart_outlined_sharp, size: iconSize),
+                  label: "Accounting"),
+              BottomNavigationBarItem(icon: BadgeIcon(), label: "Notification"),
+              BottomNavigationBarItem(
+                  icon: Icon(CupertinoIcons.person, size: iconSize),
+                  label: "Me"),
+            ],
+          ),
+          tabBuilder: (context, index) {
+            return CupertinoTabView(builder: (context) {
+              return data[index];
+            });
+          }),
+    );
+  }
+}
+
+class BadgeIcon extends StatefulWidget {
+  const BadgeIcon({super.key});
+
+  @override
+  State<BadgeIcon> createState() => _BadgeIconState();
+}
+
+class _BadgeIconState extends State<BadgeIcon> with AboutNotification {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    //!notification no refresh
+    return ValueListenableBuilder<int>(
+        valueListenable: abc,
+        builder: (context, value, _) => badges.Badge(
+              badgeContent: Text(value.toString(),
+                  style: const TextStyle(color: Colors.white, fontSize: 10)),
+              child: const Icon(
+                Icons.notifications_active_outlined,
+                size: 22.8,
+              ),
             ),
-            tabBuilder: (context, index) {
-              return CupertinoTabView(builder: (context) {
-                return data[index];
-              });
-            }));
+        child: const Icon(
+          Icons.notifications_active_outlined,
+          size: 22.8,
+        ));
   }
 }
