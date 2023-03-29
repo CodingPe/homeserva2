@@ -31,6 +31,15 @@ class _SuggestionsState extends State<Suggestions> {
   String? selectedTitle;
   String? _privacy;
   File? image;
+  bool _buttonEnabled = false;
+
+  void _validateInputs() {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        _buttonEnabled = true;
+      });
+    }
+  }
 
   Future<void> pickImage() async {
     final pickedFile =
@@ -398,40 +407,32 @@ class _SuggestionsState extends State<Suggestions> {
                                 );
                               },
                               child: SizedBox(
-                                width: 300,
-                                height: 40,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                        color: Colors.blueGrey.shade200,
-                                        width: 1,
-                                      ),
-                                    ),
-                                  ),
+                                  width: 300,
+                                  height: 50,
                                   child: Row(
                                     children: [
                                       ClipRRect(
                                         borderRadius: BorderRadius.circular(12.0),
                                         child: Image.network(
                                           list[index]['Photo'],
-                                          width: 35,
-                                          height: 35,
+                                          width: 48,
+                                          height: 48,
                                           fit: BoxFit.cover,
                                         ),
                                       ),
-                                      const SizedBox(width: 10),
+                                      const SizedBox(width: 12),
                                       Expanded(
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               list[index]['Category'],
-                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                                             ),
+                                            const SizedBox(height: 3),
                                             Text(
                                               list[index]['Title'],
-                                              style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 13,color: Colors.grey),
+                                              style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16,color: Colors.grey),
                                             ),
                                           ],
                                         ),
@@ -448,8 +449,7 @@ class _SuggestionsState extends State<Suggestions> {
                                         ),
                                       ),
                                     ],
-                                  ),
-                                ),
+                                  )
                               )
                           ),
                         );

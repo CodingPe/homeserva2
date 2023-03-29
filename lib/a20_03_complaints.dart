@@ -389,57 +389,48 @@ class _ComplaintsState extends State<Complaints> {
                               },
                               child: SizedBox(
                                 width: 300,
-                                height: 40,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                        color: Colors.blueGrey.shade200,
-                                        width: 1,
+                                height: 50,
+                                child: Row(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(12.0),
+                                      child: Image.network(
+                                        list[index]['Photo'],
+                                        width: 48,
+                                        height: 48,
+                                        fit: BoxFit.cover,
                                       ),
                                     ),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(12.0),
-                                        child: Image.network(
-                                          list[index]['Photo'],
-                                          width: 35,
-                                          height: 35,
-                                          fit: BoxFit.cover,
-                                        ),
+                                    const SizedBox(width: 12),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            list[index]['Category'],
+                                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                                          ),
+                                          const SizedBox(height: 3),
+                                          Text(
+                                            list[index]['Title'],
+                                            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16,color: Colors.grey),
+                                          ),
+                                        ],
                                       ),
-                                      const SizedBox(width: 10),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              list[index]['Category'],
-                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-                                            ),
-                                            Text(
-                                              list[index]['Title'],
-                                              style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 13,color: Colors.grey),
-                                            ),
-                                          ],
-                                        ),
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: const [
+                                          Text(
+                                            '1 day outstanding\n',
+                                            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13,color: Colors.grey),
+                                          ),
+                                        ],
                                       ),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: const [
-                                            Text(
-                                              '1 day outstanding\n',
-                                              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13,color: Colors.grey),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                    ),
+                                  ],
+                                )
                               )
                           ),
 
