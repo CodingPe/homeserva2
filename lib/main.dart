@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:homeserva_2/a00_00_directory.dart';
+// ignore: unnecessary_import
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:firebase_messaging/firebase_messaging.dart'; //push notification必定需要安裝的package //push notification must be installed package
+// ignore: depend_on_referenced_packages
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -177,9 +179,7 @@ class MainPageState extends State<MainPage> with AboutNotification {
 
     List<BottomNavigationBarItem> tabItem = const [
       BottomNavigationBarItem(
-        icon: Icon(CupertinoIcons.home, size: iconSize),
-        label: "Dashboard",
-      ),
+          icon: Icon(CupertinoIcons.home, size: iconSize), label: "Dashboard"),
       BottomNavigationBarItem(
           icon: Icon(Icons.grid_view_outlined, size: iconSize),
           label: "Functions"),
@@ -234,9 +234,6 @@ class _BadgeIconState extends State<BadgeIcon> with AboutNotification {
                 size: 22.8,
               ),
             ),
-        child: const Icon(
-          Icons.notifications_active_outlined,
-          size: 22.8,
-        ));
+        child: const Icon(Icons.notifications_active_outlined, size: 22.8));
   }
 }
