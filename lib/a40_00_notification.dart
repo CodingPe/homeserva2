@@ -7,9 +7,9 @@ import 'package:badges/badges.dart' as badges;
 import 'dart:convert';
 
 abstract class AboutNotification {
+  Box badgeBox = Hive.box('TokenBox');
   List<Widget> items = <Widget>[];
-  int notificationCount = 0;
-  final abc = ValueNotifier<int>(Hive.box('TokenBox').get(2));
+  ValueNotifier<int> abc = ValueNotifier<int>(Hive.box('TokenBox').get(2) ?? 0);
 
   Future getNotificationsData() async {
     var url = 'https://peterapi.vyrox.com/viewnotificationsdata.php';
@@ -33,29 +33,17 @@ class NotificationsState extends State<Notifications> with AboutNotification {
       const Duration(milliseconds: 1000),
     );
     setState(() {
-      notificationCount = items.length;
-      Hive.box('TokenBox').put(2, notificationCount);
+      badgeBox.put(2, items.length + 1);
+      abc.value = badgeBox.get(2);
       //!notification no refresh
-      abc.value++;
       print('notificationCount: ${Hive.box('TokenBox').get(2)}');
       items.insert(
           0,
           ListTile(
             leading: const Icon(Icons.notifications),
-            title: items.isEmpty
-                ? Text('Testing ${items.length + 1}')
-                : Text('Testing ${items.length}'),
+            title: Text('Testing ${items.length + 1}'),
             subtitle: const Text('Testing'),
           ));
-      if (items.length == 1) {
-        items.add(const SizedBox(
-          height: 100,
-          child: Center(
-              child: Text('- No more notifications -',
-                  style: TextStyle(
-                      color: Colors.grey, fontWeight: FontWeight.w300))),
-        ));
-      }
     });
   }
 
