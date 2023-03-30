@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homeserva_2/a00_02_accounting_path.dart';
 
 class Accounting extends StatelessWidget {
   const Accounting({Key? key}) : super(key: key);
@@ -57,15 +58,30 @@ class Accounting extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 23),
                     children: [
                       _buildGridViewItem('Invoices',
-                          onTap: () => (){}),
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Invoices()))),
                       _buildGridViewItem('Payments',
-                          onTap: () => (){}),
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Payments()))),
                       _buildGridViewItem('Statement',
-                          onTap: () => (){}),
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Statement()))),
                       _buildGridViewItem('Deposits',
-                          onTap: () => (){}),
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Deposits()))),
                       _buildGridViewItem('Advances',
-                          onTap: () => (){}),
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Advances()))),
                     ])
               ],
             ),
