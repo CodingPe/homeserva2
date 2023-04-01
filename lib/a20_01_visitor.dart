@@ -119,632 +119,635 @@ void showAddVisitorDialog() {
                       padding: const EdgeInsets.all(10),
                       child:  Form(
                         key: _formKey,
-                        child: ListView(
-                          children: [
-                            const Center(
-                              child: Text("New Visitor",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 22),),
-                            ),
-                            const SizedBox(height: 7),
-                            const Text('Property No.',style: TextStyle(fontSize: 14)),
-                            const SizedBox(height: 5),
-                            const Text('D-5-19',style: TextStyle(fontSize: 14)),
-                            const SizedBox(height: 7),
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              height: 650,
-                              width: 320,
-                              color: const Color.fromARGB(255, 248, 248, 248),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(height: 10),
-                                  const Text("Appointment Date",style: TextStyle(fontSize: 14)),
-                                  const SizedBox(height: 2),
-                                  GestureDetector(
-                                      onTap: () async {
-                                        DateTime? pickedDate = await showDatePicker(
-                                          context: context,
-                                          initialDate: selectedDate,
-                                          firstDate: DateTime.now(),
-                                          lastDate: DateTime(2028),
-                                        );
-                                        if (pickedDate != null && pickedDate != selectedDate)
-                                          setState(() {
-                                            selectedDate = pickedDate;
-                                          });
-                                      },
-                                      child: Container(
-                                          width: 300,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(color: Colors.grey),
-                                            borderRadius: BorderRadius.circular(5),
-                                            color: Colors.white, // set background color to white
+                        child: ScrollConfiguration(
+                            behavior: const ScrollBehavior().copyWith(overscroll: false),
+                            child: ListView(
+                              children: [
+                                const Center(
+                                  child: Text("New Visitor",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 22),),
+                                ),
+                                const SizedBox(height: 7),
+                                const Text('Property No.',style: TextStyle(fontSize: 14)),
+                                const SizedBox(height: 5),
+                                const Text('D-5-19',style: TextStyle(fontSize: 14)),
+                                const SizedBox(height: 7),
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  height: 650,
+                                  width: 320,
+                                  color: const Color.fromARGB(255, 248, 248, 248),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(height: 10),
+                                      const Text("Appointment Date",style: TextStyle(fontSize: 14)),
+                                      const SizedBox(height: 2),
+                                      GestureDetector(
+                                        onTap: () async {
+                                          DateTime? pickedDate = await showDatePicker(
+                                            context: context,
+                                            initialDate: selectedDate,
+                                            firstDate: DateTime.now(),
+                                            lastDate: DateTime(2028),
+                                          );
+                                          if (pickedDate != null && pickedDate != selectedDate)
+                                            setState(() {
+                                              selectedDate = pickedDate;
+                                            });
+                                        },
+                                        child: Container(
+                                            width: 300,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(color: Colors.grey),
+                                              borderRadius: BorderRadius.circular(5),
+                                              color: Colors.white, // set background color to white
+                                            ),
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(
+                                                '  ${DateFormat('d MMMM yyyy').format(selectedDate)}',
+                                                style: const TextStyle(fontSize: 16,color: Colors.black), // format date as "day month year"
+                                              ),
+                                            )
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      const Text("Visitor Name",style: TextStyle(fontSize: 14)),
+                                      const SizedBox(height: 2),
+                                      Container(
+                                        width: 300,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(5),
+                                          border: Border.all(color: Colors.grey),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(left: 5),
+                                          child: TextFormField(
+                                            controller: name,
+                                            decoration: InputDecoration(
+                                              border: InputBorder.none,
+                                              suffixIcon: name.text.isNotEmpty
+                                                  ? IconButton(
+                                                icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    name.clear();
+                                                  });
+                                                },
+                                              )
+                                                  : null,
+                                            ),
+                                            onChanged: (value) {
+                                              setState(() {});
+                                            },
                                           ),
-                                          child: Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Text(
-                                              '  ${DateFormat('d MMMM yyyy').format(selectedDate)}',
-                                              style: const TextStyle(fontSize: 16,color: Colors.black), // format date as "day month year"
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                              flex: 4,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children:  [
+                                                  const Text("NRIC",style: TextStyle(fontSize: 14)),
+                                                  const SizedBox(height: 2),
+                                                  Container(
+                                                    width: 300,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius: BorderRadius.circular(5),
+                                                      border: Border.all(color: Colors.grey),
+                                                    ),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.only(left: 5),
+                                                      child: TextFormField(
+                                                        controller: nRIC,
+                                                        decoration: InputDecoration(
+                                                          border: InputBorder.none,
+                                                          suffixIcon: nRIC.text.isNotEmpty
+                                                              ? IconButton(
+                                                            icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                            onPressed: () {
+                                                              setState(() {
+                                                                nRIC.clear();
+                                                              });
+                                                            },
+                                                          )
+                                                              : null,
+                                                        ),
+                                                        onChanged: (value) {
+                                                          setState(() {});
+                                                        },
+                                                      ),),
+                                                  ),
+                                                ],
+                                              )),
+                                          Expanded(
+                                              flex: 1,
+                                              child: Container()),
+                                          Expanded(
+                                              flex: 4,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children:  [
+                                                  const Text("Passport No.",style: TextStyle(fontSize: 14)),
+                                                  const SizedBox(height: 2),
+                                                  Container(
+                                                    width: 300,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius: BorderRadius.circular(5),
+                                                      border: Border.all(color: Colors.grey),
+                                                    ),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.only(left: 5),
+                                                      child: TextFormField(
+                                                        controller: passport,
+                                                        decoration: InputDecoration(
+                                                          border: InputBorder.none,
+                                                          suffixIcon: passport.text.isNotEmpty
+                                                              ? IconButton(
+                                                            icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                            onPressed: () {
+                                                              setState(() {
+                                                                passport.clear();
+                                                              });
+                                                            },
+                                                          )
+                                                              : null,
+                                                        ),
+                                                        onChanged: (value) {
+                                                          setState(() {});
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ))
+                                        ],
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                              flex: 4,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children:  [
+                                                  const Text("Mobile Phone No.",style: TextStyle(fontSize: 14)),
+                                                  const SizedBox(height: 2),
+                                                  Container(
+                                                      width: 300,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius: BorderRadius.circular(5),
+                                                        border: Border.all(color: Colors.grey),
+                                                      ),
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.only(left: 5),
+                                                        child: TextFormField(
+                                                          controller: phone,
+                                                          decoration: InputDecoration(
+                                                            border: InputBorder.none,
+                                                            suffixIcon: phone.text.isNotEmpty
+                                                                ? IconButton(
+                                                              icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                              onPressed: () {
+                                                                setState(() {
+                                                                  phone.clear();
+                                                                });
+                                                              },
+                                                            )
+                                                                : null,
+                                                          ),
+                                                          onChanged: (value) {
+                                                            setState(() {});
+                                                          },
+                                                        ),
+                                                      )
+                                                  ),
+                                                ],
+                                              )),
+                                          Expanded(
+                                              flex: 1,
+                                              child: Container()),
+                                          Expanded(
+                                              flex: 4,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children:  [
+                                                  const Text("WhatsApp",style: TextStyle(fontSize: 14)),
+                                                  const SizedBox(height: 2),
+                                                  Container(
+                                                    width: 300,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius: BorderRadius.circular(5),
+                                                      border: Border.all(color: Colors.grey),
+                                                    ),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.only(left: 5),
+                                                      child: TextFormField(
+                                                        controller: whatsapp,
+                                                        decoration: InputDecoration(
+                                                          border: InputBorder.none,
+                                                          suffixIcon: whatsapp.text.isNotEmpty
+                                                              ? IconButton(
+                                                            icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                            onPressed: () {
+                                                              setState(() {
+                                                                whatsapp.clear();
+                                                              });
+                                                            },
+                                                          )
+                                                              : null,
+                                                        ),
+                                                        onChanged: (value) {
+                                                          setState(() {});
+                                                        },
+                                                      ),),
+                                                  ),
+                                                ],
+                                              ))
+                                        ],
+                                      ),
+                                      const SizedBox(height: 10),
+                                      const Text("Email Address",style: TextStyle(fontSize: 14)),
+                                      const SizedBox(height: 2),
+                                      Container(
+                                          width: 300,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(5),
+                                            border: Border.all(color: Colors.grey),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(left: 5),
+                                            child: TextFormField(
+                                              controller: email,
+                                              decoration: InputDecoration(
+                                                border: InputBorder.none,
+                                                suffixIcon: email.text.isNotEmpty
+                                                    ? IconButton(
+                                                  icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      email.clear();
+                                                    });
+                                                  },
+                                                )
+                                                    : null,
+                                              ),
+                                              onChanged: (value) {
+                                                setState(() {});
+                                              },
                                             ),
                                           )
                                       ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  const Text("Visitor Name",style: TextStyle(fontSize: 14)),
-                                  const SizedBox(height: 2),
-                                  Container(
-                                      width: 300,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(5),
-                                        border: Border.all(color: Colors.grey),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(left: 5),
-                                        child: TextFormField(
-                                          controller: name,
-                                          decoration: InputDecoration(
-                                            border: InputBorder.none,
-                                            suffixIcon: name.text.isNotEmpty
-                                                ? IconButton(
-                                              icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
-                                              onPressed: () {
-                                                setState(() {
-                                                  name.clear();
-                                                });
-                                              },
-                                            )
-                                                : null,
-                                          ),
-                                          onChanged: (value) {
-                                            setState(() {});
-                                          },
-                                        ),
-                                      ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                          flex: 4,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children:  [
-                                              const Text("NRIC",style: TextStyle(fontSize: 14)),
-                                              const SizedBox(height: 2),
-                                              Container(
-                                                width: 300,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius: BorderRadius.circular(5),
-                                                  border: Border.all(color: Colors.grey),
-                                                ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets.only(left: 5),
-                                                  child: TextFormField(
-                                                  controller: nRIC,
-                                                  decoration: InputDecoration(
-                                                    border: InputBorder.none,
-                                                    suffixIcon: nRIC.text.isNotEmpty
-                                                        ? IconButton(
-                                                      icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
-                                                      onPressed: () {
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                              flex: 4,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children:  [
+                                                  const Text("Vehicle Plate No.",style: TextStyle(fontSize: 14)),
+                                                  const SizedBox(height: 2),
+                                                  Container(
+                                                      width: 300,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius: BorderRadius.circular(5),
+                                                        border: Border.all(color: Colors.grey),
+                                                      ),
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.only(left: 5),
+                                                        child: TextFormField(
+                                                          controller: vehiclePlate,
+                                                          decoration: InputDecoration(
+                                                            border: InputBorder.none,
+                                                            suffixIcon: vehiclePlate.text.isNotEmpty
+                                                                ? IconButton(
+                                                              icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                              onPressed: () {
+                                                                setState(() {
+                                                                  vehiclePlate.clear();
+                                                                });
+                                                              },
+                                                            )
+                                                                : null,
+                                                          ),
+                                                          onChanged: (value) {
+                                                            setState(() {});
+                                                          },
+                                                        ),
+                                                      )
+                                                  ),
+                                                ],
+                                              )),
+                                          Expanded(
+                                              flex: 1,
+                                              child: Container()),
+                                          Expanded(
+                                              flex: 4,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children:  [
+                                                  const Text("Parking Lot",style: TextStyle(fontSize: 14)),
+                                                  const SizedBox(height: 2),
+                                                  Container(
+                                                    width: 250,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius: BorderRadius.circular(5),
+                                                      border: Border.all(color: Colors.grey),
+                                                    ),
+                                                    child: DropdownButtonFormField(
+                                                      decoration: const InputDecoration(
+                                                        border: InputBorder.none,
+                                                      ),
+                                                      isExpanded: true,
+                                                      value: parkingLot.first,
+                                                      items: parkingLot.map((value) => DropdownMenuItem(
+                                                        value: value,
+                                                        child: Text('   $value',),
+                                                      )).toList(),
+                                                      onChanged: (String? value) {
                                                         setState(() {
-                                                          nRIC.clear();
+                                                          selectedParkingLot = value;
                                                         });
                                                       },
-                                                    )
-                                                        : null,
-                                                  ),
-                                                  onChanged: (value) {
-                                                    setState(() {});
-                                                  },
-                                                ),),
-                                              ),
-                                            ],
-                                          )),
-                                      Expanded(
-                                          flex: 1,
-                                          child: Container()),
-                                      Expanded(
-                                          flex: 4,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children:  [
-                                              const Text("Passport No.",style: TextStyle(fontSize: 14)),
-                                              const SizedBox(height: 2),
-                                              Container(
-                                                width: 300,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius: BorderRadius.circular(5),
-                                                  border: Border.all(color: Colors.grey),
-                                                ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets.only(left: 5),
-                                                  child: TextFormField(
-                                                    controller: passport,
-                                                    decoration: InputDecoration(
-                                                      border: InputBorder.none,
-                                                      suffixIcon: passport.text.isNotEmpty
-                                                          ? IconButton(
-                                                        icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            passport.clear();
-                                                          });
-                                                        },
-                                                      )
-                                                          : null,
                                                     ),
-                                                    onChanged: (value) {
-                                                      setState(() {});
-                                                    },
                                                   ),
-                                                ),
-                                              ),
-                                            ],
-                                          ))
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                          flex: 4,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children:  [
-                                              const Text("Mobile Phone No.",style: TextStyle(fontSize: 14)),
-                                              const SizedBox(height: 2),
-                                              Container(
-                                                width: 300,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius: BorderRadius.circular(5),
-                                                  border: Border.all(color: Colors.grey),
-                                                ),
-                                                child: Padding(
-                                                    padding: const EdgeInsets.only(left: 5),
-                                                    child: TextFormField(
-                                                      controller: phone,
-                                                      decoration: InputDecoration(
+                                                ],
+                                              ))
+                                        ],
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                              flex: 4,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children:  [
+                                                  const Text("Visitor Type",style: TextStyle(fontSize: 14)),
+                                                  const SizedBox(height: 2),
+                                                  Container(
+                                                    width: 250,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius: BorderRadius.circular(5),
+                                                      border: Border.all(color: Colors.grey),
+                                                    ),
+                                                    child: DropdownButtonFormField(
+                                                      decoration: const InputDecoration(
                                                         border: InputBorder.none,
-                                                        suffixIcon: phone.text.isNotEmpty
-                                                            ? IconButton(
-                                                          icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
-                                                          onPressed: () {
-                                                            setState(() {
-                                                              phone.clear();
-                                                            });
-                                                          },
-                                                        )
-                                                            : null,
                                                       ),
-                                                      onChanged: (value) {
-                                                        setState(() {});
+                                                      isExpanded: true,
+                                                      value: type.first,
+                                                      items: type.map((value) => DropdownMenuItem(
+                                                        value: value,
+                                                        child: Text('   $value',),
+                                                      )).toList(),
+                                                      onChanged: (String? value) {
+                                                        setState(() {
+                                                          selectedType = value;
+                                                        });
                                                       },
                                                     ),
-                                                )
-                                              ),
-                                            ],
-                                          )),
-                                      Expanded(
-                                          flex: 1,
-                                          child: Container()),
-                                      Expanded(
-                                          flex: 4,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children:  [
-                                              const Text("WhatsApp",style: TextStyle(fontSize: 14)),
-                                              const SizedBox(height: 2),
-                                              Container(
-                                                width: 300,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius: BorderRadius.circular(5),
-                                                  border: Border.all(color: Colors.grey),
-                                                ),
-                                                child: Padding(
-                                                    padding: const EdgeInsets.only(left: 5),
-                                                    child: TextFormField(
-                                                      controller: whatsapp,
-                                                      decoration: InputDecoration(
+                                                  ),
+                                                ],
+                                              )),
+                                          Expanded(
+                                              flex: 1,
+                                              child: Container()),
+                                          Expanded(
+                                              flex: 4,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children:  [
+                                                  const Text("Visitor Pass Validity",style: TextStyle(fontSize: 14)),
+                                                  const SizedBox(height: 2),
+                                                  Container(
+                                                    width: 250,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius: BorderRadius.circular(5),
+                                                      border: Border.all(color: Colors.grey),
+                                                    ),
+                                                    child: DropdownButtonFormField(
+                                                      decoration: const InputDecoration(
                                                         border: InputBorder.none,
-                                                        suffixIcon: whatsapp.text.isNotEmpty
-                                                            ? IconButton(
-                                                          icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
-                                                          onPressed: () {
-                                                            setState(() {
-                                                              whatsapp.clear();
-                                                            });
-                                                          },
-                                                        )
-                                                            : null,
                                                       ),
-                                                      onChanged: (value) {
-                                                        setState(() {});
+                                                      isExpanded: true,
+                                                      value: validity.first,
+                                                      items: validity.map((value) => DropdownMenuItem(
+                                                        value: value,
+                                                        child: Text('   $value',),
+                                                      )).toList(),
+                                                      onChanged: (String? value) {
+                                                        setState(() {
+                                                          selectedValidity = value;
+                                                        });
                                                       },
-                                                    ),),
-                                              ),
-                                            ],
-                                          ))
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10),
-                                  const Text("Email Address",style: TextStyle(fontSize: 14)),
-                                  const SizedBox(height: 2),
-                                  Container(
-                                    width: 300,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(5),
-                                      border: Border.all(color: Colors.grey),
-                                    ),
-                                    child: Padding(
-                                        padding: const EdgeInsets.only(left: 5),
-                                        child: TextFormField(
-                                          controller: email,
-                                          decoration: InputDecoration(
-                                            border: InputBorder.none,
-                                            suffixIcon: email.text.isNotEmpty
-                                                ? IconButton(
-                                              icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
-                                              onPressed: () {
-                                                setState(() {
-                                                  email.clear();
-                                                });
-                                              },
-                                            )
-                                                : null,
-                                          ),
-                                          onChanged: (value) {
-                                            setState(() {});
-                                          },
-                                        ),
-                                    )
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                          flex: 4,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children:  [
-                                              const Text("Vehicle Plate No.",style: TextStyle(fontSize: 14)),
-                                              const SizedBox(height: 2),
-                                              Container(
-                                                width: 300,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius: BorderRadius.circular(5),
-                                                  border: Border.all(color: Colors.grey),
-                                                ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets.only(left: 5),
-                                                  child: TextFormField(
-                                                    controller: vehiclePlate,
-                                                    decoration: InputDecoration(
-                                                      border: InputBorder.none,
-                                                      suffixIcon: vehiclePlate.text.isNotEmpty
-                                                          ? IconButton(
-                                                        icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            vehiclePlate.clear();
-                                                          });
-                                                        },
+                                                    ),
+                                                  ),
+                                                ],
+                                              ))
+                                        ],
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                              flex: 4,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children:  [
+                                                  const Text("Valid From",style: TextStyle(fontSize: 14)),
+                                                  const SizedBox(height: 2),
+                                                  Container(
+                                                      width: 250,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius: BorderRadius.circular(5),
+                                                        border: Border.all(color: Colors.grey),
+                                                      ),
+                                                      child: DropdownButtonFormField<String>(
+                                                        decoration: const InputDecoration(
+                                                          border: InputBorder.none,
+                                                        ),
+                                                        isExpanded: true,
+                                                        value: selectedTimes,
+                                                        items: times.map((time) => DropdownMenuItem(value: time, child: Text('  $time'))).toList(),
+                                                        onChanged: (value) => setState(() => selectedTimes = value),
                                                       )
-                                                          : null,
-                                                    ),
-                                                    onChanged: (value) {
-                                                      setState(() {});
-                                                    },
                                                   ),
-                                                )
-                                              ),
-                                            ],
-                                          )),
-                                      Expanded(
-                                          flex: 1,
-                                          child: Container()),
-                                      Expanded(
-                                          flex: 4,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children:  [
-                                              const Text("Parking Lot",style: TextStyle(fontSize: 14)),
-                                              const SizedBox(height: 2),
-                                              Container(
-                                                width: 250,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius: BorderRadius.circular(5),
-                                                  border: Border.all(color: Colors.grey),
-                                                ),
-                                                child: DropdownButtonFormField(
-                                                  decoration: const InputDecoration(
-                                                      border: InputBorder.none,
-                                                  ),
-                                                  isExpanded: true,
-                                                  value: parkingLot.first,
-                                                  items: parkingLot.map((value) => DropdownMenuItem(
-                                                    value: value,
-                                                    child: Text('   $value',),
-                                                  )).toList(),
-                                                  onChanged: (String? value) {
-                                                    setState(() {
-                                                      selectedParkingLot = value;
-                                                    });
-                                                  },
-                                                ),
-                                              ),
-                                            ],
-                                          ))
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                          flex: 4,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children:  [
-                                              const Text("Visitor Type",style: TextStyle(fontSize: 14)),
-                                              const SizedBox(height: 2),
-                                              Container(
-                                                  width: 250,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    border: Border.all(color: Colors.grey),
-                                                  ),
-                                                  child: DropdownButtonFormField(
-                                                    decoration: const InputDecoration(
-                                                        border: InputBorder.none,
-                                                    ),
-                                                    isExpanded: true,
-                                                    value: type.first,
-                                                    items: type.map((value) => DropdownMenuItem(
-                                                      value: value,
-                                                      child: Text('   $value',),
-                                                    )).toList(),
-                                                    onChanged: (String? value) {
-                                                      setState(() {
-                                                        selectedType = value;
-                                                      });
-                                                    },
-                                                  ),
-                                              ),
-                                            ],
-                                          )),
-                                      Expanded(
-                                          flex: 1,
-                                          child: Container()),
-                                      Expanded(
-                                          flex: 4,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children:  [
-                                              const Text("Visitor Pass Validity",style: TextStyle(fontSize: 14)),
-                                              const SizedBox(height: 2),
-                                              Container(
-                                                width: 250,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius: BorderRadius.circular(5),
-                                                  border: Border.all(color: Colors.grey),
-                                                ),
-                                                child: DropdownButtonFormField(
-                                                  decoration: const InputDecoration(
-                                                    border: InputBorder.none,
-                                                  ),
-                                                  isExpanded: true,
-                                                  value: validity.first,
-                                                  items: validity.map((value) => DropdownMenuItem(
-                                                    value: value,
-                                                    child: Text('   $value',),
-                                                  )).toList(),
-                                                  onChanged: (String? value) {
-                                                    setState(() {
-                                                      selectedValidity = value;
-                                                    });
-                                                  },
-                                                ),
-                                              ),
-                                            ],
-                                          ))
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                          flex: 4,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children:  [
-                                              const Text("Valid From",style: TextStyle(fontSize: 14)),
-                                              const SizedBox(height: 2),
-                                              Container(
-                                                width: 250,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius: BorderRadius.circular(5),
-                                                  border: Border.all(color: Colors.grey),
-                                                ),
-                                                child: DropdownButtonFormField<String>(
-                                                  decoration: const InputDecoration(
-                                                    border: InputBorder.none,
-                                                  ),
-                                                  isExpanded: true,
-                                                  value: selectedTimes,
-                                                  items: times.map((time) => DropdownMenuItem(value: time, child: Text('  $time'))).toList(),
-                                                  onChanged: (value) => setState(() => selectedTimes = value),
-                                                )
-                                              ),
-                                            ],
-                                          )),
-                                      Expanded(
-                                          flex: 1,
-                                          child: Container()),
-                                      Expanded(
-                                          flex: 4,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              if (selectedValidity != '--Select--' && selectedTimes != null)
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    const Text("Valid Until", style: TextStyle(fontSize: 14)),
-                                                    const SizedBox(height: 2),
-                                                    Row(
+                                                ],
+                                              )),
+                                          Expanded(
+                                              flex: 1,
+                                              child: Container()),
+                                          Expanded(
+                                              flex: 4,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  if (selectedValidity != '--Select--' && selectedTimes != null)
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: [
-                                                        Expanded(
-                                                          flex: 6,
-                                                          child: Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Container(
+                                                        const Text("Valid Until", style: TextStyle(fontSize: 14)),
+                                                        const SizedBox(height: 2),
+                                                        Row(
+                                                          children: [
+                                                            Expanded(
+                                                              flex: 6,
+                                                              child: Column(
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                children: [
+                                                                  Container(
+                                                                    width: 250,
+                                                                    height: 45,
+                                                                    decoration: BoxDecoration(
+                                                                      color: const Color.fromARGB(255, 221, 221, 221),
+                                                                      border: Border.all(color: Colors.grey),
+                                                                    ),
+                                                                    child: SingleChildScrollView(
+                                                                      scrollDirection: Axis.horizontal,
+                                                                      child: Center(
+                                                                        child:
+                                                                        Text(
+                                                                          '  ${DateFormat('d MMMM yyyy').format(selectedDate)}',
+                                                                          style: const TextStyle(fontSize: 14,color: Color.fromARGB(255, 140, 140, 140)), // format date as "day month year"
+                                                                        ),),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            Expanded(flex: 1, child: Container()),
+                                                            Expanded(
+                                                              flex: 6,
+                                                              child: Container(
                                                                 width: 250,
                                                                 height: 45,
                                                                 decoration: BoxDecoration(
                                                                   color: const Color.fromARGB(255, 221, 221, 221),
                                                                   border: Border.all(color: Colors.grey),
                                                                 ),
-                                                                child: SingleChildScrollView(
+                                                                child: const SingleChildScrollView(
                                                                   scrollDirection: Axis.horizontal,
                                                                   child: Center(
-                                                                      child:
-                                                                      Text(
-                                                                        '  ${DateFormat('d MMMM yyyy').format(selectedDate)}',
-                                                                        style: const TextStyle(fontSize: 14,color: Color.fromARGB(255, 140, 140, 140)), // format date as "day month year"
-                                                                      ),),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Expanded(flex: 1, child: Container()),
-                                                        Expanded(
-                                                          flex: 6,
-                                                          child: Container(
-                                                            width: 250,
-                                                            height: 45,
-                                                            decoration: BoxDecoration(
-                                                              color: const Color.fromARGB(255, 221, 221, 221),
-                                                              border: Border.all(color: Colors.grey),
-                                                            ),
-                                                            child: const SingleChildScrollView(
-                                                              scrollDirection: Axis.horizontal,
-                                                              child: Center(
-                                                                child: Text(
-                                                                  'data',
-                                                                  style: TextStyle(fontSize: 14,color: Color.fromARGB(255, 140, 140, 140)),
+                                                                    child: Text(
+                                                                      'data',
+                                                                      style: TextStyle(fontSize: 14,color: Color.fromARGB(255, 140, 140, 140)),
+                                                                    ),
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
-                                                          ),
+                                                          ],
                                                         ),
                                                       ],
-                                                    ),
-                                                  ],
-                                                )
-                                              else
-                                                Container(),
-                                            ],
-                                          )// Add this closing bracket
-                                      )
+                                                    )
+                                                  else
+                                                    Container(),
+                                                ],
+                                              )// Add this closing bracket
+                                          )
+                                        ],
+                                      ),
                                     ],
                                   ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 17),
-                            const Text('QR Key',style: TextStyle(fontSize: 14)),
-                            const SizedBox(height: 7),
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              height: 150,
-                              width: 320,
-                              color: const Color.fromARGB(255, 248, 248, 248),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
+                                ),
+                                const SizedBox(height: 17),
+                                const Text('QR Key',style: TextStyle(fontSize: 14)),
+                                const SizedBox(height: 7),
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  height: 150,
+                                  width: 320,
+                                  color: const Color.fromARGB(255, 248, 248, 248),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: const [
 
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 17),
-                            const Text('Remark',style: TextStyle(fontSize: 14)),
-                            const SizedBox(height: 7),
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              height: 70,
-                              width: 320,
-                              color: const Color.fromARGB(255, 248, 248, 248),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 300,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(5),
-                                      border: Border.all(color: Colors.grey),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 5),
-                                      child: TextFormField(
-                                        controller: remark,
-                                        decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          suffixIcon: remark.text.isNotEmpty
-                                              ? IconButton(
-                                            icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
-                                            onPressed: () {
-                                              setState(() {
-                                                remark.clear();
-                                              });
-                                            },
-                                          )
-                                              : null,
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 17),
+                                const Text('Remark',style: TextStyle(fontSize: 14)),
+                                const SizedBox(height: 7),
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  height: 70,
+                                  width: 320,
+                                  color: const Color.fromARGB(255, 248, 248, 248),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width: 300,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(5),
+                                          border: Border.all(color: Colors.grey),
                                         ),
-                                        onChanged: (value) {
-                                          setState(() {});
-                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(left: 5),
+                                          child: TextFormField(
+                                            controller: remark,
+                                            decoration: InputDecoration(
+                                              border: InputBorder.none,
+                                              suffixIcon: remark.text.isNotEmpty
+                                                  ? IconButton(
+                                                icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    remark.clear();
+                                                  });
+                                                },
+                                              )
+                                                  : null,
+                                            ),
+                                            onChanged: (value) {
+                                              setState(() {});
+                                            },
+                                          ),
+                                        ),
                                       ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                TextButton(
+                                  onPressed: (){
+                                    _addVisitor;
+                                    Navigator.pop(context);
+                                  },
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: Colors.blue,
+                                    primary: Colors.white,
+                                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      side: const BorderSide(color: Colors.grey),
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 20),
-                          TextButton(
-                        onPressed: (){
-                          _addVisitor;
-                          Navigator.pop(context);
-                        },
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          primary: Colors.white,
-                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            side: const BorderSide(color: Colors.grey),
-                          ),
-                        ),
-                           child: const Text(
-                            'Add',
-                            style: TextStyle(fontSize: 16),
-                         ),
-                       )
-                          ],
+                                  child: const Text(
+                                    'Add',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                )
+                              ],
+                            )
                         )
                       ),
                     ),
@@ -768,9 +771,9 @@ void showAddVisitorDialog() {
           appBar: AppBar(
             title: const Text('Visitor',style: TextStyle(fontWeight: FontWeight.w300),),
             bottom: const TabBar(
-              indicatorColor: Colors.black,
-              indicatorWeight: 5,
-              labelColor: Colors.black,
+              indicatorColor: Color.fromARGB(255, 2, 122, 252),
+              indicatorWeight: 3,
+              labelColor: Color.fromARGB(255, 2, 122, 252),
               unselectedLabelColor: Colors.grey,
               tabs: [
                 Tab(

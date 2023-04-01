@@ -75,9 +75,9 @@ class _LaundryState extends State<Laundry> {
           style: TextStyle(fontWeight: FontWeight.w300),
         ),
         bottom: const TabBar(
-          indicatorColor: Colors.black,
-          indicatorWeight: 5,
-          labelColor: Colors.black,
+          indicatorColor: Color.fromARGB(255, 2, 122, 252),
+          indicatorWeight: 2,
+          labelColor: Color.fromARGB(255, 2, 122, 252),
           unselectedLabelColor: Colors.grey,
           tabs: [
             Tab(

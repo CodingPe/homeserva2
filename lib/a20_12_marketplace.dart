@@ -23,9 +23,9 @@ class _MarketplaceState extends State<Marketplace> {
           style: TextStyle(fontWeight: FontWeight.w300),
         ),
         bottom: const TabBar(
-          indicatorColor: Colors.black,
-          indicatorWeight: 5,
-          labelColor: Colors.black,
+          indicatorColor: Color.fromARGB(255, 2, 122, 252),
+          indicatorWeight: 3,
+          labelColor: Color.fromARGB(255, 2, 122, 252),
           unselectedLabelColor: Colors.grey,
           tabs: [
             Tab(

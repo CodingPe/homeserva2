@@ -93,189 +93,192 @@ class _SuggestionsState extends State<Suggestions> {
                         padding: const EdgeInsets.all(20),
                         child:  Form(
                           key: _formKey,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                const Text("New Suggestion",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 22),),
-                                const SizedBox(height: 7),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text("Category"),
-                                    const SizedBox(height: 2),
-                                    Container(
-                                      width: 250,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.grey),
-                                      ),
-                                      child: DropdownButtonFormField(
-                                        hint: const Text(" -- Select --"),
-                                        isExpanded: true,
-                                        value: selectedTitle,
-                                        items: list.map((value) => DropdownMenuItem(
-                                          child: Text('   $value',),
-                                          value: value,
-                                        )).toList(),
-                                        onChanged: (String? value) {
-                                          setState(() {
-                                            selectedTitle = value;
-                                          });
-                                        },
-                                        validator: (value){
-                                          if(value == null || value.isEmpty){
-                                            return "Please select your Category";
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text("Title"),
-                                    const SizedBox(height: 2),
-                                    Container(
+                          child: ScrollConfiguration(
+                            behavior: const ScrollBehavior().copyWith(overscroll: false),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  const Text("New Suggestion",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 22),),
+                                  const SizedBox(height: 7),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Text("Category"),
+                                      const SizedBox(height: 2),
+                                      Container(
                                         width: 250,
                                         decoration: BoxDecoration(
                                           border: Border.all(color: Colors.grey),
                                         ),
-                                        child: TextFormField(
-                                          controller: title,
-                                          decoration: const InputDecoration(
-                                            filled: true,
-                                            fillColor: Colors.white,
-                                          ),
+                                        child: DropdownButtonFormField(
+                                          hint: const Text(" -- Select --"),
+                                          isExpanded: true,
+                                          value: selectedTitle,
+                                          items: list.map((value) => DropdownMenuItem(
+                                            child: Text('   $value',),
+                                            value: value,
+                                          )).toList(),
+                                          onChanged: (String? value) {
+                                            setState(() {
+                                              selectedTitle = value;
+                                            });
+                                          },
                                           validator: (value){
                                             if(value == null || value.isEmpty){
-                                              return "Please fill your title";
+                                              return "Please select your Category";
                                             }
                                             return null;
                                           },
-                                        )
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text("Display to"),
-                                    const SizedBox(height: 2,width: 250),
-                                    RadioListTile(
-                                      title: const Text('Public'),
-                                      value: 'public',
-                                      groupValue: _privacy,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          _privacy = value as String?;
-                                        }
-                                        );
-                                      },
-                                    ),
-                                    const SizedBox(width: 250,),
-                                    RadioListTile(
-                                      title: const Text('Private'),
-                                      value: 'private',
-                                      groupValue: _privacy,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          _privacy = value as String?;
-                                        }
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text("Description"),
-                                    const SizedBox(height: 2),
-                                    Container(
-                                      width: 250,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.grey),
-                                      ),
-                                      child: Expanded(
-                                        child: TextFormField(
-                                          controller: description,
-                                          decoration: const InputDecoration(
-                                            filled: true,
-                                            fillColor: Colors.white,
-                                          ),
-                                          validator: (value){
-                                            if(value == null || value.isEmpty){
-                                              return "Please fill your description";}
-                                            return null;
-                                          },
                                         ),
                                       ),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text("Attachment (PDF, JPG or PNG format)"),
-                                    const SizedBox(height: 2),
-                                    if (image != null)
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Text("Title"),
+                                      const SizedBox(height: 2),
+                                      Container(
+                                          width: 250,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: Colors.grey),
+                                          ),
+                                          child: TextFormField(
+                                            controller: title,
+                                            decoration: const InputDecoration(
+                                              filled: true,
+                                              fillColor: Colors.white,
+                                            ),
+                                            validator: (value){
+                                              if(value == null || value.isEmpty){
+                                                return "Please fill your title";
+                                              }
+                                              return null;
+                                            },
+                                          )
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Text("Display to"),
+                                      const SizedBox(height: 2,width: 250),
+                                      RadioListTile(
+                                        title: const Text('Public'),
+                                        value: 'public',
+                                        groupValue: _privacy,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _privacy = value as String?;
+                                          }
+                                          );
+                                        },
+                                      ),
+                                      const SizedBox(width: 250,),
+                                      RadioListTile(
+                                        title: const Text('Private'),
+                                        value: 'private',
+                                        groupValue: _privacy,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _privacy = value as String?;
+                                          }
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Text("Description"),
+                                      const SizedBox(height: 2),
                                       Container(
                                         width: 250,
-                                        height: 250,
                                         decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: FileImage(image!),
-                                            fit: BoxFit.cover,
+                                          border: Border.all(color: Colors.grey),
+                                        ),
+                                        child: Expanded(
+                                          child: TextFormField(
+                                            controller: description,
+                                            decoration: const InputDecoration(
+                                              filled: true,
+                                              fillColor: Colors.white,
+                                            ),
+                                            validator: (value){
+                                              if(value == null || value.isEmpty){
+                                                return "Please fill your description";}
+                                              return null;
+                                            },
                                           ),
                                         ),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Text("Attachment (PDF, JPG or PNG format)"),
+                                      const SizedBox(height: 2),
+                                      if (image != null)
+                                        Container(
+                                          width: 250,
+                                          height: 250,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: FileImage(image!),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      if (image != null)
+                                        Positioned(
+                                          top: 0,
+                                          right: 0,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                image = null;
+                                              });
+                                            },
+                                            child: const Icon(
+                                              Icons.clear,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      Container(
+                                        width: 250,
+                                        color: Colors.blue,
+                                        child: TextButton(onPressed: (){
+                                          pickImage();
+                                        }, child: const Text("Upload",style: TextStyle(color: Colors.white),)),
                                       ),
-                                    if (image != null)
-                                      Positioned(
-                                        top: 0,
-                                        right: 0,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              image = null;
-                                            });
+                                      const SizedBox(height: 7),
+                                      Container(
+                                        width: 250,
+                                        color: Colors.blue,
+                                        child: TextButton(
+                                          onPressed: () {
+                                            _addSuggestion();
+                                            print(image);
+                                            Navigator.pop(context);
                                           },
-                                          child: const Icon(
-                                            Icons.clear,
-                                            color: Colors.white,
+                                          child: const Text(
+                                            "Add",
+                                            style: TextStyle(color: Colors.white),
                                           ),
                                         ),
                                       ),
-                                    Container(
-                                      width: 250,
-                                      color: Colors.blue,
-                                      child: TextButton(onPressed: (){
-                                        pickImage();
-                                      }, child: const Text("Upload",style: TextStyle(color: Colors.white),)),
-                                    ),
-                                    const SizedBox(height: 7),
-                                    Container(
-                                      width: 250,
-                                      color: Colors.blue,
-                                      child: TextButton(
-                                        onPressed: () {
-                                          _addSuggestion();
-                                          print(image);
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Text(
-                                          "Add",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -303,9 +306,9 @@ class _SuggestionsState extends State<Suggestions> {
           style: TextStyle(fontWeight: FontWeight.w300),
         ),
         bottom: const TabBar(
-          indicatorColor: Colors.black,
-          indicatorWeight: 5,
-          labelColor: Colors.black,
+          indicatorColor: Color.fromARGB(255, 2, 122, 252),
+          indicatorWeight: 3,
+          labelColor: Color.fromARGB(255, 2, 122, 252),
           unselectedLabelColor: Colors.grey,
           tabs: [
             Tab(
