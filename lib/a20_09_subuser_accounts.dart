@@ -170,6 +170,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -202,6 +203,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -234,6 +236,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -266,6 +269,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -298,6 +302,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -330,6 +335,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -362,6 +368,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -394,6 +401,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -532,6 +540,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -564,6 +573,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -596,6 +606,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -628,6 +639,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -660,6 +672,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -692,6 +705,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -724,6 +738,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -756,6 +771,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -788,6 +804,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -820,6 +837,7 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
+                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),

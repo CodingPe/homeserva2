@@ -107,6 +107,7 @@ class _ComplaintsState extends State<Complaints> {
                                     const SizedBox(height: 2),
                                     Container(
                                       width: 250,
+                                      height: 50,
                                       decoration: BoxDecoration(
                                         border: Border.all(color: Colors.grey),
                                       ),
@@ -145,6 +146,7 @@ class _ComplaintsState extends State<Complaints> {
                                     const SizedBox(height: 2),
                                     Container(
                                         width: 250,
+                                        height: 40,
                                         decoration: BoxDecoration(
                                           border:
                                           Border.all(color: Colors.grey),
@@ -203,6 +205,7 @@ class _ComplaintsState extends State<Complaints> {
                                     const SizedBox(height: 2),
                                     Container(
                                       width: 250,
+                                      height: 40,
                                       decoration: BoxDecoration(
                                         border: Border.all(color: Colors.grey),
                                       ),
