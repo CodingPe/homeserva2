@@ -74,201 +74,204 @@ class _ComplaintsState extends State<Complaints> {
     }
   }
 
-  void showAddContentDialog() {
+  void showAddComplaintDialog() {
     showDialog(
         context: context,
         builder: (ctx) => StatefulBuilder(builder: (context, setState) {
           return Center(
             child: Container(
-                constraints: const BoxConstraints(minWidth: 500),
+              height: 500,
                 margin: const EdgeInsets.all(20),
                 child: Card(
                   shadowColor: Colors.blueGrey,
                   child: Container(
                     padding: const EdgeInsets.all(20),
                     child: Form(
-                      key: _formKey,
-                      child: ScrollConfiguration(
+                        key: _formKey,
+                        child: ScrollConfiguration(
                           behavior: const ScrollBehavior().copyWith(overscroll: false),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                const Text(
-                                  "New Complaint",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 22),
-                                ),
-                                const SizedBox(height: 7),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text("Category"),
-                                    const SizedBox(height: 2),
-                                    Container(
-                                      width: 250,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.grey),
-                                      ),
-                                      child: DropdownButtonFormField(
-                                        hint: const Text(" -- Select --"),
-                                        isExpanded: true,
-                                        value: selectedTitle,
-                                        items: list
-                                            .map((value) => DropdownMenuItem(
-                                          child: Text(
-                                            '   $value',
-                                          ),
-                                          value: value,
-                                        ))
-                                            .toList(),
-                                        onChanged: (String? value) {
-                                          setState(() {
-                                            selectedTitle = value;
-                                          });
-                                        },
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return "Please select your Category";
-                                          }
-                                          return null;
-                                        },
-                                      ),
+                          child: ListView(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Center(
+                                    child: Text("New Complaint",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 22),),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  const Text("Category",style: TextStyle(fontSize: 14)),
+                                  const SizedBox(height: 2),
+                                  Container(
+                                    width: 300,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(color: Colors.grey),
                                     ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text("Title"),
-                                    const SizedBox(height: 2),
-                                    Container(
-                                        width: 250,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          border:
-                                          Border.all(color: Colors.grey),
-                                        ),
-                                        child: TextFormField(
-                                          controller: title,
-                                          decoration: const InputDecoration(
-                                            filled: true,
-                                            fillColor: Colors.white,
-                                          ),
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return "Please fill your title";
-                                            }
-                                            return null;
-                                          },
-                                        )),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text("Display to"),
-                                    const SizedBox(height: 2,width: 250),
-                                    RadioListTile(
-                                      title: const Text('Public'),
-                                      value: 'public',
-                                      groupValue: _privacy,
-                                      onChanged: (value) {
+                                    child: DropdownButtonFormField(
+                                      decoration: const InputDecoration(
+                                        border: InputBorder.none,
+                                      ),
+                                      isExpanded: true,
+                                      value: list.first,
+                                      items: list.map((value) => DropdownMenuItem(
+                                        value: value,
+                                        child: Text('   $value',),
+                                      )).toList(),
+                                      onChanged: (String? value) {
                                         setState(() {
-                                          _privacy = value as String?;
-                                        }
-                                        );
-                                      },
-                                    ),
-                                    const SizedBox(width: 250),
-                                    RadioListTile(
-                                      title: const Text('Private'),
-                                      value: 'private',
-                                      groupValue: _privacy,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          _privacy = value as String?;
+                                          selectedTitle = value;
                                         });
                                       },
                                     ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text("Description"),
-                                    const SizedBox(height: 2),
-                                    Container(
-                                      width: 250,
-                                      height: 40,
+                                  ),
+                                  const SizedBox(height: 10),
+                                  const Text("Title",style: TextStyle(fontSize: 14)),
+                                  const SizedBox(height: 2),
+                                  Container(
+                                      width: 300,
                                       decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(5),
                                         border: Border.all(color: Colors.grey),
                                       ),
-                                      child: Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 5),
+                                        child: TextFormField(
+                                          controller: title,
+                                          decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            suffixIcon: title.text.isNotEmpty
+                                                ? IconButton(
+                                              icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                              onPressed: () {
+                                                setState(() {
+                                                  title.clear();
+                                                });
+                                              },
+                                            )
+                                                : null,
+                                          ),
+                                          onChanged: (value) {
+                                            setState(() {});
+                                          },
+                                        ),
+                                      )
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Text("Display to"),
+                                      const SizedBox(height: 2,width: 250),
+                                      RadioListTile(
+                                        title: const Text('Public'),
+                                        value: 'public',
+                                        groupValue: _privacy,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _privacy = value as String?;
+                                          }
+                                          );
+                                        },
+                                      ),
+                                      const SizedBox(width: 250,),
+                                      RadioListTile(
+                                        title: const Text('Private'),
+                                        value: 'private',
+                                        groupValue: _privacy,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _privacy = value as String?;
+                                          }
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  const Text("Description",style: TextStyle(fontSize: 14)),
+                                  const SizedBox(height: 2),
+                                  Container(
+                                      width: 300,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(5),
+                                        border: Border.all(color: Colors.grey),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 5),
                                         child: TextFormField(
                                           controller: description,
-                                          decoration: const InputDecoration(
-                                            filled: true,
-                                            fillColor: Colors.white,
+                                          decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            suffixIcon: description.text.isNotEmpty
+                                                ? IconButton(
+                                              icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
+                                              onPressed: () {
+                                                setState(() {
+                                                  description.clear();
+                                                });
+                                              },
+                                            )
+                                                : null,
                                           ),
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return "Please fill your description";
-                                            }
-                                            return null;
+                                          onChanged: (value) {
+                                            setState(() {});
                                           },
                                         ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                        "Attachment (PDF, JPG or PNG format)"),
-                                    const SizedBox(height: 2),
-                                    Container(
-                                      width: 250,
-                                      color: Colors.blue,
-                                      child: TextButton(
-                                          onPressed: () {
-                                            pickImage();
-                                          },
-                                          child: const Text(
-                                            "Upload",
-                                            style:
-                                            TextStyle(color: Colors.white),
-                                          )),
-                                    ),
-                                    const SizedBox(height: 7),
-                                    Container(
-                                      width: 250,
-                                      color: Colors.blue,
-                                      child: TextButton(
-                                        onPressed: () {
-                                          _addComplaint();
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Text(
-                                          "Add",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
+                                      )
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 20),
+                              SizedBox(
+                                  width: 300,
+                                  height: 50,
+                                  child: TextButton(
+                                    onPressed: (){
+                                      pickImage();
+                                    },
+                                    style: TextButton.styleFrom(
+                                      backgroundColor: Colors.blue,
+                                      primary: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5),
+                                        side: const BorderSide(color: Colors.grey),
                                       ),
                                     ),
-                                  ],
+                                    child: const Text(
+                                      'Upload',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                              ),
+                              const SizedBox(height: 10),
+                              SizedBox(
+                                width: 300,
+                                height: 50,
+                                child: TextButton(
+                                  onPressed: (){
+                                    Navigator.pop(context);
+                                  },
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: Colors.blue,
+                                    primary: Colors.white,
+                                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      side: const BorderSide(color: Colors.grey),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    'Add',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
                                 ),
-                              ],
-                            ),
-                          )
-                      ),
+                              )
+                            ],
+                          ),
+                        )
                     ),
                   ),
                 )),
@@ -309,7 +312,7 @@ class _ComplaintsState extends State<Complaints> {
         ),
         actions: [
           IconButton(onPressed: () {
-            showAddContentDialog();
+            showAddComplaintDialog();
           }, icon: const Icon(Icons.add, color: Colors.black))
         ],
       ),

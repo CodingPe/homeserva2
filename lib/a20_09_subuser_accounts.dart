@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +13,60 @@ class SubUser extends StatefulWidget {
 }
 
 class _SubUserState extends State<SubUser> {
+  int _countdown = 0;
+  late Timer _timer;
+  bool _isPressed = false;
+
+  void _startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _countdown = 3;
+    _timer = Timer.periodic(
+      oneSec,
+          (Timer timer) => setState(
+            () {
+          if (_countdown < 1) {
+            timer.cancel();
+            _showSOSDialog();
+          } else {
+            _countdown = _countdown - 1;
+          }
+        },
+      ),
+    );
+  }
+
+  void _showSOSDialog() {
+    if (_countdown == 0) {
+      setState(() {
+        _isPressed = false;
+        _countdown = 0;
+      });
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("SOS Alert"),
+            content: const Text("The SOS alarm has been successfully called!"),
+            actions: <Widget>[
+              GestureDetector(
+                onTap: (){
+                  Navigator.of(context).pop();
+                },
+                child: const Icon(Icons.clear),
+              )
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
   final _formKey = GlobalKey<FormState>();
   final List<String> accountType = <String>[
     'Family',
@@ -160,7 +215,7 @@ class _SubUserState extends State<SubUser> {
                                             if (_entity == 'personal')
                                               Container(
                                                   padding: const EdgeInsets.all(10),
-                                                  height: 1120,
+                                                  height: 1130,
                                                   width: 320,
                                                   color: const Color.fromARGB(255, 248, 248, 248),
                                                   child: Column(
@@ -170,7 +225,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -203,7 +257,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -236,7 +289,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -269,7 +321,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -302,7 +353,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -335,7 +385,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -368,7 +417,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -401,7 +449,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -448,7 +495,7 @@ class _SubUserState extends State<SubUser> {
                                                         },
                                                         child: Container(
                                                             width: 300,
-                                                            height: 40,
+                                                            height: 50,
                                                             decoration: BoxDecoration(
                                                               border: Border.all(color: Colors.grey),
                                                               borderRadius: BorderRadius.circular(5),
@@ -540,7 +587,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -573,7 +619,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -606,7 +651,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -639,7 +683,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -672,7 +715,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -705,7 +747,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -738,7 +779,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -771,7 +811,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -804,7 +843,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -837,7 +875,6 @@ class _SubUserState extends State<SubUser> {
                                                       const SizedBox(height: 2),
                                                       Container(
                                                         width: 300,
-                                                        height: 40,
                                                         decoration: BoxDecoration(
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(5),
@@ -884,7 +921,7 @@ class _SubUserState extends State<SubUser> {
                                                         },
                                                         child: Container(
                                                             width: 300,
-                                                            height: 40,
+                                                            height: 50,
                                                             decoration: BoxDecoration(
                                                               border: Border.all(color: Colors.grey),
                                                               borderRadius: BorderRadius.circular(5),
@@ -1041,7 +1078,7 @@ class _SubUserState extends State<SubUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sub-User Accounts',style: TextStyle(fontWeight: FontWeight.w300),),
+          title: const Text('Sub-User Accounts',style: TextStyle(fontWeight: FontWeight.w300),),
           actions: [
             IconButton(onPressed: showAddNewSubUserAccountDialog, icon: const Icon(Icons.add)),
             SizedBox(
@@ -1049,35 +1086,120 @@ class _SubUserState extends State<SubUser> {
               height: 35,
               child: CircleAvatar(
                   backgroundColor: Colors.red,
-                  child: FloatingActionButton(
-                      backgroundColor: Colors.red,
-                      onPressed: () {},
-                      child: const Text('SOS',
-                          style:
-                          TextStyle(color: Colors.white, fontSize: 11)
-                      )
-                  )
+                  child: GestureDetector(
+                    onTapDown: (_) {
+                      setState(() {
+                        _countdown = 3;
+                      });
+                    },
+                    onLongPressStart: (_) {
+                      setState(() {
+                        _isPressed = true;
+                      });
+                      _startTimer();
+                    },
+                    onLongPressEnd: (_) {
+                      setState(() {
+                        _isPressed = false;
+                        _timer?.cancel();
+                        _countdown = 1;
+                      });
+                    },
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                      width: 100,
+                      height: 100,
+                      child: const Center(
+                        child: Text(
+                          "SOS",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
               ),
             ),
             const SizedBox(width: 10)
           ]
       ),
-      body: Center(
-        child: Column(
-          children: [
+      body: Stack(
+        children: [
+          if (_isPressed)
             Container(
-              margin: const EdgeInsets.only(top: 20),
-              child: const Text(
-                "No sub-user account found",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w200,
-                  color: Color.fromARGB(255, 66, 72, 82),
-                ),
+              color: const Color.fromARGB(255, 51, 51, 51).withOpacity(0.8),
+            ),
+          Center(
+            child: AnimatedOpacity(
+              opacity: _isPressed ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 200),
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                child: Center(
+                  child: Column(
+                    children: [
+                      const Text(
+                          'Emergency SOS',
+                          style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 40
+                          ),
+                      ),
+                      const SizedBox(height: 30),
+                      Text(
+                        _countdown.toString(),
+                        style: const TextStyle(
+                          fontSize: 120,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      AnimatedContainer(
+                        duration: const Duration(seconds: 1),
+                        width: MediaQuery.of(context).size.width * _countdown / 3, // Set the width of the slider based on the countdown value
+                        height: 10,
+                        color: Colors.red,
+                      ),
+                      const SizedBox(height: 40),
+                      const Text(
+                        'Initializing...',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+          Center(
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  child: const Text(
+                    "No sub-user account found",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w200,
+                      color: Color.fromARGB(255, 66, 72, 82)
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

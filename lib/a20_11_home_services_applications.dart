@@ -123,7 +123,7 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
                                                     },
                                                     child: Container(
                                                         width: 300,
-                                                        height: 40,
+                                                        height: 50,
                                                         decoration: BoxDecoration(
                                                           border: Border.all(color: Colors.grey),
                                                           borderRadius: BorderRadius.circular(5),
@@ -165,7 +165,7 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
                                                     },
                                                     child: Container(
                                                         width: 300,
-                                                        height: 40,
+                                                        height: 50,
                                                         decoration: BoxDecoration(
                                                           border: Border.all(color: Colors.grey),
                                                           borderRadius: BorderRadius.circular(5),
@@ -189,7 +189,6 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
                                       const SizedBox(height: 2),
                                       Container(
                                           width: 300,
-                                          height: 40,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius: BorderRadius.circular(5),
@@ -223,7 +222,6 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
                                       const SizedBox(height: 2),
                                       Container(
                                           width: 300,
-                                          height: 40,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius: BorderRadius.circular(5),
@@ -264,7 +262,6 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
                                                   const SizedBox(height: 2),
                                                   Container(
                                                       width: 300,
-                                                      height: 40,
                                                       decoration: BoxDecoration(
                                                         color: Colors.white,
                                                         borderRadius: BorderRadius.circular(5),
@@ -307,7 +304,6 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
                                                   const SizedBox(height: 2),
                                                   Container(
                                                       width: 300,
-                                                      height: 40,
                                                       decoration: BoxDecoration(
                                                         color: Colors.white,
                                                         borderRadius: BorderRadius.circular(5),
@@ -345,7 +341,6 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
                                       const SizedBox(height: 2),
                                       Container(
                                         width: 300,
-                                        height: 40,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius: BorderRadius.circular(5),

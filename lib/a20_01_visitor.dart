@@ -157,7 +157,7 @@ void showAddVisitorDialog() {
                                         },
                                         child: Container(
                                             width: 300,
-                                            height: 40,
+                                            height: 50,
                                             decoration: BoxDecoration(
                                               border: Border.all(color: Colors.grey),
                                               borderRadius: BorderRadius.circular(5),
@@ -177,7 +177,6 @@ void showAddVisitorDialog() {
                                       const SizedBox(height: 2),
                                       Container(
                                         width: 300,
-                                        height: 40,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius: BorderRadius.circular(5),
@@ -218,7 +217,6 @@ void showAddVisitorDialog() {
                                                   const SizedBox(height: 2),
                                                   Container(
                                                     width: 300,
-                                                    height: 40,
                                                     decoration: BoxDecoration(
                                                       color: Colors.white,
                                                       borderRadius: BorderRadius.circular(5),
@@ -260,7 +258,6 @@ void showAddVisitorDialog() {
                                                   const SizedBox(height: 2),
                                                   Container(
                                                     width: 300,
-                                                    height: 40,
                                                     decoration: BoxDecoration(
                                                       color: Colors.white,
                                                       borderRadius: BorderRadius.circular(5),
@@ -305,7 +302,6 @@ void showAddVisitorDialog() {
                                                   const SizedBox(height: 2),
                                                   Container(
                                                       width: 300,
-                                                      height: 40,
                                                       decoration: BoxDecoration(
                                                         color: Colors.white,
                                                         borderRadius: BorderRadius.circular(5),
@@ -348,7 +344,6 @@ void showAddVisitorDialog() {
                                                   const SizedBox(height: 2),
                                                   Container(
                                                     width: 300,
-                                                    height: 40,
                                                     decoration: BoxDecoration(
                                                       color: Colors.white,
                                                       borderRadius: BorderRadius.circular(5),
@@ -385,7 +380,6 @@ void showAddVisitorDialog() {
                                       const SizedBox(height: 2),
                                       Container(
                                           width: 300,
-                                          height: 40,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius: BorderRadius.circular(5),
@@ -426,7 +420,6 @@ void showAddVisitorDialog() {
                                                   const SizedBox(height: 2),
                                                   Container(
                                                       width: 300,
-                                                      height: 40,
                                                       decoration: BoxDecoration(
                                                         color: Colors.white,
                                                         borderRadius: BorderRadius.circular(5),
@@ -467,31 +460,29 @@ void showAddVisitorDialog() {
                                                 children:  [
                                                   const Text("Parking Lot",style: TextStyle(fontSize: 14)),
                                                   const SizedBox(height: 2),
-                                                  DropdownButtonFormField(
-                                                    decoration: InputDecoration(
-                                                      enabledBorder: OutlineInputBorder(
-                                                          borderSide: const BorderSide(color: Colors.grey),
-                                                          borderRadius: BorderRadius.circular(5)
-                                                      ),
-                                                      focusedBorder: OutlineInputBorder(
-                                                          borderSide: const BorderSide(color: Colors.grey),
-                                                          borderRadius: BorderRadius.circular(5)
-                                                      ),
-                                                      filled: true,
-                                                      fillColor: Colors.white,
-                                                      border: InputBorder.none,
+                                                  Container(
+                                                    width: 250,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius: BorderRadius.circular(5),
+                                                      border: Border.all(color: Colors.grey),
                                                     ),
-                                                    isExpanded: true,
-                                                    value: parkingLot.first,
-                                                    items: parkingLot.map((value) => DropdownMenuItem(
-                                                      value: value,
-                                                      child: Text('   $value',),
-                                                    )).toList(),
-                                                    onChanged: (String? value) {
-                                                      setState(() {
-                                                        selectedParkingLot = value;
-                                                      });
-                                                    },
+                                                    child: DropdownButtonFormField(
+                                                      decoration: const InputDecoration(
+                                                        border: InputBorder.none,
+                                                      ),
+                                                      isExpanded: true,
+                                                      value: parkingLot.first,
+                                                      items: parkingLot.map((value) => DropdownMenuItem(
+                                                        value: value,
+                                                        child: Text('   $value',),
+                                                      )).toList(),
+                                                      onChanged: (String? value) {
+                                                        setState(() {
+                                                          selectedParkingLot = value;
+                                                        });
+                                                      },
+                                                    ),
                                                   )
                                                 ],
                                               ))
@@ -704,7 +695,6 @@ void showAddVisitorDialog() {
                                     children: [
                                       Container(
                                         width: 300,
-                                        height: 40,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius: BorderRadius.circular(5),
