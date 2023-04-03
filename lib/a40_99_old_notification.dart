@@ -40,7 +40,7 @@ class Notifications extends StatelessWidget {
                 child: FutureBuilder(
                   future: getNotificationsData(),
                   builder: (context, snapshot) {
-                    if (snapshot.hasError) print(snapshot.error);
+                    if (snapshot.hasError) debugPrint(snapshot.error as String);
                     return snapshot.hasData
                         ? ListView.builder(
                             itemCount: snapshot.data.length,
@@ -103,7 +103,7 @@ class Notifications extends StatelessWidget {
                             ),
                           );
                   },
-                ) //這個是announcement的futurebuilder 可以通過上面的flex改變大小
+                ) //這個是announcement的futureBuilder 可以通過上面的flex改變大小
                 ),
           ],
         )));

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:homeserva_2/a00_00_directory.dart';
 
 double meGab = 6.8;
 
@@ -107,7 +106,7 @@ class MeContent extends StatelessWidget {
                           child: Text(field)))
                 ]),
           ),
-          SizedBox(height: meGab)
+          SizedBox(height: meGab),
         ]);
   }
 }

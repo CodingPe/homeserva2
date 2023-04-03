@@ -1,6 +1,7 @@
 {
   "editor.formatOnSave": true,
   "cSpell.words": [
+    "ARGB",
     "Cupertino",
     "homeserva",
     "NRIC",
@@ -10,5 +11,6 @@
     "tukangman",
     "uid"
   ],
-  "cmake.sourceDirectory": "${workspaceFolder}/linux"
+  "cmake.sourceDirectory": "${workspaceFolder}/linux",
+  "cSpell.ignoreWords": ["MHTV"]
 }
