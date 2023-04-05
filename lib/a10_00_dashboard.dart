@@ -89,13 +89,15 @@ class _DashboardState extends State<Dashboard> {
               ]))),
           Expanded(
               flex: 8,
-              child: Scrollbar(
-                child: FutureBuilder(
-                  future: getAnnouncementData(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) print(snapshot.error);
-                    return snapshot.hasData
-                        ? ListView.builder(
+              child: ScrollConfiguration(
+                  behavior: const ScrollBehavior().copyWith(overscroll: false),
+                  child: Scrollbar(
+                    child: FutureBuilder(
+                      future: getAnnouncementData(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) print(snapshot.error);
+                        return snapshot.hasData
+                            ? ListView.builder(
                             itemCount: snapshot.data.length,
                             itemBuilder: (context, index) {
                               List list = snapshot.data;
@@ -111,7 +113,7 @@ class _DashboardState extends State<Dashboard> {
                                       child: Row(children: [
                                         ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(12.0),
+                                            BorderRadius.circular(12.0),
                                             child: Image.network(
                                                 list[index]['Photo'],
                                                 width: 70,
@@ -121,38 +123,38 @@ class _DashboardState extends State<Dashboard> {
                                         Expanded(
                                             child: Column(
                                                 crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                                 children: [
-                                              Text(
-                                                list[index]['Title'],
-                                                style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20),
-                                              ),
-                                              const SizedBox(height: 10),
-                                              Text(
-                                                list[index]['Time'],
-                                                style: const TextStyle(
-                                                    fontWeight: FontWeight.w200,
-                                                    color: Color.fromARGB(
-                                                        255, 66, 72, 82),
-                                                    fontSize: 13),
-                                              )
-                                            ]))
+                                                  Text(
+                                                    list[index]['Title'],
+                                                    style: const TextStyle(
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 20),
+                                                  ),
+                                                  const SizedBox(height: 10),
+                                                  Text(
+                                                    list[index]['Time'],
+                                                    style: const TextStyle(
+                                                        fontWeight: FontWeight.w200,
+                                                        color: Color.fromARGB(
+                                                            255, 66, 72, 82),
+                                                        fontSize: 13),
+                                                  )
+                                                ]))
                                       ])));
                             })
-                        : const Center(
-                            child: Text(
-                              "No announcements yet",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w200,
-                                color: Color.fromARGB(255, 66, 72, 82),
-                              ),
+                            : const Center(
+                          child: Text(
+                            "No announcements yet",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w200,
+                              color: Color.fromARGB(255, 66, 72, 82),
                             ),
-                          );
-                  },
-                ),
-              ) //這個是announcement的futurebuilder 可以通過上面的flex改變大小
+                          ),
+                        );
+                      },
+                    ),
+                  )) //這個是announcement的futurebuilder 可以通過上面的flex改變大小
               ),
         ]));
   }

@@ -318,150 +318,152 @@ class _ComplaintsState extends State<Complaints> {
       ),
       body: TabBarView(
         children: [
-          Scrollbar(
-              child: FutureBuilder(
-                future: getComplaintData(),
-                builder: (context, snapshot){
-                  if(snapshot.hasError) print(snapshot.error);
-                  return snapshot.connectionState == ConnectionState.done && snapshot.data != null && snapshot.data.length > 0
-                      ? ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      List list = snapshot.data;
-                      if (list[index]['Display'] == 'public') {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
-                          child: GestureDetector(
-                              onTap: () async {
-                                await showDialog(
-                                  context: context,
-                                  builder: (ctx) => StatefulBuilder(
-                                    builder: (context, setState) {
-                                      return Center(
-                                        child: Container(
-                                          constraints: const BoxConstraints(minWidth: 500),
-                                          margin: const EdgeInsets.all(20),
-                                          child: Card(
-                                            elevation: 10,
-                                            shadowColor: Colors.blueGrey,
+          ScrollConfiguration(
+              behavior: const ScrollBehavior().copyWith(overscroll: false),
+              child: Scrollbar(
+                  child: FutureBuilder(
+                    future: getComplaintData(),
+                    builder: (context, snapshot){
+                      if(snapshot.hasError) print(snapshot.error);
+                      return snapshot.connectionState == ConnectionState.done && snapshot.data != null && snapshot.data.length > 0
+                          ? ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          List list = snapshot.data;
+                          if (list[index]['Display'] == 'public') {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
+                              child: GestureDetector(
+                                  onTap: () async {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (ctx) => StatefulBuilder(
+                                        builder: (context, setState) {
+                                          return Center(
                                             child: Container(
-                                              padding: const EdgeInsets.all(20),
-                                              color: Colors.grey[200],
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  const Text(
-                                                    'Complaint Detail',
-                                                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                                              constraints: const BoxConstraints(minWidth: 500),
+                                              margin: const EdgeInsets.all(20),
+                                              child: Card(
+                                                elevation: 10,
+                                                shadowColor: Colors.blueGrey,
+                                                child: Container(
+                                                  padding: const EdgeInsets.all(20),
+                                                  color: Colors.grey[200],
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: [
+                                                      const Text(
+                                                        'Complaint Detail',
+                                                        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                                                      ),
+                                                      ClipRRect(
+                                                        borderRadius: BorderRadius.circular(12.0),
+                                                        child: Image.network(
+                                                          list[index]['Photo'],
+                                                        ),
+                                                      ),
+                                                      const SizedBox(height: 15),
+                                                      const Text(
+                                                        'Unit\nD-5-19',
+                                                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
+                                                      ),
+                                                      const SizedBox(height: 15),
+                                                      Text(
+                                                        'Category\n${list[index]['Category']}',
+                                                        style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
+                                                      ),
+                                                      const SizedBox(height: 15),
+                                                      Text(
+                                                        'Title\n${list[index]['Title']}',
+                                                        style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
+                                                      ),
+                                                      const SizedBox(height: 15),
+                                                      Text(
+                                                        'Show to\n${list[index]['Display']}',
+                                                        style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
+                                                      ),
+                                                      const SizedBox(height: 15),
+                                                      Text(
+                                                        'Description\n${list[index]['Description']}',
+                                                        style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
+                                                      ),
+                                                    ],
                                                   ),
-                                                  ClipRRect(
-                                                    borderRadius: BorderRadius.circular(12.0),
-                                                    child: Image.network(
-                                                      list[index]['Photo'],
-                                                    ),
-                                                  ),
-                                                  const SizedBox(height: 15),
-                                                  const Text(
-                                                    'Unit\nD-5-19',
-                                                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
-                                                  ),
-                                                  const SizedBox(height: 15),
-                                                  Text(
-                                                    'Category\n${list[index]['Category']}',
-                                                    style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
-                                                  ),
-                                                  const SizedBox(height: 15),
-                                                  Text(
-                                                    'Title\n${list[index]['Title']}',
-                                                    style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
-                                                  ),
-                                                  const SizedBox(height: 15),
-                                                  Text(
-                                                    'Show to\n${list[index]['Display']}',
-                                                    style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
-                                                  ),
-                                                  const SizedBox(height: 15),
-                                                  Text(
-                                                    'Description\n${list[index]['Description']}',
-                                                    style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
-                                                  ),
-                                                ],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                );
-                              },
-                              child: SizedBox(
-                                width: 300,
-                                height: 50,
-                                child: Row(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      child: Image.network(
-                                        list[index]['Photo'],
-                                        width: 48,
-                                        height: 48,
-                                        fit: BoxFit.cover,
+                                          );
+                                        },
                                       ),
-                                    ),
-                                    const SizedBox(width: 12),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                    );
+                                  },
+                                  child: SizedBox(
+                                      width: 300,
+                                      height: 50,
+                                      child: Row(
                                         children: [
-                                          Text(
-                                            list[index]['Category'],
-                                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                                          ClipRRect(
+                                            borderRadius: BorderRadius.circular(12.0),
+                                            child: Image.network(
+                                              list[index]['Photo'],
+                                              width: 48,
+                                              height: 48,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
-                                          const SizedBox(height: 3),
-                                          Text(
-                                            list[index]['Title'],
-                                            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16,color: Colors.grey),
+                                          const SizedBox(width: 12),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  list[index]['Category'],
+                                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                                                ),
+                                                const SizedBox(height: 3),
+                                                Text(
+                                                  list[index]['Title'],
+                                                  style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16,color: Colors.grey),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                              children: const [
+                                                Text(
+                                                  '1 day outstanding\n',
+                                                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13,color: Colors.grey),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.end,
-                                        children: const [
-                                          Text(
-                                            '1 day outstanding\n',
-                                            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13,color: Colors.grey),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              )
-                          ),
+                                      )
+                                  )
+                              ),
 
-                        );
-                      } else {
-                        // If display is private, return an empty Container
-                        return Container();
-                      }
+                            );
+                          } else {
+                            // If display is private, return an empty Container
+                            return Container();
+                          }
+                        },
+                      )
+                          : const Center(
+                        child: Text(
+                          "No complaint yet",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w200,
+                            color: Color.fromARGB(255, 66, 72, 82),
+                          ),
+                        ),
+                      );
                     },
                   )
-                      : const Center(
-                    child: Text(
-                      "No complaint yet",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w200,
-                        color: Color.fromARGB(255, 66, 72, 82),
-                      ),
-                    ),
-                  );
-                },
-              )
-          ),
+              )),
           const Center(
             child: Text('Processing'),
           ),
