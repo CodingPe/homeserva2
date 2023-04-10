@@ -29,47 +29,40 @@ class _SubUserState extends State<SubUser> {
 
   void _startTimer() {
     const oneSec = Duration(seconds: 1);
-    _countdown = 3;
-    _timer = Timer.periodic(
-      oneSec,
-          (Timer timer) {
-        setState(() {
-          if (_countdown < 1) {
-            _timer?.cancel();
-            _countdown = 0;
-            _countdownEnded = true; // set flag to true
-          } else {
-            _countdown = _countdown - 1;
-          }
-        });
-      },
-    );
+    _timer = Timer.periodic(oneSec, (timer) {
+      setState(() {
+        if (_countdown == 0) {
+          _countdownEnded = true;
+          _timer?.cancel();
+        } else {
+          _countdown--;
+        }
+      });
+    });
   }
 
   void _showSOSAccessDialog() {
-    if (_countdown == 0) {
-      setState(() {
-        _isPressed = false;
-        _countdown = 0;
-      });
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text("SOS Alert"),
-            content: const Text("The SOS alarm has been successfully called!"),
-            actions: <Widget>[
-              GestureDetector(
-                onTap: (){
-                  Navigator.of(context).pop();
-                },
-                child: const Icon(Icons.clear),
-              )
-            ],
-          );
-        },
-      );
-    }
+    setState(() {
+      _isPressed = false;
+      _countdown = 0;
+    });
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("SOS Alert"),
+          content: const Text("The SOS alarm has been successfully called!"),
+          actions: <Widget>[
+            GestureDetector(
+              onTap: (){
+                Navigator.of(context).pop();
+              },
+              child: const Icon(Icons.clear),
+            )
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -1089,8 +1082,8 @@ class _SubUserState extends State<SubUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Sub-User Accounts',style: TextStyle(fontWeight: FontWeight.w300),),
-          actions: [
+        title: const Text('Sub-User Accounts',style: TextStyle(fontWeight: FontWeight.w300),),
+        actions: [
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.add),
@@ -1103,6 +1096,7 @@ class _SubUserState extends State<SubUser> {
               child: GestureDetector(
                 onTapDown: (_) {
                   setState(() {
+                    _isPressed = false;
                     _countdown = 3;
                     _countdownEnded = false; // set flag to false
                   });
@@ -1117,7 +1111,8 @@ class _SubUserState extends State<SubUser> {
                   setState(() {
                     _isPressed = false;
                     _timer?.cancel();
-                    if (_countdown > 0) {
+                    if (_countdownEnded) {
+                      _isPressed = true;
                       _countdown = 1;
                     }
                   });
@@ -1240,21 +1235,21 @@ class _SubUserState extends State<SubUser> {
                                   });
                                 },
                                 child: Container(
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    color: _isAmbulance ? Colors.white : Colors.red,
-                                    border: Border.all(color: Colors.black),
-                                  ),
-                                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                                  child: Center(
-                                    child: Text(
-                                      'Ambulance',
-                                      style: TextStyle(
-                                        color: _isAmbulance ? Colors.black : Colors.white,
-                                        fontSize: 20,
-                                      ),
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      color: _isAmbulance ? Colors.white : Colors.red,
+                                      border: Border.all(color: Colors.black),
                                     ),
-                                  )
+                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                    child: Center(
+                                      child: Text(
+                                        'Ambulance',
+                                        style: TextStyle(
+                                          color: _isAmbulance ? Colors.black : Colors.white,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    )
                                 ),
                               ),
                               const SizedBox(height: 5),
@@ -1350,16 +1345,16 @@ class _SubUserState extends State<SubUser> {
                                       border: InputBorder.none,
                                     ),
                                     isExpanded: true,
-                                      value: unit.first,
-                                      onChanged: (String? newValue){
-                                        setState(() {
-                                          selectedUnit = newValue!;
-                                        });
-                                      },
-                                      items: unit.map((value) => DropdownMenuItem(
-                                        value: value,
-                                        child: Text('   $value',),
-                                      )).toList(),
+                                    value: unit.first,
+                                    onChanged: (String? newValue){
+                                      setState(() {
+                                        selectedUnit = newValue!;
+                                      });
+                                    },
+                                    items: unit.map((value) => DropdownMenuItem(
+                                      value: value,
+                                      child: Text('   $value',),
+                                    )).toList(),
                                   )
                               ),
                               const SizedBox(height: 15),
@@ -1388,23 +1383,23 @@ class _SubUserState extends State<SubUser> {
                 ),
               ),
             ),
-            Center(
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 20),
-                    child: const Text(
-                      "No sub-user account found",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w200,
-                        color: Color.fromARGB(255, 66, 72, 82),
-                      ),
+          Center(
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  child: const Text(
+                    "No sub-user account found",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w200,
+                      color: Color.fromARGB(255, 66, 72, 82),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
+          ), //Need To Change
         ],
       ),
     );
