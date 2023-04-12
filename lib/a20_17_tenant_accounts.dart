@@ -17,7 +17,7 @@ class _TenantAccountsState extends State<TenantAccounts> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tenant Accounts',style: TextStyle(fontWeight: FontWeight.w300),),
+        title: const Text('Tenant Accounts',style: TextStyle(fontWeight: FontWeight.bold),),
       ),
     );
   }

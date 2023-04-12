@@ -17,7 +17,7 @@ class _EmergencyNumbersState extends State<EmergencyNumbers> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Emergency Numbers',style: TextStyle(fontWeight: FontWeight.w300),),
+        title: const Text('Emergency Numbers',style: TextStyle(fontWeight: FontWeight.bold),),
           actions: [
             SizedBox(
               width: 35,

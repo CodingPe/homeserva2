@@ -10,7 +10,6 @@ class FacilityBookings extends StatefulWidget {
 class _FacilityBookingsState extends State<FacilityBookings> {
   final _formKey = GlobalKey<FormState>();
 
-
   void showAddNewBookingDialog() {
     showDialog(
         context: context,
@@ -46,7 +45,6 @@ class _FacilityBookingsState extends State<FacilityBookings> {
     );
   }
 
-
   @override
   void initState() {
     super.initState();
@@ -58,11 +56,29 @@ class _FacilityBookingsState extends State<FacilityBookings> {
       appBar: AppBar(
         title: const Text(
           'Facility Bookings',
-          style: TextStyle(fontWeight: FontWeight.w300),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        actions: [
-          IconButton(onPressed: showAddNewBookingDialog, icon: const Icon(Icons.add))
-        ],
+      ),
+      bottomNavigationBar: Material(
+        color: Colors.blue,
+        child: InkWell(
+          onTap: () {
+            showAddNewBookingDialog();
+          },
+          child: const SizedBox(
+            height: 60,
+            width: double.infinity,
+            child: Center(
+              child: Text(
+                'New Booking',
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

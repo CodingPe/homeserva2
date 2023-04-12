@@ -17,7 +17,7 @@ class _EmergencySOSState extends State<EmergencySOS> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Emergency SOS',style: TextStyle(fontWeight: FontWeight.w300),),
+        title: const Text('Emergency SOS',style: TextStyle(fontWeight: FontWeight.bold),),
       ),
     );
   }

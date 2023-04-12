@@ -20,7 +20,7 @@ class _MarketplaceState extends State<Marketplace> {
       appBar: AppBar(
         title: const Text(
           'Marketplace',
-          style: TextStyle(fontWeight: FontWeight.w300),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         bottom: const TabBar(
           indicatorColor: Color.fromARGB(255, 2, 122, 252),
@@ -43,24 +43,43 @@ class _MarketplaceState extends State<Marketplace> {
           ],
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.search, color: Colors.black))
+          IconButton(onPressed: () {}, icon: const Icon(Icons.search, color: Colors.black))
         ],
       ),
-      body: TabBarView(
+      body: const TabBarView(
         children: [
-          const Center(
+           Center(
             child: Text('Items'),
           ),
-          const Center(
+           Center(
             child: Text('Foods'),
           ),
-          const Center(
+           Center(
             child: Text('Services'),
           ),
-          const Center(
+           Center(
             child: Text('Others'),
           ),
         ],
+      ),
+      bottomNavigationBar: Material(
+        color: Colors.blue,
+        child: InkWell(
+          onTap: () {},
+          child: const SizedBox(
+            height: 60,
+            width: double.infinity,
+            child: Center(
+              child: Text(
+                'New New Listing',
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     ),
   );

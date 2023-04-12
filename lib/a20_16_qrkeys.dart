@@ -18,7 +18,7 @@ class _QRKeysState extends State<QRKeys> {
       length: 3,
       child: Scaffold(
           appBar: AppBar(
-              title: const Text('QR-Keys',style: TextStyle(fontWeight: FontWeight.w300),),
+              title: const Text('QR-Keys',style: TextStyle(fontWeight: FontWeight.bold),),
               bottom: const TabBar(
                 indicatorColor: Color.fromARGB(255, 2, 122, 252),
                 indicatorWeight: 2,

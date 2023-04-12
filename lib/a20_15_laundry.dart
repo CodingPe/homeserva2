@@ -11,53 +11,55 @@ class _LaundryState extends State<Laundry> {
 
   void showScanQRDialog() {
     showDialog(
-        context: context,
-        builder: (ctx) => StatefulBuilder(
-            builder: (context,setState){
-              return Center(
-                child: Container(
-                  constraints: const BoxConstraints(
-                      minWidth: 500
-                  ),
-                  margin: const EdgeInsets.all(20),
-                  child: Card(
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      color: Colors.grey[200],
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Text('Scan QR Code',style: TextStyle(fontSize: 20)),
-                          const SizedBox(height: 20),
-                          const Text('Please scan the QR Code of the amenity and make payment to start using.'),
-                          const SizedBox(height: 15),
-                          TextButton(
-                            onPressed: (){
-                              Navigator.pop(context);
-                            },
-                            style: TextButton.styleFrom(
-                              backgroundColor: Colors.blue,
-                              primary: Colors.white,
-                              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                            child: const Text(
-                              'Ok',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+        builder: (context, setState) {
+          return Center(
+            child: Container(
+              constraints: const BoxConstraints(minWidth: 500),
+              margin: const EdgeInsets.all(20),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20), // Set the desired radius here
                 ),
-              );
-            }
-        )
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  color: Colors.grey[200],
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text('Scan QR Code', style: TextStyle(fontSize: 20)),
+                      const SizedBox(height: 20),
+                      const Text(
+                          'Please scan the QR Code of the amenity and make payment to start using.'),
+                      const SizedBox(height: 15),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          primary: Colors.white,
+                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        child: const Text(
+                          'Ok',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
     );
+
   }
 
   @override
@@ -72,7 +74,7 @@ class _LaundryState extends State<Laundry> {
       appBar: AppBar(
         title: const Text(
           'Laundry',
-          style: TextStyle(fontWeight: FontWeight.w300),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         bottom: const TabBar(
           indicatorColor: Color.fromARGB(255, 2, 122, 252),

@@ -1027,10 +1027,28 @@ class _AccessCardsState extends State<AccessCards> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Access Cards',style: TextStyle(fontWeight: FontWeight.w300),),
-        actions: [
-          IconButton(onPressed: showAddNewAccessDialog, icon: const Icon(Icons.add))
-        ],
+        title: const Text('Access Cards',style: TextStyle(fontWeight: FontWeight.bold),),
+      ),
+      bottomNavigationBar: Material(
+        color: Colors.blue,
+        child: InkWell(
+          onTap: () {
+            showAddNewAccessDialog();
+          },
+          child: const SizedBox(
+            height: 60,
+            width: double.infinity,
+            child: Center(
+              child: Text(
+                'New Access Card',
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -17,7 +17,7 @@ class _TukangManState extends State<TukangMan> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('TukangMan',style: TextStyle(fontWeight: FontWeight.w300),),
+        title: const Text('TukangMan',style: TextStyle(fontWeight: FontWeight.bold),),
       ),
     );
   }

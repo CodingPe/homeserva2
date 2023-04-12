@@ -17,15 +17,15 @@ class _StatementState extends State<Statement> {
 
   @override
   Widget build(BuildContext context) => DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: const Text('Statement',style: TextStyle(fontWeight: FontWeight.w300),),
+          title: const Text('Statement',style: TextStyle(fontWeight: FontWeight.bold),),
           bottom: const TabBar(
-            indicatorColor: Colors.black,
-            indicatorWeight: 5,
-            labelColor: Colors.black,
+            indicatorColor: Color.fromARGB(255, 2, 122, 252),
+            indicatorWeight: 3,
+            labelColor: Color.fromARGB(255, 2, 122, 252),
             unselectedLabelColor: Colors.grey,
             tabs: [
               Tab(
@@ -39,24 +39,6 @@ class _StatementState extends State<Statement> {
               ),
             ],
           ),
-          actions: [
-            SizedBox(
-              width: 35,
-              height: 35,
-              child: CircleAvatar(
-                  backgroundColor: Colors.red,
-                  child: FloatingActionButton(
-                      backgroundColor: Colors.red,
-                      onPressed: () {},
-                      child: const Text('SOS',
-                          style:
-                          TextStyle(color: Colors.white, fontSize: 11)
-                      )
-                  )
-              ),
-            ),
-            const SizedBox(width: 10)
-          ],
         ),
         body: const TabBarView(
           children: [

@@ -17,7 +17,7 @@ class _DeliveryLockersState extends State<DeliveryLockers> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Palazzo @ Ipoh Garden East',style: TextStyle(fontWeight: FontWeight.w300),),
+        title: const Text('Palazzo @ Ipoh Garden East',style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: Center(
         child: Column(

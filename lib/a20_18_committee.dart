@@ -17,7 +17,7 @@ class _CommitteeState extends State<Committee> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Committee',style: TextStyle(fontWeight: FontWeight.w300),),
+        title: const Text('Committee',style: TextStyle(fontWeight: FontWeight.bold),),
       ),
     );
   }

@@ -17,7 +17,7 @@ class _ManagementAccountState extends State<ManagementAccount> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Management Account',style: TextStyle(fontWeight: FontWeight.w300),),
+        title: const Text('Management Account',style: TextStyle(fontWeight: FontWeight.bold),),
       ),
     );
   }

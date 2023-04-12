@@ -412,32 +412,34 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Contractor Service Applications',style: TextStyle(fontWeight: FontWeight.w300),),
-          actions: [
-            IconButton(onPressed: showAddHomeServicesApplicationsDialog, icon: const Icon(Icons.add)),
-            SizedBox(
-              width: 35,
-              height: 35,
-              child: CircleAvatar(
-                  backgroundColor: Colors.red,
-                  child: FloatingActionButton(
-                      backgroundColor: Colors.red,
-                      onPressed: () {},
-                      child: const Text('SOS',
-                          style:
-                          TextStyle(color: Colors.white, fontSize: 11)
-                      )
-                  )
-              ),
-            ),
-            const SizedBox(width: 10)
-          ]
+          title: const Text('Contractor Service Permit',style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: Center(
         child: Column(
           children: const [
 
           ],
+        ),
+      ),
+      bottomNavigationBar: Material(
+        color: Colors.blue,
+        child: InkWell(
+          onTap: () {
+            showAddHomeServicesApplicationsDialog();
+          },
+          child: const SizedBox(
+            height: 60,
+            width: double.infinity,
+            child: Center(
+              child: Text(
+                'New Permit',
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );

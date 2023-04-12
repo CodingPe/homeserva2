@@ -17,7 +17,7 @@ class _MeetingMinutesState extends State<MeetingMinutes> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Meeting Minutes',style: TextStyle(fontWeight: FontWeight.w300),),
+        title: const Text('Meeting Minutes',style: TextStyle(fontWeight: FontWeight.bold),),
       ),
     );
   }

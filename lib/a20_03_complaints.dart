@@ -291,7 +291,7 @@ class _ComplaintsState extends State<Complaints> {
       appBar: AppBar(
         title: const Text(
           'Complaints',
-          style: TextStyle(fontWeight: FontWeight.w300),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         bottom: const TabBar(
           indicatorColor: Color.fromARGB(255, 2, 122, 252),
@@ -310,11 +310,6 @@ class _ComplaintsState extends State<Complaints> {
             ),
           ],
         ),
-        actions: [
-          IconButton(onPressed: () {
-            showAddComplaintDialog();
-          }, icon: const Icon(Icons.add, color: Colors.black))
-        ],
       ),
       body: TabBarView(
         children: [
@@ -471,6 +466,27 @@ class _ComplaintsState extends State<Complaints> {
             child: Text('Completed'),
           ),
         ],
+      ),
+      bottomNavigationBar: Material(
+        color: Colors.blue,
+        child: InkWell(
+          onTap: () {
+            showAddComplaintDialog();
+          },
+          child: const SizedBox(
+            height: 60,
+            width: double.infinity,
+            child: Center(
+              child: Text(
+                'New Copmlaints',
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     ),
   );

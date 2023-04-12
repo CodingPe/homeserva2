@@ -297,7 +297,7 @@ class _SuggestionsState extends State<Suggestions> {
       appBar: AppBar(
         title: const Text(
           'Suggestions',
-          style: TextStyle(fontWeight: FontWeight.w300),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         bottom: const TabBar(
           indicatorColor: Color.fromARGB(255, 2, 122, 252),
@@ -316,11 +316,6 @@ class _SuggestionsState extends State<Suggestions> {
             ),
           ],
         ),
-        actions: [
-          IconButton(onPressed: () {
-            showAddSuggestionDialog();
-          }, icon: const Icon(Icons.add, color: Colors.black))
-        ],
       ),
       body: TabBarView(
         children: [
@@ -477,6 +472,27 @@ class _SuggestionsState extends State<Suggestions> {
             child: Text('Completed'),
           ),
         ],
+      ),
+      bottomNavigationBar: Material(
+        color: Colors.blue,
+        child: InkWell(
+          onTap: () {
+            showAddSuggestionDialog();
+          },
+          child: const SizedBox(
+            height: 60,
+            width: double.infinity,
+            child: Center(
+              child: Text(
+                'New Suggestion',
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     ),
   );

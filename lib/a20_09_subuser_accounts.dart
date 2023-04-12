@@ -1082,12 +1082,8 @@ class _SubUserState extends State<SubUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sub-User Accounts',style: TextStyle(fontWeight: FontWeight.w300),),
+        title: const Text('Sub-User Accounts',style: TextStyle(fontWeight: FontWeight.bold),),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.add),
-          ),
           SizedBox(
             width: 35,
             height: 35,
@@ -1401,6 +1397,27 @@ class _SubUserState extends State<SubUser> {
             ),
           ), //Need To Change
         ],
+      ),
+      bottomNavigationBar: Material(
+        color: Colors.blue,
+        child: InkWell(
+          onTap: () {
+            showAddNewSubUserAccountDialog();
+          },
+          child: const SizedBox(
+            height: 60,
+            width: double.infinity,
+            child: Center(
+              child: Text(
+                'New Sub-User Account',
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

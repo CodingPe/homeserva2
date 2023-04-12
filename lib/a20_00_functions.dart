@@ -6,34 +6,39 @@ import 'package:homeserva_2/a00_01_functions_path.dart';
 ////Each icon is a GestureDetector, when tapped, it will navigate to the respective page.
 ////Write a function to display the icons and text. Do not hardcode the icons and text.
 ///change all widget to UpperCamelCase
-class Functions extends StatelessWidget {
+class Functions extends StatefulWidget {
   const Functions({Key? key}) : super(key: key);
 
   @override
+  State<Functions> createState() => _FunctionsState();
+}
+
+class _FunctionsState extends State<Functions> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            leading: const Icon(Icons.home),
-            title: const Text("Functions"),
-            actions: [
-              SizedBox(
-                width: 35,
-                height: 35,
-                child: CircleAvatar(
-                    backgroundColor: Colors.red,
-                    child: FloatingActionButton(
-                        backgroundColor: Colors.red,
-                        onPressed: () {},
-                        child: const Text('SOS',
-                            style:
-                            TextStyle(color: Colors.white, fontSize: 11)
-                        )
-                    )
-                ),
+      appBar: AppBar(
+          leading: const Icon(Icons.home),
+          title: const Text("Functions"),
+          actions: [
+            SizedBox(
+              width: 35,
+              height: 35,
+              child: CircleAvatar(
+                  backgroundColor: Colors.red,
+                  child: FloatingActionButton(
+                      backgroundColor: Colors.red,
+                      onPressed: () {},
+                      child: const Text('SOS',
+                          style:
+                          TextStyle(color: Colors.white, fontSize: 11)
+                      )
+                  )
               ),
-              const SizedBox(width: 10)
-            ]),
-        body: ScrollConfiguration(
+            ),
+            const SizedBox(width: 10)
+          ]),
+      body: ScrollConfiguration(
           behavior: const ScrollBehavior().copyWith(overscroll: false),
           child: ListView(
             children: [
@@ -107,7 +112,7 @@ class Functions extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (context) => const AccessCards()))),
                         _buildGridViewItem('assets/icons/home services applications.png',
-                            'Home Services\nApplications',
+                            'Home Services\nPermit',
                             onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -158,7 +163,7 @@ class Functions extends StatelessWidget {
               )
             ],
           )
-        ),
+      ),
     );
   }
 }
@@ -172,14 +177,14 @@ Widget _buildGridViewItem(String iconAssetPath, String label,
           height: 80,
           width: 80,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.black, width: 2),
+            border: Border.all(color: Colors.black, width: 0.5),
             borderRadius: BorderRadius.circular(20),
             color: const Color.fromARGB(255, 246, 247, 249),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(iconAssetPath, height: 53, width: 53),
+              Image.asset(iconAssetPath, height: 52, width: 52),
             ],
           ),
         ),

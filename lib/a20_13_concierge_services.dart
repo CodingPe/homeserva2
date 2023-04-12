@@ -18,7 +18,7 @@ class _ConciergeServicesState extends State<ConciergeServices> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Concierge Services',style: TextStyle(fontWeight: FontWeight.w300),),
+        title: const Text('Concierge Services',style: TextStyle(fontWeight: FontWeight.bold),),
       ),
     );
   }

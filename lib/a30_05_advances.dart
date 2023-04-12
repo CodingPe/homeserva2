@@ -20,7 +20,7 @@ class _AdvancesState extends State<Advances> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Advances',style: TextStyle(fontWeight: FontWeight.w300),),
+        title: const Text('Advances',style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: const Center(
         child: Text('Advances'),
