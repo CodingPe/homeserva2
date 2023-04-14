@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homeserva_2/a00_02_accounting_path.dart';
 import 'dart:async';
-import 'dart:io';
-import 'package:intl/intl.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 
 class Accounting extends StatefulWidget {
@@ -149,6 +147,52 @@ class _AccountingState extends State<Accounting> {
         ),
         body: Stack(
           children: [
+            TabBarView(
+              children: [
+                Column(
+                  children: [
+                    const SizedBox(height: 15),
+                    GridView.count(
+                        crossAxisCount: 3,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        physics: const BouncingScrollPhysics(),
+                        crossAxisSpacing: 20,
+                        padding: const EdgeInsets.symmetric(horizontal: 23),
+                        children: [
+                          _buildGridViewItem('Invoices',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Invoices()))),
+                          _buildGridViewItem('Payments',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Payments()))),
+                          _buildGridViewItem('Statement',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Statement()))),
+                          _buildGridViewItem('Deposits',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Deposits()))),
+                          _buildGridViewItem('Advances',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Advances()))),
+                        ])
+                  ],
+                ),
+                const Center(
+                  child: Text('Overview'),
+                )
+              ],
+            ),
             if (_isPressed)
               Container(
                 color: const Color.fromARGB(255, 51, 51, 51).withOpacity(0.8),
@@ -389,52 +433,6 @@ class _AccountingState extends State<Accounting> {
                   ),
                 ),
               ),
-            TabBarView(
-              children: [
-                Column(
-                  children: [
-                    const SizedBox(height: 15),
-                    GridView.count(
-                        crossAxisCount: 3,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        physics: const BouncingScrollPhysics(),
-                        crossAxisSpacing: 20,
-                        padding: const EdgeInsets.symmetric(horizontal: 23),
-                        children: [
-                          _buildGridViewItem('Invoices',
-                              onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Invoices()))),
-                          _buildGridViewItem('Payments',
-                              onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Payments()))),
-                          _buildGridViewItem('Statement',
-                              onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Statement()))),
-                          _buildGridViewItem('Deposits',
-                              onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Deposits()))),
-                          _buildGridViewItem('Advances',
-                              onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Advances()))),
-                        ])
-                  ],
-                ),
-                const Center(
-                  child: Text('Overview'),
-                )
-              ],
-            )
           ],
         ),
       )

@@ -416,8 +416,18 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
       ),
       body: Center(
         child: Column(
-          children: const [
-
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 20),
+              child: const Text(
+                "No application found",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w200,
+                  color: Color.fromARGB(255, 66, 72, 82),
+                ),
+              ),
+            )
           ],
         ),
       ),

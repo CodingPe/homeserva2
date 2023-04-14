@@ -3,8 +3,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:slide_to_act/slide_to_act.dart';
 import 'dart:async';
-import 'dart:io';
-import 'package:intl/intl.dart';
 import 'package:homeserva_2/a00_00_directory.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -174,6 +172,91 @@ class _DashboardState extends State<Dashboard> {
       ),
       body: Stack(
         children: [
+          Column(children: <Widget>[
+            Container(
+                margin: const EdgeInsets.only(top: 10, right: 160),
+                child: RichText(
+                    text: const TextSpan(children: [
+                      WidgetSpan(
+                          child: Icon(Icons.speaker_notes,
+                              size: 20, color: Colors.black)),
+                      TextSpan(
+                          text: "Announcements",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w200,
+                              fontSize: 20))
+                    ]))),
+            Expanded(
+                flex: 8,
+                child: ScrollConfiguration(
+                    behavior: const ScrollBehavior().copyWith(overscroll: false),
+                    child: Scrollbar(
+                      child: FutureBuilder(
+                        future: getAnnouncementData(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) {}
+                          return snapshot.hasData
+                              ? ListView.builder(
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (context, index) {
+                                List list = snapshot.data;
+                                return Padding(
+                                    padding: const EdgeInsets.all(20),
+                                    child: GestureDetector(
+                                        onTap: () {
+                                          navigateAndFinish(
+                                              context,
+                                              DetailAnnouncementPage(
+                                                  list: list, index: index));
+                                        },
+                                        child: Row(children: [
+                                          ClipRRect(
+                                              borderRadius:
+                                              BorderRadius.circular(12.0),
+                                              child: Image.network(
+                                                  list[index]['Photo'],
+                                                  width: 70,
+                                                  height: 70,
+                                                  fit: BoxFit.cover)),
+                                          const SizedBox(width: 16),
+                                          Expanded(
+                                              child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      list[index]['Title'],
+                                                      style: const TextStyle(
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: 20),
+                                                    ),
+                                                    const SizedBox(height: 10),
+                                                    Text(
+                                                      list[index]['Time'],
+                                                      style: const TextStyle(
+                                                          fontWeight: FontWeight.w200,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 72, 82),
+                                                          fontSize: 13),
+                                                    )
+                                                  ]))
+                                        ])));
+                              })
+                              : const Center(
+                            child: Text(
+                              "No announcements yet",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w200,
+                                color: Color.fromARGB(255, 66, 72, 82),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    )) //這個是announcement的futurebuilder 可以通過上面的flex改變大小
+            ),
+          ]),
           if (_isPressed)
             Container(
               color: const Color.fromARGB(255, 51, 51, 51).withOpacity(0.8),
@@ -414,91 +497,6 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
-          Column(children: <Widget>[
-            Container(
-                margin: const EdgeInsets.only(top: 10, right: 160),
-                child: RichText(
-                    text: const TextSpan(children: [
-                      WidgetSpan(
-                          child: Icon(Icons.speaker_notes,
-                              size: 20, color: Colors.black)),
-                      TextSpan(
-                          text: "Announcements",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w200,
-                              fontSize: 20))
-                    ]))),
-            Expanded(
-                flex: 8,
-                child: ScrollConfiguration(
-                    behavior: const ScrollBehavior().copyWith(overscroll: false),
-                    child: Scrollbar(
-                      child: FutureBuilder(
-                        future: getAnnouncementData(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasError) print(snapshot.error);
-                          return snapshot.hasData
-                              ? ListView.builder(
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (context, index) {
-                                List list = snapshot.data;
-                                return Padding(
-                                    padding: const EdgeInsets.all(20),
-                                    child: GestureDetector(
-                                        onTap: () {
-                                          navigateAndFinish(
-                                              context,
-                                              DetailAnnouncementPage(
-                                                  list: list, index: index));
-                                        },
-                                        child: Row(children: [
-                                          ClipRRect(
-                                              borderRadius:
-                                              BorderRadius.circular(12.0),
-                                              child: Image.network(
-                                                  list[index]['Photo'],
-                                                  width: 70,
-                                                  height: 70,
-                                                  fit: BoxFit.cover)),
-                                          const SizedBox(width: 16),
-                                          Expanded(
-                                              child: Column(
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      list[index]['Title'],
-                                                      style: const TextStyle(
-                                                          fontWeight: FontWeight.bold,
-                                                          fontSize: 20),
-                                                    ),
-                                                    const SizedBox(height: 10),
-                                                    Text(
-                                                      list[index]['Time'],
-                                                      style: const TextStyle(
-                                                          fontWeight: FontWeight.w200,
-                                                          color: Color.fromARGB(
-                                                              255, 66, 72, 82),
-                                                          fontSize: 13),
-                                                    )
-                                                  ]))
-                                        ])));
-                              })
-                              : const Center(
-                            child: Text(
-                              "No announcements yet",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w200,
-                                color: Color.fromARGB(255, 66, 72, 82),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    )) //這個是announcement的futurebuilder 可以通過上面的flex改變大小
-            ),
-          ])
         ],
       ),
     );

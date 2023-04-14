@@ -54,7 +54,7 @@ class _ComplaintsState extends State<Complaints> {
   }
 
   Future<void> _addComplaint() async {
-    final url = 'https://peterapi.vyrox.com/addcomplaints.php';
+    const url = 'https://peterapi.vyrox.com/addcomplaints.php';
     try {
       final response = await http.post(Uri.parse(url), body: {
         'category': selectedTitle!,

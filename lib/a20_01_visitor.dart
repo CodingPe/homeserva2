@@ -78,7 +78,7 @@ class _VisitorState extends State<Visitor> {
     try {
       final response = await http.post(Uri.parse(url), body: {
         'property': property,
-        'date': selectedDate!,
+        'date': selectedDate,
         'name': name.text,
         'nRIC': nRIC.text,
         'passport': passport.text,
