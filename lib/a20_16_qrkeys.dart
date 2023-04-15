@@ -19,27 +19,37 @@ class _QRKeysState extends State<QRKeys> {
       child: Scaffold(
           appBar: AppBar(
               title: const Text('QR-Keys',style: TextStyle(fontWeight: FontWeight.bold),),
-              bottom: const TabBar(
-                indicatorColor: Color.fromARGB(255, 2, 122, 252),
-                indicatorWeight: 2,
-                labelColor: Color.fromARGB(255, 2, 122, 252),
-                unselectedLabelColor: Colors.grey,
-                tabs: [
-                  Tab(
-                    text: 'Pending',
-                  ),
-                  Tab(
-                    text: 'Active',
-                  ),
-                  Tab(
-                    text: 'Inactive',
-                  ),
-                ],
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(kToolbarHeight),
+                child: Column(
+                  children: [
+                    const TabBar(
+                      indicatorColor: Color.fromARGB(255, 2, 122, 252),
+                      indicatorWeight: 2,
+                      labelColor: Color.fromARGB(255, 2, 122, 252),
+                      unselectedLabelColor: Colors.grey,
+                      tabs: [
+                        Tab(
+                          text: 'Pending',
+                        ),
+                        Tab(
+                          text: 'Active',
+                        ),
+                        Tab(
+                          text: 'Inactive',
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: 0.7,
+                      color: Colors.black,
+                    )
+                  ],
+                ),
               )
-
           ),
           body: Column(
-            children: [
+            children: const [
 
             ],
           )

@@ -77,19 +77,30 @@ class _AccountingState extends State<Accounting> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text('Accounting',style: TextStyle(fontWeight: FontWeight.bold),),
-          bottom: const TabBar(
-            indicatorColor: Color.fromARGB(255, 2, 122, 252),
-            indicatorWeight: 3,
-            labelColor: Color.fromARGB(255, 2, 122, 252),
-            unselectedLabelColor: Colors.grey,
-            tabs: [
-              Tab(
-                text: 'Documents',
-              ),
-              Tab(
-                text: 'Overview',
-              ),
-            ],
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(kToolbarHeight),
+            child: Column(
+              children: [
+                const TabBar(
+                  indicatorColor: Color.fromARGB(255, 2, 122, 252),
+                  indicatorWeight: 3,
+                  labelColor: Color.fromARGB(255, 2, 122, 252),
+                  unselectedLabelColor: Colors.grey,
+                  tabs: [
+                    Tab(
+                      text: 'Documents',
+                    ),
+                    Tab(
+                      text: 'Overview',
+                    ),
+                  ],
+                ),
+                Container(
+                  height: 0.7,
+                  color: Colors.black,
+                )
+              ],
+            ),
           ),
           actions: [
             SizedBox(
@@ -148,6 +159,7 @@ class _AccountingState extends State<Accounting> {
         body: Stack(
           children: [
             TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
               children: [
                 Column(
                   children: [
@@ -202,44 +214,47 @@ class _AccountingState extends State<Accounting> {
                 child: AnimatedOpacity(
                   opacity: _isPressed ? 1.0 : 0.0,
                   duration: const Duration(milliseconds: 200),
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          const Text(
-                            'Emergency SOS',
-                            style: TextStyle(
+                  child: IgnorePointer(
+                    ignoring: true,
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      child: Center(
+                        child: Column(
+                          children: [
+                            const Text(
+                              'Emergency SOS',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 40,
+                              ),
+                            ),
+                            const SizedBox(height: 30),
+                            Text(
+                              _countdown.toString(),
+                              style: const TextStyle(
+                                fontSize: 120,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(height: 30),
+                            AnimatedContainer(
+                              duration: const Duration(seconds: 1),
+                              width: MediaQuery.of(context).size.width * _countdown / 3,
+                              height: 10,
                               color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 40,
                             ),
-                          ),
-                          const SizedBox(height: 30),
-                          Text(
-                            _countdown.toString(),
-                            style: const TextStyle(
-                              fontSize: 120,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                            const SizedBox(height: 40),
+                            const Text(
+                              'Initializing...',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 20,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 30),
-                          AnimatedContainer(
-                            duration: const Duration(seconds: 1),
-                            width: MediaQuery.of(context).size.width * _countdown / 3,
-                            height: 10,
-                            color: Colors.red,
-                          ),
-                          const SizedBox(height: 40),
-                          const Text(
-                            'Initializing...',
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

@@ -1028,6 +1028,13 @@ class _AccessCardsState extends State<AccessCards> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Access Cards',style: TextStyle(fontWeight: FontWeight.bold),),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.black,
+            height: 0.7,
+          ),
+        ),
       ),
       bottomNavigationBar: Material(
         color: Colors.blue,

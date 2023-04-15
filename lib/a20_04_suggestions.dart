@@ -299,25 +299,37 @@ class _SuggestionsState extends State<Suggestions> {
           'Suggestions',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        bottom: const TabBar(
-          indicatorColor: Color.fromARGB(255, 2, 122, 252),
-          indicatorWeight: 3,
-          labelColor: Color.fromARGB(255, 2, 122, 252),
-          unselectedLabelColor: Colors.grey,
-          tabs: [
-            Tab(
-              text: 'New',
-            ),
-            Tab(
-              text: 'Processing',
-            ),
-            Tab(
-              text: 'Completed',
-            ),
-          ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(kToolbarHeight),
+          child: Column(
+            children: [
+              const TabBar(
+                indicatorColor: Color.fromARGB(255, 2, 122, 252),
+                indicatorWeight: 3,
+                labelColor: Color.fromARGB(255, 2, 122, 252),
+                unselectedLabelColor: Colors.grey,
+                tabs: [
+                  Tab(
+                    text: 'New',
+                  ),
+                  Tab(
+                    text: 'Processing',
+                  ),
+                  Tab(
+                    text: 'Completed',
+                  ),
+                ],
+              ),
+              Container(
+                height: 0.7,
+                color: Colors.black,
+              )
+            ],
+          ),
         ),
       ),
       body: TabBarView(
+        physics: const NeverScrollableScrollPhysics(),
         children: [
           ScrollConfiguration(
               behavior: const ScrollBehavior().copyWith(overscroll: false),

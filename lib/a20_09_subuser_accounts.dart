@@ -1083,59 +1083,13 @@ class _SubUserState extends State<SubUser> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sub-User Accounts',style: TextStyle(fontWeight: FontWeight.bold),),
-        actions: [
-          SizedBox(
-            width: 35,
-            height: 35,
-            child: CircleAvatar(
-              backgroundColor: Colors.red,
-              child: GestureDetector(
-                onTapDown: (_) {
-                  setState(() {
-                    _isPressed = false;
-                    _countdown = 3;
-                    _countdownEnded = false; // set flag to false
-                  });
-                },
-                onLongPressStart: (_) {
-                  setState(() {
-                    _isPressed = true;
-                  });
-                  _startTimer();
-                },
-                onLongPressEnd: (_) {
-                  setState(() {
-                    _isPressed = false;
-                    _timer?.cancel();
-                    if (_countdownEnded) {
-                      _isPressed = true;
-                      _countdown = 1;
-                    }
-                  });
-                },
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.red,
-                    shape: BoxShape.circle,
-                  ),
-                  width: 100,
-                  height: 100,
-                  child: const Center(
-                    child: Text(
-                      "SOS",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.black,
+            height: 0.7,
           ),
-          const SizedBox(width: 10)
-        ],
+        ),
       ),
       body: Stack(
         children: [

@@ -18,6 +18,13 @@ class _EmergencySOSState extends State<EmergencySOS> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Emergency SOS',style: TextStyle(fontWeight: FontWeight.bold),),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.black,
+            height: 0.7,
+          ),
+        ),
       ),
     );
   }

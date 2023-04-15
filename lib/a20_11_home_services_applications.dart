@@ -413,6 +413,13 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
     return Scaffold(
       appBar: AppBar(
           title: const Text('Contractor Service Permit',style: TextStyle(fontWeight: FontWeight.bold),),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.black,
+            height: 0.7,
+          ),
+        ),
       ),
       body: Center(
         child: Column(

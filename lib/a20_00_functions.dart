@@ -77,7 +77,6 @@ class _FunctionsState extends State<Functions> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          leading: const Icon(Icons.home),
           title: const Text("Functions"),
           actions: [
             SizedBox(
@@ -131,7 +130,14 @@ class _FunctionsState extends State<Functions> {
               ),
             ),
             const SizedBox(width: 10)
-          ]
+          ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.black,
+            height: 0.7,
+          ),
+        ),
       ),
       body: Stack(
         children: [
@@ -270,44 +276,47 @@ class _FunctionsState extends State<Functions> {
               child: AnimatedOpacity(
                 opacity: _isPressed ? 1.0 : 0.0,
                 duration: const Duration(milliseconds: 200),
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  child: Center(
-                    child: Column(
-                      children: [
-                        const Text(
-                          'Emergency SOS',
-                          style: TextStyle(
+                child: IgnorePointer(
+                  ignoring: true,
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          const Text(
+                            'Emergency SOS',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 40,
+                            ),
+                          ),
+                          const SizedBox(height: 30),
+                          Text(
+                            _countdown.toString(),
+                            style: const TextStyle(
+                              fontSize: 120,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 30),
+                          AnimatedContainer(
+                            duration: const Duration(seconds: 1),
+                            width: MediaQuery.of(context).size.width * _countdown / 3,
+                            height: 10,
                             color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 40,
                           ),
-                        ),
-                        const SizedBox(height: 30),
-                        Text(
-                          _countdown.toString(),
-                          style: const TextStyle(
-                            fontSize: 120,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                          const SizedBox(height: 40),
+                          const Text(
+                            'Initializing...',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 20,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 30),
-                        AnimatedContainer(
-                          duration: const Duration(seconds: 1),
-                          width: MediaQuery.of(context).size.width * _countdown / 3,
-                          height: 10,
-                          color: Colors.red,
-                        ),
-                        const SizedBox(height: 40),
-                        const Text(
-                          'Initializing...',
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

@@ -770,26 +770,40 @@ class _VisitorState extends State<Visitor> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Visitor',style: TextStyle(fontWeight: FontWeight.bold),),
-          bottom: const TabBar(
-            indicatorColor: Color.fromARGB(255, 2, 122, 252),
-            indicatorWeight: 3,
-            labelColor: Color.fromARGB(255, 2, 122, 252),
-            unselectedLabelColor: Colors.grey,
-            tabs: [
-              Tab(
-                text: 'Registrations',
-              ),
-              Tab(
-                text: 'Checked-In',
-              ),
-            ],
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(kToolbarHeight),
+            child: Column(
+              children: [
+                const TabBar(
+                  indicatorColor: Color.fromARGB(255, 2, 122, 252),
+                  indicatorWeight: 3,
+                  labelColor: Color.fromARGB(255, 2, 122, 252),
+                  unselectedLabelColor: Colors.grey,
+                  tabs: [
+                    Tab(
+                      text: 'Registrations',
+                    ),
+                    Tab(
+                      text: 'Checked-In',
+                    ),
+                  ],
+                ),
+                Container(
+                  height: 0.7,
+                  color: Colors.black,
+                )
+              ],
+            ),
           ),
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.qr_code_scanner, color: Colors.black),),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.search, color: Colors.black),),
+            GestureDetector(onTap: () {}, child: const Icon(Icons.qr_code_scanner, color: Colors.black),),
+            const SizedBox(width: 15),
+            GestureDetector(onTap: () {}, child: const Icon(Icons.search, color: Colors.black),),
+            const SizedBox(width: 15),
           ],
         ),
         body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             Scrollbar(
               child: FutureBuilder(

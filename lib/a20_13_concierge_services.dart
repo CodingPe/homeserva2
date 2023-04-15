@@ -19,6 +19,13 @@ class _ConciergeServicesState extends State<ConciergeServices> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Concierge Services',style: TextStyle(fontWeight: FontWeight.bold),),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.black,
+            height: 0.7,
+          ),
+        ),
       ),
     );
   }

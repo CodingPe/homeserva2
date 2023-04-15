@@ -22,25 +22,44 @@ class _StatementState extends State<Statement> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text('Statement',style: TextStyle(fontWeight: FontWeight.bold),),
-          bottom: const TabBar(
-            indicatorColor: Color.fromARGB(255, 2, 122, 252),
-            indicatorWeight: 3,
-            labelColor: Color.fromARGB(255, 2, 122, 252),
-            unselectedLabelColor: Colors.grey,
-            tabs: [
-              Tab(
-                text: 'In',
-              ),
-              Tab(
-                text: 'Out',
-              ),
-              Tab(
-                text: 'Balance',
-              ),
-            ],
-          ),
+          actions: [
+            GestureDetector(
+              onTap: (){},
+              child: const Icon(Icons.file_download_outlined,color: Colors.black,),
+            ),
+            const SizedBox(width: 15),
+          ],
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(kToolbarHeight),
+            child: Column(
+              children: [
+                const TabBar(
+                  indicatorColor: Color.fromARGB(255, 2, 122, 252),
+                  indicatorWeight: 3,
+                  labelColor: Color.fromARGB(255, 2, 122, 252),
+                  unselectedLabelColor: Colors.grey,
+                  tabs: [
+                    Tab(
+                      child: Text('In\nRM0.00',textAlign: TextAlign.center,),
+                    ),
+                    Tab(
+                      child: Text('Out\nRM3213.90',textAlign: TextAlign.center,),
+                    ),
+                    Tab(
+                      child: Text('Balance\nRM3213.90',textAlign: TextAlign.center,),
+                    ),
+                  ],
+                ),
+                Container(
+                  height: 0.7,
+                  color: Colors.black,
+                )
+              ],
+            ),
+          )
         ),
         body: const TabBarView(
+          physics: NeverScrollableScrollPhysics(),
           children: [
             Center(
               child: Text('In'),

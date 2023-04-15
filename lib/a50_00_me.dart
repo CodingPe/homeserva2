@@ -130,7 +130,14 @@ class _MeState extends State<Me> {
                 ),
               ),
               const SizedBox(width: 10)
-            ]
+            ],
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(1.0),
+            child: Container(
+              color: Colors.black,
+              height: 0.7,
+            ),
+          ),
         ),
         body: Stack(
           children: [

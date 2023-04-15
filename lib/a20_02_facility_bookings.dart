@@ -58,6 +58,13 @@ class _FacilityBookingsState extends State<FacilityBookings> {
           'Facility Bookings',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.black,
+            height: 0.7,
+          ),
+        ),
       ),
       bottomNavigationBar: Material(
         color: Colors.blue,

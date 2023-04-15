@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+
 
 class Laundry extends StatefulWidget {
   const Laundry({Key? key}) : super(key: key);
@@ -8,6 +11,14 @@ class Laundry extends StatefulWidget {
 }
 
 class _LaundryState extends State<Laundry> {
+  File? _image;
+
+  Future<void> _getImageFromCamera() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    setState(() {
+      _image = File(image!.path);
+    });
+  }
 
   void showScanQRDialog() {
     showDialog(
@@ -35,6 +46,7 @@ class _LaundryState extends State<Laundry> {
                       const SizedBox(height: 15),
                       TextButton(
                         onPressed: () {
+                          _getImageFromCamera();
                           Navigator.pop(context);
                         },
                         style: TextButton.styleFrom(
@@ -76,28 +88,41 @@ class _LaundryState extends State<Laundry> {
           'Laundry',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        bottom: const TabBar(
-          indicatorColor: Color.fromARGB(255, 2, 122, 252),
-          indicatorWeight: 2,
-          labelColor: Color.fromARGB(255, 2, 122, 252),
-          unselectedLabelColor: Colors.grey,
-          tabs: [
-            Tab(
-              text: 'Availability',
-            ),
-            Tab(
-              text: 'Running',
-            ),
-            Tab(
-              text: 'Ended',
-            ),
-          ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(kToolbarHeight),
+          child: Column(
+            children: [
+              const TabBar(
+                indicatorColor: Color.fromARGB(255, 2, 122, 252),
+                indicatorWeight: 2,
+                labelColor: Color.fromARGB(255, 2, 122, 252),
+                unselectedLabelColor: Colors.grey,
+                tabs: [
+                  Tab(
+                    text: 'Availability',
+                  ),
+                  Tab(
+                    text: 'Running',
+                  ),
+                  Tab(
+                    text: 'Ended',
+                  ),
+                ],
+              ),
+              Container(
+                height: 0.7,
+                color: Colors.black,
+              )
+            ],
+          ),
         ),
         actions: [
-          IconButton(onPressed: showScanQRDialog, icon: const Icon(Icons.add, color: Colors.black))
+          GestureDetector(onTap: showScanQRDialog, child: const Icon(Icons.add, color: Colors.black)),
+          const SizedBox(width: 15)
         ],
       ),
       body: TabBarView(
+        physics: const NeverScrollableScrollPhysics(),
         children: [
           Column(
             children: [

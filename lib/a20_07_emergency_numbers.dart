@@ -18,24 +18,13 @@ class _EmergencyNumbersState extends State<EmergencyNumbers> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Emergency Numbers',style: TextStyle(fontWeight: FontWeight.bold),),
-          actions: [
-            SizedBox(
-              width: 35,
-              height: 35,
-              child: CircleAvatar(
-                  backgroundColor: Colors.red,
-                  child: FloatingActionButton(
-                      backgroundColor: Colors.red,
-                      onPressed: () {},
-                      child: const Text('SOS',
-                          style:
-                          TextStyle(color: Colors.white, fontSize: 11)
-                      )
-                  )
-              ),
-            ),
-            const SizedBox(width: 10)
-          ]
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(
+            color: Colors.black,
+            height: 0.7,
+          ),
+        ),
       ),
       body: SafeArea(
         child: Column(
