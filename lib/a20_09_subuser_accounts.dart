@@ -118,6 +118,7 @@ class _SubUserState extends State<SubUser> {
             builder: (context,setState){
               return Center(
                 child: Container(
+                    height: 550,
                     constraints: const BoxConstraints(
                         minWidth: 500
                     ),

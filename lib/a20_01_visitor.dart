@@ -60,6 +60,8 @@ class _VisitorState extends State<Visitor> {
     return formattedTime;
   });
   TextEditingController remark = TextEditingController();
+  TextEditingController photo = TextEditingController();
+
 
   String? selectedParkingLot;
   String? selectedType;
@@ -78,18 +80,20 @@ class _VisitorState extends State<Visitor> {
     try {
       final response = await http.post(Uri.parse(url), body: {
         'property': property,
-        'date': selectedDate,
+        'date': DateFormat('yyyy-MM-dd').format(selectedDate),
         'name': name.text,
-        'nRIC': nRIC.text,
+        'nric': nRIC.text,
         'passport': passport.text,
-        'mobilePhone': phone.text,
+        'mobilephone': phone.text,
         'email': email.text,
-        'vehiclePlate': vehiclePlate.text,
-        'parkingLot': selectedParkingLot!,
+        'whatsapp': whatsapp.text,
+        'vehicleplate': vehiclePlate.text,
+        'parkinglot': selectedParkingLot!,
         'type': selectedType!,
         'validity': selectedValidity!,
-        'validFrom': selectedTimes!,
+        'validfrom': selectedTimes!,
         'remark': remark.text,
+        'photo': photo.text,
       });
       if (response.statusCode == 200) {
         name.clear();
@@ -109,6 +113,7 @@ class _VisitorState extends State<Visitor> {
             builder: (context,setState){
               return Center(
                 child: Container(
+                  height: 550,
                     constraints: const BoxConstraints(
                         minWidth: 500
                     ),
@@ -729,7 +734,7 @@ class _VisitorState extends State<Visitor> {
                                     const SizedBox(height: 20),
                                     TextButton(
                                       onPressed: (){
-                                        _addVisitor;
+                                        _addVisitor();
                                         Navigator.pop(context);
                                       },
                                       style: TextButton.styleFrom(
@@ -796,8 +801,6 @@ class _VisitorState extends State<Visitor> {
             ),
           ),
           actions: [
-            GestureDetector(onTap: () {}, child: const Icon(Icons.qr_code_scanner, color: Colors.black),),
-            const SizedBox(width: 15),
             GestureDetector(onTap: () {}, child: const Icon(Icons.search, color: Colors.black),),
             const SizedBox(width: 15),
           ],
@@ -805,71 +808,134 @@ class _VisitorState extends State<Visitor> {
         body: TabBarView(
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            Scrollbar(
-              child: FutureBuilder(
-                future: getVisitorsData(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) print(snapshot.error);
-                  return snapshot.hasData
-                      ? ListView.builder(
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        List list = snapshot.data;
-                        return Padding(
+            ScrollConfiguration(
+              behavior: const ScrollBehavior().copyWith(overscroll: false),
+              child: Scrollbar(
+                child: FutureBuilder(
+                  future: getVisitorsData(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) print(snapshot.error);
+                    return snapshot.hasData
+                        ? ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          List list = snapshot.data;
+                          return Padding(
                             padding: const EdgeInsets.all(20),
                             child: GestureDetector(
-                                onTap: () {},
-                                child: Row(children: [
-                                  ClipRRect(
-                                      borderRadius:
-                                      BorderRadius.circular(12.0),
-                                      child: Image.network(
+                              onTap: () {},
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(12.0),
+                                        child: Image.network(
                                           list[index]['Photo'],
-                                          width: 70,
-                                          height: 70,
-                                          fit: BoxFit.cover)),
-                                  const SizedBox(width: 16),
-                                  Expanded(
-                                      child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                          width: 48,
+                                          height: 48,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 12),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               list[index]['Name'],
                                               style: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                              ),
                                             ),
-                                            const SizedBox(height: 10),
-                                            Text(
-                                              list[index]['Phone'],
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.w200,
-                                                  color: Color.fromARGB(
-                                                      255, 66, 72, 82),
-                                                  fontSize: 13),
+                                            const SizedBox(height: 3),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Text(
+                                                    list[index]['Phone'],
+                                                    style: const TextStyle(
+                                                      fontWeight: FontWeight.w200,
+                                                      color: Color.fromARGB(255, 66, 72, 82),
+                                                      fontSize: 16,
+                                                    ),
+                                                    textAlign: TextAlign.left,
+                                                  ),
+                                                ),
+                                                Container(
+                                                  padding: const EdgeInsets.all(4),
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color: Colors.black,
+                                                    ),
+                                                    borderRadius: BorderRadius.circular(4),
+                                                  ),
+                                                  child: const Text(
+                                                    'No Vehicle',
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 12,
+                                                    ),
+                                                    textAlign: TextAlign.right,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            Text(
-                                              list[index]['ValidFrom'],
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.w200,
-                                                  color: Color.fromARGB(
-                                                      255, 66, 72, 82),
-                                                  fontSize: 13),
-                                            )
-                                          ]))
-                                ])));
-                      })
-                      : const Center(
-                    child: Text(
-                      "No visitor yet",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w200,
-                        color: Color.fromARGB(255, 66, 72, 82),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  list[index]['Date'],
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.w200,
+                                                    color: Color.fromARGB(255, 66, 72, 82),
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 10),
+                                                Text(
+                                                  list[index]['ValidFrom'],
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.w200,
+                                                    color: Color.fromARGB(255, 66, 72, 82),
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    decoration: const BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                          color: Color.fromARGB(255, 232, 232, 232),
+                                          width: 1
+                                        ),
+                                      ),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(vertical: 3),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }
+                        )
+                        : const Center(
+                      child: Text(
+                        "No visitor yet",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w200,
+                          color: Color.fromARGB(255, 66, 72, 82),
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
             const Center(

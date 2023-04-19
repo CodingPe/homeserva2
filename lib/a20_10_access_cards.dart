@@ -55,6 +55,7 @@ class _AccessCardsState extends State<AccessCards> {
             builder: (context,setState){
               return Center(
                 child: Container(
+                    height: 550,
                     constraints: const BoxConstraints(
                         minWidth: 500
                     ),

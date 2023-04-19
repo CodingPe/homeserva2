@@ -84,13 +84,14 @@ class _AdvancesState extends State<Advances> {
                                           ),
                                           child: DropdownButtonFormField(
                                             decoration: const InputDecoration(
+
                                               border: InputBorder.none,
                                             ),
                                             isExpanded: true,
                                             value: payment.first,
                                             items: payment.map((value) => DropdownMenuItem(
                                               value: value,
-                                              child: Text('   $value',),
+                                              child: Text('   $value', ),
                                             )).toList(),
                                             onChanged: (String? value) {
                                               setState(() {

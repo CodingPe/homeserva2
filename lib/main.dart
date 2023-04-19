@@ -53,6 +53,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SMARTSERVA',
       theme: ThemeData(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
           textTheme: const TextTheme(
             bodyLarge: TextStyle(fontSize: 11.8),
             bodyMedium: TextStyle(fontSize: 11.8),
@@ -199,7 +201,7 @@ class MainPageState extends State<MainPage> with AboutNotification {
                 child: const Text('No'),
               ),
               CupertinoDialogAction(
-                onPressed: (){
+                onPressed: () {
                   Navigator.of(context).pop(true);
                   SystemNavigator.pop();
                 },

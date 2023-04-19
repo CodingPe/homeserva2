@@ -200,9 +200,354 @@ class _AccountingState extends State<Accounting> {
                         ])
                   ],
                 ),
-                const Center(
-                  child: Text('Overview'),
-                )
+                ScrollConfiguration(
+                    behavior: const ScrollBehavior().copyWith(overscroll: false),
+                    child: Scrollbar(
+                      child: ListView(
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text("Item",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("Balance",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 3),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text("SERVICE CHARGE",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),textAlign: TextAlign.start,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" SERVICE CHARGE",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          flex: 2,
+                                          child: Text(" 6% SERVICE TAX OF SERVICE CHARGE",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          flex: 1,
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text("SINKING FUND",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),textAlign: TextAlign.start,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" SINKING FUND",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text("WATER & SEWERAGE",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),textAlign: TextAlign.start,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" WATER & SEWERAGE",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 349.44",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text("INTEREST ADVICE",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),textAlign: TextAlign.start,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          flex: 2,
+                                          child: Text(" INTEREST CHARGE ON OVERDUE INVOICES",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          flex: 1,
+                                          child: Text("RM 3519.34",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text("DEPOSITS",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),textAlign: TextAlign.start,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" SERVICE CHARGE DEPOSIT",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" SINKING FUND DEPOSIT",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" WATER & SEWERAGE DEPOSIT",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" SERVICE CHARGE DEPOSIT",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" HOME SERVICE DEPOSIT",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 3800.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" ACCESS CARD DEPOSIT",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" FACILITY BOOKING DEPOSIT",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" CONCIERGE SERVICE DEPOSIT",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text("ADVANCE PAYMENT",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),textAlign: TextAlign.start,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" ADVANCE PAYMENT",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text("QUIT RENT",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),textAlign: TextAlign.start,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" QUIT RENT",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text("FIRE INSURANCE PREMIUM",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),textAlign: TextAlign.start,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" FIRE INSURANCE PREMIUM",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text("ACCESS CARD",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),textAlign: TextAlign.start,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" ACCESS CARD",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text("FACILITY BOOKING",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),textAlign: TextAlign.start,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" FACILITY BOOKING",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text("CONCIERGE SERVICE",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),textAlign: TextAlign.start,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" CONCIERGE SERVICE",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text("AMENITY CHARGE",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),textAlign: TextAlign.start,)
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: const [
+                                      Expanded(
+                                          child: Text(" AMENITY CHARGE",style: TextStyle(fontSize: 13),textAlign: TextAlign.start,)
+                                      ),
+                                      Expanded(
+                                          child: Text("RM 0.00",style: TextStyle(fontSize: 13),textAlign: TextAlign.end,)
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    height: 100,
+                                  )
+                                ],
+                              )
+                          )
+                        ],
+                      ),
+                    ))
               ],
             ),
             if (_isPressed)

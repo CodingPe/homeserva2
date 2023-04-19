@@ -80,7 +80,10 @@ class _ComplaintsState extends State<Complaints> {
         builder: (ctx) => StatefulBuilder(builder: (context, setState) {
           return Center(
             child: Container(
-              height: 500,
+                height: 550,
+                constraints: const BoxConstraints(
+                    minWidth: 500
+                ),
                 margin: const EdgeInsets.all(20),
                 child: Card(
                   shadowColor: Colors.blueGrey,

@@ -43,6 +43,7 @@ class _HomeServicesApplicationsState extends State<HomeServicesApplications> {
             builder: (context,setState){
               return Center(
                 child: Container(
+                    height: 550,
                     constraints: const BoxConstraints(
                         minWidth: 500
                     ),

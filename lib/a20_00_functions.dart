@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homeserva_2/a00_01_functions_path.dart';
-import 'dart:convert';
 import 'package:slide_to_act/slide_to_act.dart';
 import 'dart:async';
-import 'dart:io';
-import 'package:intl/intl.dart';
 
 //TODO: to improve the UI, use GridView to display the functions icons.
 ////Chee Mun, use Gridview to display the functions icons.
@@ -132,7 +129,7 @@ class _FunctionsState extends State<Functions> {
             const SizedBox(width: 10)
           ],
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(1.0),
+          preferredSize: const Size.fromHeight(1.0),
           child: Container(
             color: Colors.black,
             height: 0.7,
@@ -261,8 +258,11 @@ class _FunctionsState extends State<Functions> {
                                 onTap: () => Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const DeliveryLockers())))
-                          ])
+                                        builder: (context) => const DeliveryLockers()))),
+                          ]),
+                  ),
+                  Container(
+                    height: 30,
                   )
                 ],
               )

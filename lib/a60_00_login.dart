@@ -7,7 +7,7 @@ import 'package:hive/hive.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 canLogin(context) {
-  navigateAndFinish(context, MainPage());
+  navigateAndFinish(context, const MainPage());
 }
 
 class LoginUser extends StatefulWidget {
@@ -406,28 +406,28 @@ class _PasswordInputSampleState extends State<PasswordInputSample> {
       decoration: InputDecoration(
         hintText: widget.hintText,
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: Colors.grey,
             width: 1,
           ),
           borderRadius: BorderRadius.circular(25.0),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: Colors.red,
             width: 1,
           ),
           borderRadius: BorderRadius.circular(25.0),
         ),
         errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: Colors.red,
             width: 1,
           ),
           borderRadius: BorderRadius.circular(25.0),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: Colors.grey,
             width: 1,
           ),

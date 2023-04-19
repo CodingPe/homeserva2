@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homeserva_2/a00_00_directory.dart';
 import 'dart:async';
-import 'dart:io';
-import 'package:intl/intl.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 
 class Me extends StatefulWidget {

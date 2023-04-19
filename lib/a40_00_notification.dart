@@ -3,12 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:badges/badges.dart' as badges;
 import 'dart:convert';
 import 'package:slide_to_act/slide_to_act.dart';
 import 'dart:async';
-import 'dart:io';
-import 'package:intl/intl.dart';
 
 abstract class AboutNotification {
   Box badgeBox = Hive.box('TokenBox');
