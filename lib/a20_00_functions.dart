@@ -3,11 +3,6 @@ import 'package:homeserva_2/a00_01_functions_path.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 import 'dart:async';
 
-//TODO: to improve the UI, use GridView to display the functions icons.
-////Chee Mun, use Gridview to display the functions icons.
-////Each icon is a GestureDetector, when tapped, it will navigate to the respective page.
-////Write a function to display the icons and text. Do not hardcode the icons and text.
-///change all widget to UpperCamelCase
 class Functions extends StatefulWidget {
   const Functions({Key? key}) : super(key: key);
 
@@ -16,7 +11,6 @@ class Functions extends StatefulWidget {
 }
 
 class _FunctionsState extends State<Functions> {
-
   int _countdown = 0;
   bool _countdownEnded = false;
   bool _isPressed = false;
@@ -57,7 +51,7 @@ class _FunctionsState extends State<Functions> {
           content: const Text("The SOS alarm has been successfully called!"),
           actions: <Widget>[
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.of(context).pop();
               },
               child: const Icon(Icons.clear),
@@ -74,60 +68,63 @@ class _FunctionsState extends State<Functions> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text("Functions"),
-          actions: [
-            SizedBox(
-              width: 35,
-              height: 35,
-              child: CircleAvatar(
-                backgroundColor: Colors.red,
-                child: GestureDetector(
-                  onTapDown: (_) {
-                    setState(() {
-                      _isPressed = false;
-                      _countdown = 3;
-                      _countdownEnded = false; // set flag to false
-                    });
-                  },
-                  onLongPressStart: (_) {
-                    setState(() {
+        title: const Text("Functions"),
+        shape:
+            Border(bottom: BorderSide(color: Colors.grey.shade100, width: 1)),
+        elevation: 0.5,
+        actions: [
+          SizedBox(
+            width: 35,
+            height: 35,
+            child: CircleAvatar(
+              backgroundColor: Colors.red,
+              child: GestureDetector(
+                onTapDown: (_) {
+                  setState(() {
+                    _isPressed = false;
+                    _countdown = 3;
+                    _countdownEnded = false; // set flag to false
+                  });
+                },
+                onLongPressStart: (_) {
+                  setState(() {
+                    _isPressed = true;
+                  });
+                  _startTimer();
+                },
+                onLongPressEnd: (_) {
+                  setState(() {
+                    _isPressed = false;
+                    _timer?.cancel();
+                    if (_countdownEnded) {
                       _isPressed = true;
-                    });
-                    _startTimer();
-                  },
-                  onLongPressEnd: (_) {
-                    setState(() {
-                      _isPressed = false;
-                      _timer?.cancel();
-                      if (_countdownEnded) {
-                        _isPressed = true;
-                        _countdown = 1;
-                      }
-                    });
-                  },
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                    width: 100,
-                    height: 100,
-                    child: const Center(
-                      child: Text(
-                        "SOS",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                        ),
+                      _countdown = 1;
+                    }
+                  });
+                },
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                  width: 100,
+                  height: 100,
+                  child: const Center(
+                    child: Text(
+                      "SOS",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-            const SizedBox(width: 10)
-          ],
+          ),
+          const SizedBox(width: 10)
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
           child: Container(
@@ -144,129 +141,158 @@ class _FunctionsState extends State<Functions> {
                 children: [
                   const SizedBox(height: 15),
                   Scrollbar(
-                      child: GridView.count(
-                          childAspectRatio: 0.8,
-                          crossAxisCount: 3,
-                          mainAxisSpacing: 8,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          physics: const BouncingScrollPhysics(),
-                          crossAxisSpacing: 8,
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          children: [
-                            _buildGridViewItem('assets/icons/visitors.png', 'Visitor',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const Visitor()))),
-                            _buildGridViewItem(
-                                'assets/icons/facility bookings.png', 'Facility\nBookings',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const FacilityBookings()))),
-                            _buildGridViewItem('assets/icons/complaints.png', 'Complaints',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const Complaints()))),
-                            _buildGridViewItem('assets/icons/suggestions.png', 'Suggestions',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const Suggestions()))),
-                            _buildGridViewItem(
-                                'assets/icons/management account.png', 'Management\nAccount',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const ManagementAccount()))),
-                            _buildGridViewItem(
-                                'assets/icons/meeting minutes.png', 'Meeting\nMinutes',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const MeetingMinutes()))),
-                            _buildGridViewItem(
-                                'assets/icons/useful contacts.png', 'Emergency\nNumbers',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const EmergencyNumbers()))),
-                            _buildGridViewItem(
-                                'assets/icons/emergency sos.png', 'Emergency\nSOS',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const EmergencySOS()))),
-                            _buildGridViewItem(
-                                'assets/icons/sub-user accounts.png', 'Sub-User\nAccounts',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const SubUser()))),
-                            _buildGridViewItem(
-                                'assets/icons/access%20card.png', 'Access\nCards',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const AccessCards()))),
-                            _buildGridViewItem('assets/icons/home services applications.png',
-                                'Home Services\nPermit',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                        const HomeServicesApplications()))),
-                            _buildGridViewItem('assets/icons/marketplace.png', 'Marketplace',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const Marketplace()))),
-                            _buildGridViewItem(
-                                'assets/icons/concierge services.png', 'Concierge\nServices',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const ConciergeServices()))),
-                            _buildGridViewItem('assets/icons/tukangman.png', 'TukangMan',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const TukangMan()))),
-                            _buildGridViewItem('assets/icons/laundry.png', 'Laundry',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const Laundry()))),
-                            _buildGridViewItem('assets/icons/qr keys.png', 'QR-Keys',
-                                onTap: () => Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => const QRKeys()))),
-                            _buildGridViewItem(
-                                'assets/icons/tenant accounts.png', 'Tenant\nAccounts',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const TenantAccounts()))),
-                            _buildGridViewItem('assets/icons/committee.png', 'Committee',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const Committee()))),
-                            _buildGridViewItem(
-                                'assets/icons/delivery lockers.png', 'Delivery\nLockers',
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const DeliveryLockers()))),
-                          ]),
+                    child: GridView.count(
+                        childAspectRatio: 0.8,
+                        crossAxisCount: 3,
+                        mainAxisSpacing: 8,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        physics: const BouncingScrollPhysics(),
+                        crossAxisSpacing: 8,
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        children: [
+                          _buildGridViewItem(
+                              'assets/icons/visitors.png', 'Visitor',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Visitor()))),
+                          _buildGridViewItem(
+                              'assets/icons/facility bookings.png',
+                              'Facility\nBookings',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const FacilityBookings()))),
+                          _buildGridViewItem(
+                              'assets/icons/complaints.png', 'Complaints',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const Complaints()))),
+                          _buildGridViewItem(
+                              'assets/icons/suggestions.png', 'Suggestions',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const Suggestions()))),
+                          _buildGridViewItem(
+                              'assets/icons/management account.png',
+                              'Management\nAccount',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ManagementAccount()))),
+                          _buildGridViewItem('assets/icons/meeting minutes.png',
+                              'Meeting\nMinutes',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const MeetingMinutes()))),
+                          _buildGridViewItem('assets/icons/useful contacts.png',
+                              'Emergency\nNumbers',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const EmergencyNumbers()))),
+                          _buildGridViewItem('assets/icons/emergency sos.png',
+                              'Emergency\nSOS',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const EmergencySOS()))),
+                          _buildGridViewItem(
+                              'assets/icons/sub-user accounts.png',
+                              'Sub-User\nAccounts',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const SubUser()))),
+                          _buildGridViewItem(
+                              'assets/icons/access%20card.png', 'Access\nCards',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const AccessCards()))),
+                          _buildGridViewItem(
+                              'assets/icons/home services applications.png',
+                              'Home Services\nPermit',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const HomeServicesApplications()))),
+                          _buildGridViewItem(
+                              'assets/icons/marketplace.png', 'Marketplace',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const Marketplace()))),
+                          _buildGridViewItem(
+                              'assets/icons/concierge services.png',
+                              'Concierge\nServices',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ConciergeServices()))),
+                          _buildGridViewItem(
+                              'assets/icons/tukangman.png', 'TukangMan',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const TukangMan()))),
+                          _buildGridViewItem(
+                              'assets/icons/laundry.png', 'Laundry',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Laundry()))),
+                          _buildGridViewItem(
+                              'assets/icons/qr keys.png', 'QR-Keys',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const QRKeys()))),
+                          _buildGridViewItem('assets/icons/tenant accounts.png',
+                              'Tenant\nAccounts',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const TenantAccounts()))),
+                          _buildGridViewItem(
+                              'assets/icons/committee.png', 'Committee',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const Committee()))),
+                          _buildGridViewItem(
+                              'assets/icons/delivery lockers.png',
+                              'Delivery\nLockers',
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const DeliveryLockers()))),
+                        ]),
                   ),
                   Container(
                     height: 30,
                   )
                 ],
-              )
-          ),
+              )),
           if (_isPressed)
             Container(
               color: const Color.fromARGB(255, 51, 51, 51).withOpacity(0.8),
@@ -303,7 +329,9 @@ class _FunctionsState extends State<Functions> {
                           const SizedBox(height: 30),
                           AnimatedContainer(
                             duration: const Duration(seconds: 1),
-                            width: MediaQuery.of(context).size.width * _countdown / 3,
+                            width: MediaQuery.of(context).size.width *
+                                _countdown /
+                                3,
                             height: 10,
                             color: Colors.red,
                           ),
@@ -332,7 +360,8 @@ class _FunctionsState extends State<Functions> {
                   child: Form(
                       key: _formKey,
                       child: ScrollConfiguration(
-                          behavior: const ScrollBehavior().copyWith(overscroll: false),
+                          behavior: const ScrollBehavior()
+                              .copyWith(overscroll: false),
                           child: ListView(
                             children: [
                               const Center(
@@ -364,20 +393,24 @@ class _FunctionsState extends State<Functions> {
                                 child: Container(
                                     height: 60,
                                     decoration: BoxDecoration(
-                                      color: _isAmbulance ? Colors.white : Colors.red,
+                                      color: _isAmbulance
+                                          ? Colors.white
+                                          : Colors.red,
                                       border: Border.all(color: Colors.black),
                                     ),
-                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
                                     child: Center(
                                       child: Text(
                                         'Ambulance',
                                         style: TextStyle(
-                                          color: _isAmbulance ? Colors.black : Colors.white,
+                                          color: _isAmbulance
+                                              ? Colors.black
+                                              : Colors.white,
                                           fontSize: 20,
                                         ),
                                       ),
-                                    )
-                                ),
+                                    )),
                               ),
                               const SizedBox(height: 5),
                               GestureDetector(
@@ -389,20 +422,23 @@ class _FunctionsState extends State<Functions> {
                                 child: Container(
                                     height: 60,
                                     decoration: BoxDecoration(
-                                      color: _isPolice ? Colors.white : Colors.red,
+                                      color:
+                                          _isPolice ? Colors.white : Colors.red,
                                       border: Border.all(color: Colors.black),
                                     ),
-                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
                                     child: Center(
                                       child: Text(
                                         'Police',
                                         style: TextStyle(
-                                          color: _isPolice ? Colors.black : Colors.white,
+                                          color: _isPolice
+                                              ? Colors.black
+                                              : Colors.white,
                                           fontSize: 20,
                                         ),
                                       ),
-                                    )
-                                ),
+                                    )),
                               ),
                               const SizedBox(height: 5),
                               GestureDetector(
@@ -414,20 +450,24 @@ class _FunctionsState extends State<Functions> {
                                 child: Container(
                                     height: 60,
                                     decoration: BoxDecoration(
-                                      color: _isFireFighter ? Colors.white : Colors.red,
+                                      color: _isFireFighter
+                                          ? Colors.white
+                                          : Colors.red,
                                       border: Border.all(color: Colors.black),
                                     ),
-                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
                                     child: Center(
                                       child: Text(
                                         'Fire Fighter',
                                         style: TextStyle(
-                                          color: _isFireFighter ? Colors.black : Colors.white,
+                                          color: _isFireFighter
+                                              ? Colors.black
+                                              : Colors.white,
                                           fontSize: 20,
                                         ),
                                       ),
-                                    )
-                                ),
+                                    )),
                               ),
                               const SizedBox(height: 15),
                               Container(
@@ -446,13 +486,17 @@ class _FunctionsState extends State<Functions> {
                                         border: InputBorder.none,
                                         suffixIcon: remark.text.isNotEmpty
                                             ? IconButton(
-                                          icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
-                                          onPressed: () {
-                                            setState(() {
-                                              remark.clear();
-                                            });
-                                          },
-                                        )
+                                                icon: const Icon(
+                                                  Icons.clear,
+                                                  color: Colors.grey,
+                                                  size: 20,
+                                                ),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    remark.clear();
+                                                  });
+                                                },
+                                              )
                                             : null,
                                       ),
                                       onChanged: (value) {
@@ -473,17 +517,20 @@ class _FunctionsState extends State<Functions> {
                                     ),
                                     isExpanded: true,
                                     value: unit.first,
-                                    onChanged: (String? newValue){
+                                    onChanged: (String? newValue) {
                                       setState(() {
                                         selectedUnit = newValue!;
                                       });
                                     },
-                                    items: unit.map((value) => DropdownMenuItem(
-                                      value: value,
-                                      child: Text('   $value',),
-                                    )).toList(),
-                                  )
-                              ),
+                                    items: unit
+                                        .map((value) => DropdownMenuItem(
+                                              value: value,
+                                              child: Text(
+                                                '   $value',
+                                              ),
+                                            ))
+                                        .toList(),
+                                  )),
                               const SizedBox(height: 15),
                               Center(
                                 child: Padding(
@@ -498,15 +545,13 @@ class _FunctionsState extends State<Functions> {
                                         color: Colors.white,
                                       ),
                                       text: '       Slide to Request',
-                                      onSubmit: (){
+                                      onSubmit: () {
                                         _showSOSAccessDialog();
                                       },
                                     )),
                               )
                             ],
-                          )
-                      )
-                  ),
+                          ))),
                 ),
               ),
             ),
@@ -540,7 +585,5 @@ Widget _buildGridViewItem(String iconAssetPath, String label,
         Text(label,
             style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
             textAlign: TextAlign.center)
-      ]
-      )
-  );
+      ]));
 }

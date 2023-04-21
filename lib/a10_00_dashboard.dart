@@ -21,7 +21,6 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-
   int _countdown = 0;
   bool _countdownEnded = false;
   bool _isPressed = false;
@@ -62,7 +61,7 @@ class _DashboardState extends State<Dashboard> {
           content: const Text("The SOS alarm has been successfully called!"),
           actions: <Widget>[
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.of(context).pop();
               },
               child: const Icon(Icons.clear),
@@ -80,6 +79,7 @@ class _DashboardState extends State<Dashboard> {
     _timer?.cancel();
     super.dispose();
   }
+
   //! flutter_local_notifications can delete?
   @override
   void initState() {
@@ -115,7 +115,11 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dashboard',style: TextStyle(fontWeight: FontWeight.bold),),
+        title: const Text('Dashboard',
+            style: TextStyle(fontWeight: FontWeight.bold)),
+        shape:
+            Border(bottom: BorderSide(color: Colors.grey.shade100, width: 1)),
+        elevation: 0.5,
         actions: [
           SizedBox(
             width: 35,
@@ -184,20 +188,21 @@ class _DashboardState extends State<Dashboard> {
                 margin: const EdgeInsets.only(top: 10, right: 160),
                 child: RichText(
                     text: const TextSpan(children: [
-                      WidgetSpan(
-                          child: Icon(Icons.speaker_notes,
-                              size: 20, color: Colors.black)),
-                      TextSpan(
-                          text: "Announcements",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w200,
-                              fontSize: 20))
-                    ]))),
+                  WidgetSpan(
+                      child: Icon(Icons.speaker_notes,
+                          size: 20, color: Colors.black)),
+                  TextSpan(
+                      text: "Announcements",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w200,
+                          fontSize: 20))
+                ]))),
             Expanded(
                 flex: 8,
                 child: ScrollConfiguration(
-                    behavior: const ScrollBehavior().copyWith(overscroll: false),
+                    behavior:
+                        const ScrollBehavior().copyWith(overscroll: false),
                     child: Scrollbar(
                       child: FutureBuilder(
                         future: getAnnouncementData(),
@@ -205,64 +210,69 @@ class _DashboardState extends State<Dashboard> {
                           if (snapshot.hasError) {}
                           return snapshot.hasData
                               ? ListView.builder(
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (context, index) {
-                                List list = snapshot.data;
-                                return Padding(
-                                    padding: const EdgeInsets.all(20),
-                                    child: GestureDetector(
-                                        onTap: () {
-                                          navigateAndFinish(
-                                              context,
-                                              DetailAnnouncementPage(
-                                                  list: list, index: index));
-                                        },
-                                        child: Row(children: [
-                                          ClipRRect(
-                                              borderRadius:
-                                              BorderRadius.circular(12.0),
-                                              child: Image.network(
-                                                  list[index]['Photo'],
-                                                  width: 70,
-                                                  height: 70,
-                                                  fit: BoxFit.cover)),
-                                          const SizedBox(width: 16),
-                                          Expanded(
-                                              child: Column(
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                                  children: [
+                                  itemCount: snapshot.data.length,
+                                  itemBuilder: (context, index) {
+                                    List list = snapshot.data;
+                                    return Padding(
+                                        padding: const EdgeInsets.all(20),
+                                        child: GestureDetector(
+                                            onTap: () {
+                                              navigateAndFinish(
+                                                  context,
+                                                  DetailAnnouncementPage(
+                                                      list: list,
+                                                      index: index));
+                                            },
+                                            child: Row(children: [
+                                              ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          12.0),
+                                                  child: Image.network(
+                                                      list[index]['Photo'],
+                                                      width: 70,
+                                                      height: 70,
+                                                      fit: BoxFit.cover)),
+                                              const SizedBox(width: 16),
+                                              Expanded(
+                                                  child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
                                                     Text(
                                                       list[index]['Title'],
                                                       style: const TextStyle(
-                                                          fontWeight: FontWeight.bold,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                           fontSize: 20),
                                                     ),
                                                     const SizedBox(height: 10),
                                                     Text(
                                                       list[index]['Time'],
                                                       style: const TextStyle(
-                                                          fontWeight: FontWeight.w200,
+                                                          fontWeight:
+                                                              FontWeight.w200,
                                                           color: Color.fromARGB(
                                                               255, 66, 72, 82),
                                                           fontSize: 13),
                                                     )
                                                   ]))
-                                        ])));
-                              })
+                                            ])));
+                                  })
                               : const Center(
-                            child: Text(
-                              "No announcements yet",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w200,
-                                color: Color.fromARGB(255, 66, 72, 82),
-                              ),
-                            ),
-                          );
+                                  child: Text(
+                                    "No announcements yet",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w200,
+                                      color: Color.fromARGB(255, 66, 72, 82),
+                                    ),
+                                  ),
+                                );
                         },
                       ),
                     )) //這個是announcement的futurebuilder 可以通過上面的flex改變大小
-            ),
+                ),
           ]),
           if (_isPressed)
             Container(
@@ -300,7 +310,9 @@ class _DashboardState extends State<Dashboard> {
                           const SizedBox(height: 30),
                           AnimatedContainer(
                             duration: const Duration(seconds: 1),
-                            width: MediaQuery.of(context).size.width * _countdown / 3,
+                            width: MediaQuery.of(context).size.width *
+                                _countdown /
+                                3,
                             height: 10,
                             color: Colors.red,
                           ),
@@ -329,7 +341,8 @@ class _DashboardState extends State<Dashboard> {
                   child: Form(
                       key: _formKey,
                       child: ScrollConfiguration(
-                          behavior: const ScrollBehavior().copyWith(overscroll: false),
+                          behavior: const ScrollBehavior()
+                              .copyWith(overscroll: false),
                           child: ListView(
                             children: [
                               const Center(
@@ -361,20 +374,24 @@ class _DashboardState extends State<Dashboard> {
                                 child: Container(
                                     height: 60,
                                     decoration: BoxDecoration(
-                                      color: _isAmbulance ? Colors.white : Colors.red,
+                                      color: _isAmbulance
+                                          ? Colors.white
+                                          : Colors.red,
                                       border: Border.all(color: Colors.black),
                                     ),
-                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
                                     child: Center(
                                       child: Text(
                                         'Ambulance',
                                         style: TextStyle(
-                                          color: _isAmbulance ? Colors.black : Colors.white,
+                                          color: _isAmbulance
+                                              ? Colors.black
+                                              : Colors.white,
                                           fontSize: 20,
                                         ),
                                       ),
-                                    )
-                                ),
+                                    )),
                               ),
                               const SizedBox(height: 5),
                               GestureDetector(
@@ -386,20 +403,23 @@ class _DashboardState extends State<Dashboard> {
                                 child: Container(
                                     height: 60,
                                     decoration: BoxDecoration(
-                                      color: _isPolice ? Colors.white : Colors.red,
+                                      color:
+                                          _isPolice ? Colors.white : Colors.red,
                                       border: Border.all(color: Colors.black),
                                     ),
-                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
                                     child: Center(
                                       child: Text(
                                         'Police',
                                         style: TextStyle(
-                                          color: _isPolice ? Colors.black : Colors.white,
+                                          color: _isPolice
+                                              ? Colors.black
+                                              : Colors.white,
                                           fontSize: 20,
                                         ),
                                       ),
-                                    )
-                                ),
+                                    )),
                               ),
                               const SizedBox(height: 5),
                               GestureDetector(
@@ -411,20 +431,24 @@ class _DashboardState extends State<Dashboard> {
                                 child: Container(
                                     height: 60,
                                     decoration: BoxDecoration(
-                                      color: _isFireFighter ? Colors.white : Colors.red,
+                                      color: _isFireFighter
+                                          ? Colors.white
+                                          : Colors.red,
                                       border: Border.all(color: Colors.black),
                                     ),
-                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
                                     child: Center(
                                       child: Text(
                                         'Fire Fighter',
                                         style: TextStyle(
-                                          color: _isFireFighter ? Colors.black : Colors.white,
+                                          color: _isFireFighter
+                                              ? Colors.black
+                                              : Colors.white,
                                           fontSize: 20,
                                         ),
                                       ),
-                                    )
-                                ),
+                                    )),
                               ),
                               const SizedBox(height: 15),
                               Container(
@@ -443,13 +467,17 @@ class _DashboardState extends State<Dashboard> {
                                         border: InputBorder.none,
                                         suffixIcon: remark.text.isNotEmpty
                                             ? IconButton(
-                                          icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
-                                          onPressed: () {
-                                            setState(() {
-                                              remark.clear();
-                                            });
-                                          },
-                                        )
+                                                icon: const Icon(
+                                                  Icons.clear,
+                                                  color: Colors.grey,
+                                                  size: 20,
+                                                ),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    remark.clear();
+                                                  });
+                                                },
+                                              )
                                             : null,
                                       ),
                                       onChanged: (value) {
@@ -470,17 +498,20 @@ class _DashboardState extends State<Dashboard> {
                                     ),
                                     isExpanded: true,
                                     value: unit.first,
-                                    onChanged: (String? newValue){
+                                    onChanged: (String? newValue) {
                                       setState(() {
                                         selectedUnit = newValue!;
                                       });
                                     },
-                                    items: unit.map((value) => DropdownMenuItem(
-                                      value: value,
-                                      child: Text('   $value',),
-                                    )).toList(),
-                                  )
-                              ),
+                                    items: unit
+                                        .map((value) => DropdownMenuItem(
+                                              value: value,
+                                              child: Text(
+                                                '   $value',
+                                              ),
+                                            ))
+                                        .toList(),
+                                  )),
                               const SizedBox(height: 15),
                               Center(
                                 child: Padding(
@@ -495,15 +526,13 @@ class _DashboardState extends State<Dashboard> {
                                         color: Colors.white,
                                       ),
                                       text: '       Slide to Request',
-                                      onSubmit: (){
+                                      onSubmit: () {
                                         _showSOSAccessDialog();
                                       },
                                     )),
                               )
                             ],
-                          )
-                      )
-                  ),
+                          ))),
                 ),
               ),
             ),

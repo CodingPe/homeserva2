@@ -26,7 +26,7 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 );
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin();
 
 //? flutter_local_notifications
 
@@ -136,7 +136,7 @@ class MainPageState extends State<MainPage> with AboutNotification {
     //? flutter_local_notifications by Peter.
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>()
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
 
     //? foreground notification by Peter.
@@ -175,88 +175,79 @@ class MainPageState extends State<MainPage> with AboutNotification {
             notification.body,
             NotificationDetails(
                 android: AndroidNotificationDetails(
-                  channel.id,
-                  channel.name,
-                  //channel.description,
-                  // icon: 'launch_background',
-                )));
+              channel.id,
+              channel.name,
+              //channel.description,
+              // icon: 'launch_background',
+            )));
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return WillPopScope(
-      onWillPop: () async {
-        showDialog(
-          context: context,
-          builder: (context) =>  CupertinoAlertDialog(
-            title: const Text('Confirm Exit'),
-            content: const Text('Do you want to exit the app?'),
-            actions: [
-              CupertinoDialogAction(
-                onPressed: () => Navigator.of(context).pop(false),
-                isDefaultAction: true,
-                child: const Text('No'),
-              ),
-              CupertinoDialogAction(
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                  SystemNavigator.pop();
-                },
-                isDestructiveAction: true,
-                child: const Text('Yes'),
-              ),
-            ],
-          ),
-        );
-        return false;
-      },
-      child: Scaffold(
-        body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
-        bottomNavigationBar: Container(
-          decoration: const BoxDecoration(
-              border: Border(
-                top: BorderSide(width: 0.5,color: Color.fromARGB(255, 208, 207, 212)),
-              )
-          ),
-          child: BottomNavigationBar(
-            backgroundColor: const Color.fromARGB(255, 243, 242, 247),
-            type: BottomNavigationBarType.fixed,
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Dashboard',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.grid_view_outlined),
-                label: 'Functions',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.insert_chart_outlined_sharp),
-                label: 'Accounting',
-              ),
-              BottomNavigationBarItem(
-                icon: BadgeIcon(),
-                label: '  Notification',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'Me',
-              ),
-            ],
-            selectedFontSize: 12,
-            currentIndex: _selectedIndex,
-            selectedItemColor: Colors.blue,
-            unselectedItemColor: Colors.grey,
-            onTap: _onItemTapped,
-          ),
-        ),
-      )
-    );
+        onWillPop: () async {
+          showDialog(
+              context: context,
+              builder: (context) => CupertinoAlertDialog(
+                      title: const Text('Confirm Exit'),
+                      content: const Text('Do you want to exit the app?'),
+                      actions: [
+                        CupertinoDialogAction(
+                          onPressed: () => Navigator.of(context).pop(false),
+                          isDefaultAction: true,
+                          child: const Text('No'),
+                        ),
+                        CupertinoDialogAction(
+                            onPressed: () {
+                              Navigator.of(context).pop(true);
+                              SystemNavigator.pop();
+                            },
+                            isDestructiveAction: true,
+                            child: const Text('Yes'))
+                      ]));
+          return false;
+        },
+        child: Scaffold(
+            body: Center(
+              child: _widgetOptions.elementAt(_selectedIndex),
+            ),
+            bottomNavigationBar: Container(
+                decoration: const BoxDecoration(
+                    border: Border(
+                  top: BorderSide(
+                      width: 0.5, color: Color.fromARGB(255, 208, 207, 212)),
+                )),
+                child: BottomNavigationBar(
+                    backgroundColor: const Color.fromARGB(255, 243, 242, 247),
+                    type: BottomNavigationBarType.fixed,
+                    selectedFontSize: 10,
+                    unselectedFontSize: 8.8,
+                    items: const <BottomNavigationBarItem>[
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.home),
+                        label: 'Dashboard',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.grid_view_outlined),
+                        label: 'Functions',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.insert_chart_outlined_sharp),
+                        label: 'Accounting',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: BadgeIcon(),
+                        label: '  Notification',
+                      ),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.person), label: 'Me'),
+                    ],
+                    currentIndex: _selectedIndex,
+                    selectedItemColor: CupertinoColors.activeBlue,
+                    unselectedItemColor: Colors.grey,
+                    onTap: _onItemTapped))));
   }
 }
 
@@ -279,13 +270,13 @@ class _BadgeIconState extends State<BadgeIcon> with AboutNotification {
     return ValueListenableBuilder<int>(
         valueListenable: abc,
         builder: (context, value, _) => badges.Badge(
-          badgeContent: Text(value.toString(),
-              style: const TextStyle(color: Colors.white, fontSize: 10)),
-          child: const Icon(
-            Icons.notifications_active_outlined,
-            size: 22.8,
-          ),
-        ),
+              badgeContent: Text(value.toString(),
+                  style: const TextStyle(color: Colors.white, fontSize: 10)),
+              child: const Icon(
+                Icons.notifications_active_outlined,
+                size: 22.8,
+              ),
+            ),
         child: const Icon(Icons.notifications_active_outlined, size: 22.8));
   }
 }

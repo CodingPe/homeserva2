@@ -29,7 +29,6 @@ class Notifications extends StatefulWidget {
 }
 
 class NotificationsState extends State<Notifications> with AboutNotification {
-
   int _countdown = 0;
   bool _countdownEnded = false;
   bool _isPressed = false;
@@ -70,7 +69,7 @@ class NotificationsState extends State<Notifications> with AboutNotification {
           content: const Text("The SOS alarm has been successfully called!"),
           actions: <Widget>[
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.of(context).pop();
               },
               child: const Icon(Icons.clear),
@@ -113,60 +112,63 @@ class NotificationsState extends State<Notifications> with AboutNotification {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-          title: const Text('Notifications'),
-          actions: [
-            SizedBox(
-              width: 35,
-              height: 35,
-              child: CircleAvatar(
-                backgroundColor: Colors.red,
-                child: GestureDetector(
-                  onTapDown: (_) {
-                    setState(() {
-                      _isPressed = false;
-                      _countdown = 3;
-                      _countdownEnded = false; // set flag to false
-                    });
-                  },
-                  onLongPressStart: (_) {
-                    setState(() {
+        title: const Text('Notifications'),
+        shape:
+            Border(bottom: BorderSide(color: Colors.grey.shade100, width: 1)),
+        elevation: 0.5,
+        actions: [
+          SizedBox(
+            width: 35,
+            height: 35,
+            child: CircleAvatar(
+              backgroundColor: Colors.red,
+              child: GestureDetector(
+                onTapDown: (_) {
+                  setState(() {
+                    _isPressed = false;
+                    _countdown = 3;
+                    _countdownEnded = false; // set flag to false
+                  });
+                },
+                onLongPressStart: (_) {
+                  setState(() {
+                    _isPressed = true;
+                  });
+                  _startTimer();
+                },
+                onLongPressEnd: (_) {
+                  setState(() {
+                    _isPressed = false;
+                    _timer?.cancel();
+                    if (_countdownEnded) {
                       _isPressed = true;
-                    });
-                    _startTimer();
-                  },
-                  onLongPressEnd: (_) {
-                    setState(() {
-                      _isPressed = false;
-                      _timer?.cancel();
-                      if (_countdownEnded) {
-                        _isPressed = true;
-                        _countdown = 1;
-                      }
-                    });
-                  },
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                    width: 100,
-                    height: 100,
-                    child: const Center(
-                      child: Text(
-                        "SOS",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                        ),
+                      _countdown = 1;
+                    }
+                  });
+                },
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                  width: 100,
+                  height: 100,
+                  child: const Center(
+                    child: Text(
+                      "SOS",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-            const SizedBox(width: 10),
-          ],
+          ),
+          const SizedBox(width: 10),
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
           child: Container(
@@ -188,10 +190,10 @@ class NotificationsState extends State<Notifications> with AboutNotification {
               items.isEmpty
                   ? const EmptyList()
                   : SliverList(
-                //TODO: fetch notification from database, and insert into items.
-                  delegate: SliverChildBuilderDelegate(
+                      //TODO: fetch notification from database, and insert into items.
+                      delegate: SliverChildBuilderDelegate(
                           (BuildContext context, index) => items[index],
-                      childCount: items.length)),
+                          childCount: items.length)),
             ],
           ),
           if (_isPressed)
@@ -230,7 +232,9 @@ class NotificationsState extends State<Notifications> with AboutNotification {
                           const SizedBox(height: 30),
                           AnimatedContainer(
                             duration: const Duration(seconds: 1),
-                            width: MediaQuery.of(context).size.width * _countdown / 3,
+                            width: MediaQuery.of(context).size.width *
+                                _countdown /
+                                3,
                             height: 10,
                             color: Colors.red,
                           ),
@@ -259,7 +263,8 @@ class NotificationsState extends State<Notifications> with AboutNotification {
                   child: Form(
                       key: _formKey,
                       child: ScrollConfiguration(
-                          behavior: const ScrollBehavior().copyWith(overscroll: false),
+                          behavior: const ScrollBehavior()
+                              .copyWith(overscroll: false),
                           child: ListView(
                             children: [
                               const Center(
@@ -291,20 +296,24 @@ class NotificationsState extends State<Notifications> with AboutNotification {
                                 child: Container(
                                     height: 60,
                                     decoration: BoxDecoration(
-                                      color: _isAmbulance ? Colors.white : Colors.red,
+                                      color: _isAmbulance
+                                          ? Colors.white
+                                          : Colors.red,
                                       border: Border.all(color: Colors.black),
                                     ),
-                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
                                     child: Center(
                                       child: Text(
                                         'Ambulance',
                                         style: TextStyle(
-                                          color: _isAmbulance ? Colors.black : Colors.white,
+                                          color: _isAmbulance
+                                              ? Colors.black
+                                              : Colors.white,
                                           fontSize: 20,
                                         ),
                                       ),
-                                    )
-                                ),
+                                    )),
                               ),
                               const SizedBox(height: 5),
                               GestureDetector(
@@ -316,20 +325,23 @@ class NotificationsState extends State<Notifications> with AboutNotification {
                                 child: Container(
                                     height: 60,
                                     decoration: BoxDecoration(
-                                      color: _isPolice ? Colors.white : Colors.red,
+                                      color:
+                                          _isPolice ? Colors.white : Colors.red,
                                       border: Border.all(color: Colors.black),
                                     ),
-                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
                                     child: Center(
                                       child: Text(
                                         'Police',
                                         style: TextStyle(
-                                          color: _isPolice ? Colors.black : Colors.white,
+                                          color: _isPolice
+                                              ? Colors.black
+                                              : Colors.white,
                                           fontSize: 20,
                                         ),
                                       ),
-                                    )
-                                ),
+                                    )),
                               ),
                               const SizedBox(height: 5),
                               GestureDetector(
@@ -341,20 +353,24 @@ class NotificationsState extends State<Notifications> with AboutNotification {
                                 child: Container(
                                     height: 60,
                                     decoration: BoxDecoration(
-                                      color: _isFireFighter ? Colors.white : Colors.red,
+                                      color: _isFireFighter
+                                          ? Colors.white
+                                          : Colors.red,
                                       border: Border.all(color: Colors.black),
                                     ),
-                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
                                     child: Center(
                                       child: Text(
                                         'Fire Fighter',
                                         style: TextStyle(
-                                          color: _isFireFighter ? Colors.black : Colors.white,
+                                          color: _isFireFighter
+                                              ? Colors.black
+                                              : Colors.white,
                                           fontSize: 20,
                                         ),
                                       ),
-                                    )
-                                ),
+                                    )),
                               ),
                               const SizedBox(height: 15),
                               Container(
@@ -373,13 +389,17 @@ class NotificationsState extends State<Notifications> with AboutNotification {
                                         border: InputBorder.none,
                                         suffixIcon: remark.text.isNotEmpty
                                             ? IconButton(
-                                          icon: const Icon(Icons.clear, color: Colors.grey,size: 20,),
-                                          onPressed: () {
-                                            setState(() {
-                                              remark.clear();
-                                            });
-                                          },
-                                        )
+                                                icon: const Icon(
+                                                  Icons.clear,
+                                                  color: Colors.grey,
+                                                  size: 20,
+                                                ),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    remark.clear();
+                                                  });
+                                                },
+                                              )
                                             : null,
                                       ),
                                       onChanged: (value) {
@@ -400,17 +420,20 @@ class NotificationsState extends State<Notifications> with AboutNotification {
                                     ),
                                     isExpanded: true,
                                     value: unit.first,
-                                    onChanged: (String? newValue){
+                                    onChanged: (String? newValue) {
                                       setState(() {
                                         selectedUnit = newValue!;
                                       });
                                     },
-                                    items: unit.map((value) => DropdownMenuItem(
-                                      value: value,
-                                      child: Text('   $value',),
-                                    )).toList(),
-                                  )
-                              ),
+                                    items: unit
+                                        .map((value) => DropdownMenuItem(
+                                              value: value,
+                                              child: Text(
+                                                '   $value',
+                                              ),
+                                            ))
+                                        .toList(),
+                                  )),
                               const SizedBox(height: 15),
                               Center(
                                 child: Padding(
@@ -425,15 +448,13 @@ class NotificationsState extends State<Notifications> with AboutNotification {
                                         color: Colors.white,
                                       ),
                                       text: '       Slide to Request',
-                                      onSubmit: (){
+                                      onSubmit: () {
                                         _showSOSAccessDialog();
                                       },
                                     )),
                               )
                             ],
-                          )
-                      )
-                  ),
+                          ))),
                 ),
               ),
             ),
