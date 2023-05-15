@@ -18,7 +18,10 @@ class _QRKeysState extends State<QRKeys> {
       length: 3,
       child: Scaffold(
           appBar: AppBar(
-              title: const Text('QR-Keys',style: TextStyle(fontWeight: FontWeight.bold),),
+              title: const Text(
+                'QR-Keys',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(kToolbarHeight),
                 child: Column(
@@ -46,13 +49,8 @@ class _QRKeysState extends State<QRKeys> {
                     )
                   ],
                 ),
-              )
-          ),
-          body: Column(
-            children: const [
-
-            ],
-          )
-      )
-  );
+              )),
+          body: const Column(
+            children: [],
+          )));
 }
