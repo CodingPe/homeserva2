@@ -30,6 +30,16 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 
 //? flutter_local_notifications
 
+//?Flutter Provider
+
+class NotificationProvider extends ChangeNotifier {
+  Box badgeBox = Hive.box('TokenBox');
+  List<Widget> items = <Widget>[];
+  ValueNotifier<int> abc = ValueNotifier<int>(Hive.box('TokenBox').get(2) ?? 0);
+}
+
+//?Flutter Provider
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
