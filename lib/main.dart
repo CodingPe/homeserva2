@@ -11,6 +11,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:provider/provider.dart';
 
 Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   debugPrint("Handling a background message: ${message.messageId}");
@@ -35,7 +36,6 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 class NotificationProvider extends ChangeNotifier {
   Box badgeBox = Hive.box('TokenBox');
   List<Widget> items = <Widget>[];
-  ValueNotifier<int> abc = ValueNotifier<int>(Hive.box('TokenBox').get(2) ?? 0);
 }
 
 //?Flutter Provider
